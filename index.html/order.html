@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order WOWO</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body class="bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center min-h-screen">
+
+<!-- FORM -->
+<div class="bg-gray-900/80 backdrop-blur-lg shadow-2xl p-6 rounded-2xl w-full max-w-lg">
+
+  <h2 class="text-2xl font-bold text-center mb-6 text-purple-400">
+    🚀 Form Order WOWO
+  </h2>
+
+  <form id="orderForm" class="grid grid-cols-2 gap-4">
+
+    <input id="nama" placeholder="Nama"
+      class="col-span-2 p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
+
+    <input id="wa" placeholder="No WA"
+      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
+
+    <input id="layanan" placeholder="Layanan"
+      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
+
+    <input id="nominal" placeholder="Nominal"
+      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
+
+    <input id="tujuan" placeholder="Tujuan"
+      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
+
+    <button
+      class="col-span-2 mt-2 bg-gradient-to-r from-purple-600 to-purple-800 p-3 rounded-xl font-semibold hover:scale-105 transition">
+      Kirim Order
+    </button>
+
+  </form>
+
+</div>
+
+<!-- ✅ POPUP SUCCESS -->
+<div id="successPopup" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-center justify-center z-50">
+  <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-2xl max-w-sm w-full">
+
+    <div class="text-green-400 text-6xl mb-4">
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+
+    <h2 class="text-2xl font-bold mb-2">Order Berhasil!</h2>
+    <p class="text-gray-400 mb-6">Pesanan kamu sudah masuk ke admin</p>
+
+    <button onclick="closePopup()"
+      class="bg-purple-600 px-6 py-3 rounded-xl hover:bg-purple-700 transition">
+      Tutup
+    </button>
+
+  </div>
+</div>
+
+<!-- 🔥 FIREBASE SCRIPT -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB9bCpEzdmfOlHGRwedqkofqgR44EiI4Xc",
+  authDomain: "uasbima-2c5d7.firebaseapp.com",
+  projectId: "uasbima-2c5d7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const form = document.getElementById("orderForm");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  try {
+    const data = {
+      id: "WOWO-" + Date.now().toString().slice(-8),
+      nama: document.getElementById("nama").value,
+      wa: document.getElementById("wa").value,
+      layanan: document.getElementById("layanan").value,
+      nominal: document.getElementById("nominal").value,
+      tujuan: document.getElementById("tujuan").value,
+      createdAt: serverTimestamp()
+    };
+
+    await addDoc(collection(db, "booking_bus"), data);
+
+    // ✅ tampilkan popup
+    const popup = document.getElementById("successPopup");
+    popup.classList.remove("hidden");
+    popup.classList.add("flex");
+
+    form.reset();
+
+    // ✅ auto close 2 detik
+    setTimeout(() => {
+      closePopup();
+    }, 2000);
+
+  } catch (err) {
+    console.error("ERROR:", err);
+    alert("❌ Gagal kirim order!");
+  }
+});
+
+// tombol close popup
+window.closePopup = function () {
+  const popup = document.getElementById("successPopup");
+  popup.classList.remove("flex");
+  popup.classList.add("hidden");
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Efek tambahan */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+}
+
+/* Optional: tambahan style custom */
+.hero-bg {
+  background: radial-gradient(circle at center, #6b21a8 0%, transparent 70%);
+}

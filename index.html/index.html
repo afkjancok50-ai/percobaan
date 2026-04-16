@@ -11,7 +11,6 @@
 
 <body class="bg-gray-950 text-white overflow-x-hidden">
 
-  <!-- NAVBAR -->
   <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-lg z-50 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       
@@ -27,12 +26,10 @@
         <a href="#layanan" class="hover:text-purple-400">Layanan</a>
         <a href="#why" class="hover:text-purple-400">Keunggulan</a>
         <a href="#contact" class="hover:text-purple-400">Kontak</a>
-        <a href="order.html" class="text-purple-400 font-semibold">Order</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="min-h-screen flex items-center relative pt-24">
     <div class="absolute inset-0 bg-[radial-gradient(at_center,#6b21a8_0%,transparent_70%)] opacity-30"></div>
     
@@ -48,46 +45,65 @@
         Transaksi instan 24 jam • Aman • Cepat • Harga termurah
       </p>
 
-      <a href="order.html"
+      <a href="#layanan"
          class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 rounded-2xl text-lg font-semibold hover:scale-105 transition">
-        Order Sekarang 🚀
+        Lihat Harga 🚀
       </a>
     </div>
   </section>
 
-  <!-- LAYANAN -->
   <section id="layanan" class="py-24 bg-black">
     <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-5xl font-bold text-center mb-16">Layanan Kami</h2>
+      <h2 class="text-5xl font-bold text-center mb-16">Daftar Layanan</h2>
       
       <div class="grid md:grid-cols-3 gap-8">
 
-        <!-- PULSA -->
-        <div class="bg-white/5 p-8 rounded-3xl hover:bg-white/10 transition">
-          <i class="fa-solid fa-mobile-screen-button text-5xl text-purple-500 mb-6"></i>
-          <h3 class="text-2xl font-bold mb-3">Pulsa</h3>
-          <p class="text-gray-400 mb-6">Semua operator</p>
+        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group">
+          <i class="fa-solid fa-mobile-screen-button text-5xl text-purple-500 mb-6 group-hover:scale-110 transition-transform"></i>
+          <h3 class="text-2xl font-bold mb-4">Pulsa All Operator</h3>
+          
+          <div class="space-y-3 mb-8 flex-grow">
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>5.000</span> <span class="font-bold text-purple-400">Rp 6.200</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>10.000</span> <span class="font-bold text-purple-400">Rp 11.150</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>20.000</span> <span class="font-bold text-purple-400">Rp 20.800</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2 text-gray-500 italic text-sm"><span>Dan seterusnya...</span></div>
+          </div>
+
+          <a href="order.html?service=pulsa" class="w-full text-center bg-purple-600 py-3 rounded-xl font-bold hover:bg-purple-700 transition">Order Pulsa</a>
         </div>
 
-        <!-- KUOTA -->
-        <div class="bg-white/5 p-8 rounded-3xl hover:bg-white/10 transition">
-          <i class="fa-solid fa-wifi text-5xl text-pink-500 mb-6"></i>
-          <h3 class="text-2xl font-bold mb-3">Kuota Internet</h3>
-          <p class="text-gray-400 mb-6">Semua operator</p>
+        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group">
+          <i class="fa-solid fa-wifi text-5xl text-pink-500 mb-6 group-hover:scale-110 transition-transform"></i>
+          <h3 class="text-2xl font-bold mb-4">Kuota Internet</h3>
+          
+          <div class="space-y-3 mb-8 flex-grow">
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>1 GB / 30 Hari</span> <span class="font-bold text-pink-400">Rp 12.000</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>5 GB / 30 Hari</span> <span class="font-bold text-pink-400">Rp 35.000</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>10 GB / 30 Hari</span> <span class="font-bold text-pink-400">Rp 62.000</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2 text-gray-500 italic text-sm"><span>Tersedia paket harian...</span></div>
+          </div>
+
+          <a href="order.html?service=kuota" class="w-full text-center bg-pink-600 py-3 rounded-xl font-bold hover:bg-pink-700 transition">Order Kuota</a>
         </div>
 
-        <!-- TOKEN -->
-        <div class="bg-white/5 p-8 rounded-3xl hover:bg-white/10 transition">
-          <i class="fa-solid fa-plug text-5xl text-cyan-500 mb-6"></i>
-          <h3 class="text-2xl font-bold mb-3">Token PLN</h3>
-          <p class="text-gray-400 mb-6">Instan & cepat</p>
+        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group">
+          <i class="fa-solid fa-plug text-5xl text-cyan-500 mb-6 group-hover:scale-110 transition-transform"></i>
+          <h3 class="text-2xl font-bold mb-4">Token PLN</h3>
+          
+          <div class="space-y-3 mb-8 flex-grow">
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 20.000</span> <span class="font-bold text-cyan-400">Rp 21.500</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 50.000</span> <span class="font-bold text-cyan-400">Rp 51.500</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 100.000</span> <span class="font-bold text-cyan-400">Rp 101.500</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2 text-gray-500 italic text-sm"><span>Biaya admin tetap...</span></div>
+          </div>
+
+          <a href="order.html?service=pln" class="w-full text-center bg-cyan-600 py-3 rounded-xl font-bold hover:bg-cyan-700 transition text-black">Order Token</a>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- KEUNGGULAN -->
   <section id="why" class="py-20 bg-gray-900">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <h2 class="text-4xl font-bold mb-12">Kenapa Pilih WOWO?</h2>
@@ -114,7 +130,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer id="contact" class="bg-black border-t border-white/10 py-20 text-center">
     <h2 class="text-4xl font-bold mb-6">Hubungi Kami</h2>
 

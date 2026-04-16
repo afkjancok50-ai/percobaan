@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin WOWO</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 text-white p-6">
+
+<h1 class="text-3xl mb-6 font-bold">Dashboard Admin</h1>
+
+<table class="w-full text-center border border-white/20">
+  <thead class="bg-purple-600">
+    <tr>
+      <th>ID</th>
+      <th>Nama</th>
+      <th>WA</th>
+      <th>Layanan</th>
+      <th>Nominal</th>
+      <th>Tujuan</th>
+      <th>Waktu</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody"></tbody>
+</table>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB9bCpEzdmfOlHGRwedqkofqgR44EiI4Xc",
+  authDomain: "uasbima-2c5d7.firebaseapp.com",
+  projectId: "uasbima-2c5d7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const tableBody = document.getElementById("tableBody");
+
+onSnapshot(collection(db, "booking_bus"), (snapshot) => {
+  tableBody.innerHTML = "";
+
+  snapshot.forEach((doc) => {
+    const d = doc.data();
+
+    tableBody.innerHTML += `
+      <tr class="border-b border-white/20">
+        <td>${d.id}</td>
+        <td>${d.nama}</td>
+        <td>${d.wa}</td>
+        <td>${d.layanan}</td>
+        <td>${d.nominal}</td>
+        <td>${d.tujuan}</td>
+        <td>${d.createdAt?.toDate ? d.createdAt.toDate().toLocaleString() : '-'}</td>
+      </tr>
+    `;
+  });
+});
+</script>
+
+</body>
+</html>

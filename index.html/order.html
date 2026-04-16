@@ -11,7 +11,6 @@
 
 <body class="bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center min-h-screen">
 
-<!-- FORM -->
 <div class="bg-gray-900/80 backdrop-blur-lg shadow-2xl p-6 rounded-2xl w-full max-w-lg">
 
   <h2 class="text-2xl font-bold text-center mb-6 text-purple-400">
@@ -44,7 +43,6 @@
 
 </div>
 
-<!-- ✅ POPUP SUCCESS -->
 <div id="successPopup" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-center justify-center z-50">
   <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-2xl max-w-sm w-full">
 
@@ -63,7 +61,6 @@
   </div>
 </div>
 
-<!-- 🔥 FIREBASE SCRIPT -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -82,38 +79,62 @@ const form = document.getElementById("orderForm");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  // Ambil nilai dari input form
+  const valNama = document.getElementById("nama").value;
+  const valWa = document.getElementById("wa").value;
+  const valLayanan = document.getElementById("layanan").value;
+  const valNominal = document.getElementById("nominal").value;
+  const valTujuan = document.getElementById("tujuan").value;
+
   try {
     const data = {
-      id: "WOWO-" + Date.now().toString().slice(-8),
-      nama: document.getElementById("nama").value,
-      wa: document.getElementById("wa").value,
-      layanan: document.getElementById("layanan").value,
-      nominal: document.getElementById("nominal").value,
-      tujuan: document.getElementById("tujuan").value,
+      orderId: "WOWO-" + Date.now().toString().slice(-8),
+      nama: valNama,
+      wa_pelanggan: valWa,
+      layanan: valLayanan,
+      nominal: valNominal,
+      tujuan: valTujuan,
       createdAt: serverTimestamp()
     };
 
-    await addDoc(collection(db, "booking_bus"), data);
+    // 1. Simpan ke Firebase Firestore di koleksi 'order'
+    await addDoc(collection(db, "order"), data);
 
-    // ✅ tampilkan popup
+    // 2. Kirim Notifikasi ke WhatsApp Admin (083148583173)
+    const nomorAdmin = "6283148583173"; 
+    const pesanWA = `Halo Admin, ada pesanan baru di WOWO!\n\n` +
+                    `*ID Order:* ${data.orderId}\n` +
+                    `*Nama:* ${valNama}\n` +
+                    `*WA Pelanggan:* ${valWa}\n` +
+                    `*Pesanan:* ${valPesanan}\n` +
+                    `*Nominal:* ${valNominal}\n` +
+                    `*NomorTujuan:* ${valNomorTujuan}`;
+    
+    const urlWA = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesanWA)}`;
+    
+    // Membuka jendela WhatsApp baru
+    window.open(urlWA, '_blank');
+
+    // ✅ Tampilkan popup sukses di web
     const popup = document.getElementById("successPopup");
     popup.classList.remove("hidden");
     popup.classList.add("flex");
 
+    // Reset form setelah berhasil
     form.reset();
 
-    // ✅ auto close 2 detik
+    // Auto close popup setelah 3 detik
     setTimeout(() => {
       closePopup();
-    }, 2000);
+    }, 3000);
 
   } catch (err) {
-    console.error("ERROR:", err);
-    alert("❌ Gagal kirim order!");
+    console.error("Firebase Error:", err);
+    alert("❌ Gagal mengirim order ke database!");
   }
 });
 
-// tombol close popup
+// Fungsi untuk menutup popup secara manual
 window.closePopup = function () {
   const popup = document.getElementById("successPopup");
   popup.classList.remove("flex");

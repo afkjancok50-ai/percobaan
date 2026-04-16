@@ -4,60 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order WOWO</title>
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
-
 <body class="bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center min-h-screen">
 
-<div class="bg-gray-900/80 backdrop-blur-lg shadow-2xl p-6 rounded-2xl w-full max-w-lg">
-
-  <h2 class="text-2xl font-bold text-center mb-6 text-purple-400">
-    🚀 Form Order WOWO
-  </h2>
-
+<div class="bg-gray-900/80 backdrop-blur-lg shadow-2xl p-6 rounded-2xl w-full max-w-lg border border-white/10">
+  <h2 class="text-2xl font-bold text-center mb-6 text-purple-400">🚀 Form Order WOWO</h2>
+  
   <form id="orderForm" class="grid grid-cols-2 gap-4">
-
-    <input id="nama" placeholder="Nama"
-      class="col-span-2 p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
-
-    <input id="wa" placeholder="No WA"
-      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
-
-    <input id="layanan" placeholder="Layanan"
-      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
-
-    <input id="nominal" placeholder="Nominal"
-      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
-
-    <input id="tujuan" placeholder="Tujuan"
-      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
-
-    <button
-      class="col-span-2 mt-2 bg-gradient-to-r from-purple-600 to-purple-800 p-3 rounded-xl font-semibold hover:scale-105 transition">
+    <input id="nama" type="text" placeholder="Nama" class="col-span-2 p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
+    <input id="wa" type="number" placeholder="No WA (08xx)" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
+    <input id="layanan" type="text" placeholder="Layanan" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
+    <input id="nominal" type="text" placeholder="Nominal" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
+    <input id="tujuan" type="number" placeholder="No Tujuan" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
+    
+    <button type="submit" id="btnKirim" class="col-span-2 mt-2 bg-gradient-to-r from-purple-600 to-purple-800 p-3 rounded-xl font-semibold hover:scale-105 transition disabled:opacity-50">
       Kirim Order
     </button>
-
   </form>
-
 </div>
 
 <div id="successPopup" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-center justify-center z-50">
-  <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-2xl max-w-sm w-full">
-
-    <div class="text-green-400 text-6xl mb-4">
-      <i class="fa-solid fa-circle-check"></i>
-    </div>
-
+  <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-2xl max-w-sm w-full border border-purple-500/30">
+    <div class="text-green-400 text-6xl mb-4"><i class="fa-solid fa-circle-check"></i></div>
     <h2 class="text-2xl font-bold mb-2">Order Berhasil!</h2>
-    <p class="text-gray-400 mb-6">Pesanan kamu sudah masuk ke admin</p>
-
-    <button onclick="closePopup()"
-      class="bg-purple-600 px-6 py-3 rounded-xl hover:bg-purple-700 transition">
-      Tutup
-    </button>
-
+    <p class="text-gray-400 mb-6">Data tersimpan & Notif dikirim ke WA.</p>
+    <button onclick="closePopup()" class="bg-purple-600 px-6 py-3 rounded-xl hover:bg-purple-700 transition">Tutup</button>
   </div>
 </div>
 
@@ -73,74 +46,59 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
 const form = document.getElementById("orderForm");
+const btnKirim = document.getElementById("btnKirim");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+  
+  // Matikan tombol agar tidak double click
+  btnKirim.disabled = true;
+  btnKirim.innerText = "Sedang Memproses...";
 
-  // Ambil nilai dari input form
-  const valNama = document.getElementById("nama").value;
-  const valWa = document.getElementById("wa").value;
-  const valLayanan = document.getElementById("layanan").value;
-  const valNominal = document.getElementById("nominal").value;
-  const valTujuan = document.getElementById("tujuan").value;
+  const data = {
+    orderId: "WOWO-" + Math.floor(Math.random() * 1000000),
+    nama: document.getElementById("nama").value,
+    wa_pelanggan: document.getElementById("wa").value,
+    layanan: document.getElementById("layanan").value,
+    nominal: document.getElementById("nominal").value,
+    tujuan: document.getElementById("tujuan").value,
+    createdAt: serverTimestamp()
+  };
 
   try {
-    const data = {
-      orderId: "WOWO-" + Date.now().toString().slice(-8),
-      nama: valNama,
-      wa_pelanggan: valWa,
-      layanan: valLayanan,
-      nominal: valNominal,
-      tujuan: valTujuan,
-      createdAt: serverTimestamp()
-    };
-
-    // 1. Simpan ke Firebase Firestore di koleksi 'order'
+    // 1. ALUR PERTAMA: SIMPAN KE FIREBASE
     await addDoc(collection(db, "order"), data);
 
-    // 2. Kirim Notifikasi ke WhatsApp Admin (083148583173)
+    // 2. ALUR KEDUA: KIRIM KE WHATSAPP ADMIN
     const nomorAdmin = "6283148583173"; 
-    const pesanWA = `Halo Admin, ada pesanan baru di WOWO!\n\n` +
+    const pesanWA = `Halo Admin, ada pesanan baru!\n\n` +
                     `*ID Order:* ${data.orderId}\n` +
-                    `*Nama:* ${valNama}\n` +
-                    `*WA Pelanggan:* ${valWa}\n` +
-                    `*Layanan:* ${valLayanan}\n` +
-                    `*Nominal:* ${valNominal}\n` +
-                    `*Tujuan:* ${valTujuan}`;
+                    `*Nama:* ${data.nama}\n` +
+                    `*WA Pelanggan:* ${data.wa_pelanggan}\n` +
+                    `*Layanan:* ${data.layanan}\n` +
+                    `*Nominal:* ${data.nominal}\n` +
+                    `*Tujuan:* ${data.tujuan}`;
     
-    const urlWA = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesanWA)}`;
-    
-    // Membuka jendela WhatsApp baru
-    window.open(urlWA, '_blank');
+    window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesanWA)}`, '_blank');
 
-    // ✅ Tampilkan popup sukses di web
+    // 3. TAMPILKAN POPUP SUKSES
     const popup = document.getElementById("successPopup");
-    popup.classList.remove("hidden");
-    popup.classList.add("flex");
-
-    // Reset form setelah berhasil
+    popup.classList.replace("hidden", "flex");
     form.reset();
-
-    // Auto close popup setelah 3 detik
-    setTimeout(() => {
-      closePopup();
-    }, 3000);
 
   } catch (err) {
     console.error("Firebase Error:", err);
-    alert("❌ Gagal mengirim order ke database!");
+    alert("❌ Gagal masuk ke database! Pastikan 'Rules' di Firebase sudah 'allow read, write: if true;'");
+  } finally {
+    btnKirim.disabled = false;
+    btnKirim.innerText = "Kirim Order";
   }
 });
 
-// Fungsi untuk menutup popup secara manual
 window.closePopup = function () {
-  const popup = document.getElementById("successPopup");
-  popup.classList.remove("flex");
-  popup.classList.add("hidden");
+  document.getElementById("successPopup").classList.replace("flex", "hidden");
 };
 </script>
-
 </body>
 </html>

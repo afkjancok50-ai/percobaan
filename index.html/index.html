@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WOWO - Pulsa & Kuota Murah</title>
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
@@ -13,14 +12,12 @@
 
   <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-lg z-50 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      
       <div class="flex items-center gap-3">
         <img src="prabowo.jpg" class="w-10 h-10 rounded-2xl object-cover shadow-lg shadow-purple-500/30">
         <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
           WOWO
         </h1>
       </div>
-
       <div class="space-x-6 text-lg hidden md:block">
         <a href="#" class="hover:text-purple-400">Beranda</a>
         <a href="#layanan" class="hover:text-purple-400">Layanan</a>
@@ -32,7 +29,6 @@
 
   <section class="min-h-screen flex items-center relative pt-24">
     <div class="absolute inset-0 bg-[radial-gradient(at_center,#6b21a8_0%,transparent_70%)] opacity-30"></div>
-    
     <div class="max-w-4xl mx-auto px-6 text-center">
       <h2 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
         WOWO STORE<br>
@@ -40,13 +36,10 @@
           Pulsa & Kuota Murah
         </span>
       </h2>
-
       <p class="text-xl text-gray-400 mb-8">
         Transaksi instan 24 jam • Aman • Cepat • Harga termurah
       </p>
-
-      <a href="#layanan"
-         class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 rounded-2xl text-lg font-semibold hover:scale-105 transition">
+      <a href="#layanan" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 rounded-2xl text-lg font-semibold hover:scale-105 transition">
         Lihat Harga 🚀
       </a>
     </div>
@@ -56,47 +49,51 @@
     <div class="max-w-7xl mx-auto px-6">
       <h2 class="text-5xl font-bold text-center mb-16">Daftar Layanan</h2>
       
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group border-blue-500/20">
+          <i class="fa-solid fa-wallet text-5xl text-blue-500 mb-6 group-hover:scale-110 transition-transform"></i>
+          <h3 class="text-2xl font-bold mb-4">Top Up DANA</h3>
+          <div class="space-y-3 mb-8 flex-grow">
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>10.000</span> <span class="font-bold text-blue-400">Rp 12.000</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>50.000</span> <span class="font-bold text-blue-400">Rp 52.000</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>100.000</span> <span class="font-bold text-blue-400">Rp 102.000</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2 text-gray-500 italic text-sm"><span>Sampai 1 Juta...</span></div>
+          </div>
+          <a href="order.html?service=dana" class="w-full text-center bg-blue-600 py-3 rounded-xl font-bold hover:bg-blue-700 transition">Order DANA</a>
+        </div>
 
         <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group">
           <i class="fa-solid fa-mobile-screen-button text-5xl text-purple-500 mb-6 group-hover:scale-110 transition-transform"></i>
           <h3 class="text-2xl font-bold mb-4">Pulsa All Operator</h3>
-          
           <div class="space-y-3 mb-8 flex-grow">
             <div class="flex justify-between border-b border-white/5 pb-2"><span>5.000</span> <span class="font-bold text-purple-400">Rp 6.200</span></div>
             <div class="flex justify-between border-b border-white/5 pb-2"><span>10.000</span> <span class="font-bold text-purple-400">Rp 11.150</span></div>
             <div class="flex justify-between border-b border-white/5 pb-2"><span>20.000</span> <span class="font-bold text-purple-400">Rp 20.800</span></div>
             <div class="flex justify-between border-b border-white/5 pb-2 text-gray-500 italic text-sm"><span>Dan seterusnya...</span></div>
           </div>
-
           <a href="order.html?service=pulsa" class="w-full text-center bg-purple-600 py-3 rounded-xl font-bold hover:bg-purple-700 transition">Order Pulsa</a>
         </div>
 
         <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group">
           <i class="fa-solid fa-wifi text-5xl text-pink-500 mb-6 group-hover:scale-110 transition-transform"></i>
           <h3 class="text-2xl font-bold mb-4">Kuota Internet</h3>
-          
           <div class="space-y-3 mb-8 flex-grow">
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>1 GB / 30 Hari</span> <span class="font-bold text-pink-400">Rp 12.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>5 GB / 30 Hari</span> <span class="font-bold text-pink-400">Rp 35.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>10 GB / 30 Hari</span> <span class="font-bold text-pink-400">Rp 62.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2 text-gray-500 italic text-sm"><span>Tersedia paket harian...</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>1 GB / 30 H</span> <span class="font-bold text-pink-400">Rp 12.000</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>5 GB / 30 H</span> <span class="font-bold text-pink-400">Rp 35.000</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>10 GB / 30 H</span> <span class="font-bold text-pink-400">Rp 62.000</span></div>
           </div>
-
           <a href="order.html?service=kuota" class="w-full text-center bg-pink-600 py-3 rounded-xl font-bold hover:bg-pink-700 transition">Order Kuota</a>
         </div>
 
         <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group">
           <i class="fa-solid fa-plug text-5xl text-cyan-500 mb-6 group-hover:scale-110 transition-transform"></i>
           <h3 class="text-2xl font-bold mb-4">Token PLN</h3>
-          
           <div class="space-y-3 mb-8 flex-grow">
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 20.000</span> <span class="font-bold text-cyan-400">Rp 21.500</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 50.000</span> <span class="font-bold text-cyan-400">Rp 51.500</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 100.000</span> <span class="font-bold text-cyan-400">Rp 101.500</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2 text-gray-500 italic text-sm"><span>Biaya admin tetap...</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 20k</span> <span class="font-bold text-cyan-400">Rp 21.500</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 50k</span> <span class="font-bold text-cyan-400">Rp 51.500</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 100k</span> <span class="font-bold text-cyan-400">Rp 101.500</span></div>
           </div>
-
           <a href="order.html?service=pln" class="w-full text-center bg-cyan-600 py-3 rounded-xl font-bold hover:bg-cyan-700 transition text-black">Order Token</a>
         </div>
 
@@ -107,37 +104,19 @@
   <section id="why" class="py-20 bg-gray-900">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <h2 class="text-4xl font-bold mb-12">Kenapa Pilih WOWO?</h2>
-
       <div class="grid md:grid-cols-3 gap-10">
-        <div>
-          <i class="fa-solid fa-clock text-4xl text-purple-500 mb-4"></i>
-          <h4 class="text-xl font-semibold">24 Jam</h4>
-          <p class="text-gray-400">Nonstop</p>
-        </div>
-
-        <div>
-          <i class="fa-solid fa-shield-halved text-4xl text-pink-500 mb-4"></i>
-          <h4 class="text-xl font-semibold">Aman</h4>
-          <p class="text-gray-400">Terpercaya</p>
-        </div>
-
-        <div>
-          <i class="fa-solid fa-money-bill-wave text-4xl text-cyan-500 mb-4"></i>
-          <h4 class="text-xl font-semibold">Murah</h4>
-          <p class="text-gray-400">Harga terbaik</p>
-        </div>
+        <div><i class="fa-solid fa-clock text-4xl text-purple-500 mb-4"></i><h4 class="text-xl font-semibold">24 Jam</h4><p class="text-gray-400">Nonstop</p></div>
+        <div><i class="fa-solid fa-shield-halved text-4xl text-pink-500 mb-4"></i><h4 class="text-xl font-semibold">Aman</h4><p class="text-gray-400">Terpercaya</p></div>
+        <div><i class="fa-solid fa-money-bill-wave text-4xl text-cyan-500 mb-4"></i><h4 class="text-xl font-semibold">Murah</h4><p class="text-gray-400">Harga terbaik</p></div>
       </div>
     </div>
   </section>
 
   <footer id="contact" class="bg-black border-t border-white/10 py-20 text-center">
     <h2 class="text-4xl font-bold mb-6">Hubungi Kami</h2>
-
-    <a href="https://wa.me/6283148583173" target="_blank"
-       class="inline-flex items-center gap-3 bg-green-500 px-8 py-4 rounded-2xl text-lg font-semibold hover:scale-105 transition">
+    <a href="https://wa.me/6283148583173" target="_blank" class="inline-flex items-center gap-3 bg-green-500 px-8 py-4 rounded-2xl text-lg font-semibold hover:scale-105 transition">
       <i class="fab fa-whatsapp"></i> WhatsApp
     </a>
-
     <p class="mt-10 text-gray-500">© 2026 WOWO</p>
   </footer>
 

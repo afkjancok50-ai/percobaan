@@ -8,70 +8,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-    
-    :root { 
-      --brimo-blue: #00529C; 
-      --brimo-dark: #002D57; 
-      --brimo-light: #F4F7FA; 
-    }
-    
-    body { 
-      font-family: 'Plus Jakarta Sans', sans-serif; 
-      background-color: var(--brimo-light); 
-    }
-    
-    .nav-gradient { 
-      background: linear-gradient(to right, var(--brimo-dark), var(--brimo-blue)); 
-    }
-    
-    .hero-section { 
-      background: linear-gradient(135deg, var(--brimo-dark) 0%, var(--brimo-blue) 100%); 
-      clip-path: ellipse(150% 100% at 50% 0%); 
-      position: relative;
-      z-index: 20;
-    }
-    
-    .service-card { 
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-      border: 1px solid rgba(0, 82, 156, 0.08); 
-      position: relative;
-      z-index: 10;
-      transform: translateY(-50px);
-    }
-    
-    .service-card:hover { 
-      transform: translateY(0px); 
-      box-shadow: 0 20px 40px rgba(0, 82, 156, 0.12); 
-      z-index: 30;
-    }
-
-    .logo-box {
-      width: 40px; height: 40px;
-      background: white;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      padding: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      overflow: hidden;
-    }
-
+    :root { --brimo-blue: #00529C; --brimo-dark: #002D57; --brimo-light: #F4F7FA; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--brimo-light); }
+    .nav-gradient { background: linear-gradient(to right, var(--brimo-dark), var(--brimo-blue)); }
+    .hero-section { background: linear-gradient(135deg, var(--brimo-dark) 0%, var(--brimo-blue) 100%); clip-path: ellipse(150% 100% at 50% 0%); position: relative; z-index: 20; }
+    .service-card { transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(0, 82, 156, 0.08); position: relative; z-index: 10; transform: translateY(-50px); }
+    .service-card:hover { transform: translateY(0px); box-shadow: 0 20px 40px rgba(0, 82, 156, 0.12); z-index: 30; }
+    .logo-box { width: 40px; height: 40px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; }
     .provider-img { width: 100%; height: 100%; object-fit: contain; }
-
-    .profile-img-container {
-      width: 42px; height: 42px;
-      border-radius: 9999px;
-      overflow: hidden;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      background: white;
-    }
-
-    /* Testimonial Card Style */
-    .testi-card {
-      background: white;
-      border-radius: 1.5rem;
-      padding: 1.5rem;
-      border: 1px solid rgba(0,0,0,0.05);
-      transition: transform 0.3s ease;
-    }
+    .profile-img-container { width: 42px; height: 42px; border-radius: 9999px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.3); background: white; }
+    .testi-card { background: white; border-radius: 1.5rem; padding: 1.5rem; border: 1px solid rgba(0,0,0,0.05); transition: transform 0.3s ease; }
     .testi-card:hover { transform: scale(1.02); }
     .star-gold { color: #fbbf24; }
   </style>
@@ -86,10 +32,9 @@
         </div>
         <h1 class="text-2xl font-black text-white tracking-tighter uppercase">WOWO<span class="text-orange-400">.</span></h1>
       </div>
-      <div class="hidden md:flex items-center space-x-8 text-sm font-bold text-blue-100 uppercase tracking-widest">
-        <a href="#" class="hover:text-white transition">Beranda</a>
-        <a href="#layanan" class="hover:text-white transition">Produk</a>
-        <a href="https://wa.me/6283148583173" class="bg-orange-500 text-white px-6 py-2.5 rounded-full hover:bg-orange-600 shadow-lg transition transform hover:scale-105 active:scale-95">Hubungi Kami</a>
+      <div class="flex items-center space-x-4 md:space-x-8 text-sm font-bold text-blue-100 uppercase tracking-widest">
+        <a href="#" class="hidden md:block hover:text-white transition">Beranda</a>
+        <a href="https://wa.me/6283148583173" class="bg-orange-500 text-white px-4 md:px-6 py-2 rounded-full hover:bg-orange-600 shadow-lg transition transform hover:scale-105 active:scale-95">Hubungi Kami</a>
       </div>
     </div>
   </nav>
@@ -97,10 +42,10 @@
   <section class="hero-section pt-40 pb-52 text-white px-6 text-center md:text-left">
     <div class="max-w-7xl mx-auto">
       <div class="inline-block px-4 py-1.5 bg-blue-400/20 backdrop-blur-md rounded-full text-xs font-bold tracking-[0.2em] mb-6 border border-white/10 uppercase">
-        🚀 Tercepat & Terpercaya di Indonesia
+        🚀 Tercepat & Terpercaya
       </div>
-      <h2 class="text-5xl md:text-6xl font-black mb-6 leading-tight">Transaksi Digital <br><span class="text-orange-400">Tanpa Batas.</span></h2>
-      <p class="text-lg text-blue-100 mb-10 opacity-80 max-w-2xl font-medium">Layanan Top Up E-Wallet, Pulsa, dan Token Listrik dengan proses instan 24 jam nonstop.</p>
+      <h2 class="text-5xl md:text-6xl font-black mb-6 leading-tight uppercase">Transaksi Digital <br><span class="text-orange-400 text-4xl md:text-5xl">WOWO STORE.</span></h2>
+      <p class="text-lg text-blue-100 mb-10 opacity-80 max-w-2xl font-medium">Top Up E-Wallet, Pulsa, dan Token Listrik instan 24 jam nonstop.</p>
     </div>
   </section>
 
@@ -131,7 +76,7 @@
         <div class="space-y-3">
           <a href="order.html?prod=Pulsa" class="flex items-center gap-4 p-4 bg-purple-50 rounded-2xl border border-purple-100">
             <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm"><i class="fa-solid fa-mobile-screen text-purple-600 text-xl"></i></div>
-            <div><p class="text-sm font-black text-gray-800">Cek Harga</p><p class="text-[10px] text-purple-500 font-bold uppercase">Mulai Rp 10.000</p></div>
+            <div><p class="text-sm font-black text-gray-800">Cek Harga</p><p class="text-[10px] text-purple-500 font-bold uppercase tracking-tighter">Mulai Rp 10.000</p></div>
           </a>
         </div>
       </div>
@@ -145,13 +90,13 @@
   </section>
 
   <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-black text-gray-900 uppercase tracking-tighter">Apa Kata Mereka?</h2>
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <div class="mb-16">
+        <h2 class="text-3xl font-black text-gray-900 uppercase">Apa Kata Mereka?</h2>
         <div class="h-1.5 w-20 bg-orange-400 mx-auto mt-4 rounded-full"></div>
       </div>
       <div id="testiContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="col-span-full text-center text-gray-400 animate-pulse">Memuat penilaian terbaru...</div>
+        <div class="col-span-full text-center text-gray-400 animate-pulse uppercase font-bold text-xs tracking-widest">Memuat penilaian terbaru...</div>
       </div>
     </div>
   </section>
@@ -159,8 +104,7 @@
   <footer class="bg-gray-50 py-12 border-t text-center">
     <div class="max-w-7xl mx-auto px-6">
         <h4 class="text-xl font-black text-gray-900 mb-2 uppercase">WOWO STORE</h4>
-        <p class="text-gray-400 text-sm font-medium mb-6">Partner Terpercaya Untuk Kebutuhan Digital Anda.</p>
-        <div class="h-px bg-gray-200 w-full mb-6"></div>
+        <p class="text-gray-400 text-sm font-medium mb-6">Partner Terpercaya Kebutuhan Digital.</p>
         <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">© 2026 WOWO STORE. Seluruh hak cipta dilindungi.</p>
     </div>
   </footer>
@@ -177,11 +121,8 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-
-    // LOGIKA AMBIL RATING
     const testiContainer = document.getElementById("testiContainer");
 
-    // Ambil order yang statusnya "Success" dan punya rating > 0
     const q = query(
       collection(db, "order"), 
       where("status", "==", "Success"), 
@@ -192,37 +133,37 @@
 
     onSnapshot(q, (snapshot) => {
       if (snapshot.empty) {
-        testiContainer.innerHTML = '<p class="col-span-full text-center text-gray-400 italic">Belum ada penilaian.</p>';
+        testiContainer.innerHTML = '<p class="col-span-full text-center text-gray-400 italic font-bold">Belum ada penilaian Success.</p>';
         return;
       }
 
       testiContainer.innerHTML = "";
       snapshot.forEach((doc) => {
         const data = doc.data();
+        const nama = data.nama || "User";
+        const namaSensor = nama.length > 2 ? nama.substring(0, 2) + "***" : nama;
         
-        // Sensor nama (contoh: Bima -> Bi**)
-        const namaSensor = data.nama.length > 2 ? data.nama.substring(0, 2) + "**" : data.nama;
-        
-        // Buat Bintang visual
         let starsHtml = "";
         for (let i = 1; i <= 5; i++) {
-          starsHtml += `<i class="fa-solid fa-star ${i <= data.rating ? 'star-gold' : 'text-gray-200'} text-xs"></i>`;
+          starsHtml += `<i class="fa-solid fa-star ${i <= (data.rating || 0) ? 'star-gold' : 'text-gray-200'} text-xs"></i>`;
         }
 
-        const card = `
-          <div class="testi-card">
+        testiContainer.innerHTML += `
+          <div class="testi-card text-left">
             <div class="flex justify-between items-start mb-4">
               <div>
-                <h4 class="font-black text-gray-800 text-sm">${namaSensor}</h4>
-                <p class="text-[10px] text-blue-500 font-bold uppercase">${data.layanan} - ${data.nominal}</p>
+                <h4 class="font-black text-gray-800 text-sm uppercase">${namaSensor}</h4>
+                <p class="text-[9px] text-blue-500 font-bold uppercase">${data.layanan || ''} - ${data.nominal || ''}</p>
               </div>
               <div class="flex gap-0.5">${starsHtml}</div>
             </div>
             <p class="text-xs text-gray-500 leading-relaxed italic">"Transaksi sangat cepat dan aman. Terima kasih WOWO Store!"</p>
           </div>
         `;
-        testiContainer.innerHTML += card;
       });
+    }, (error) => {
+      console.error(error);
+      testiContainer.innerHTML = '<p class="text-red-500 text-center col-span-full font-bold uppercase text-xs">Gagal memuat data.</p>';
     });
   </script>
 </body>

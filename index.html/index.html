@@ -3,122 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WOWO - Pulsa & Kuota Murah</title>
+  <title>WOWO - Solusi Transaksi Digital</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    :root {
+      --brimo-blue: #00529C;
+      --brimo-dark: #002D57;
+      --brimo-light: #F4F7FA;
+    }
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--brimo-light);
+    }
+    .nav-gradient {
+      background: linear-gradient(to right, var(--brimo-dark), var(--brimo-blue));
+    }
+    .hero-section {
+      background: linear-gradient(135deg, var(--brimo-dark) 0%, var(--brimo-blue) 100%);
+      clip-path: ellipse(150% 100% at 50% 0%);
+    }
+    .service-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(0, 82, 156, 0.1);
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 82, 156, 0.2);
+    }
+    .btn-brimo {
+      background-color: var(--brimo-blue);
+      transition: background-color 0.3s;
+    }
+    .btn-brimo:hover {
+      background-color: var(--brimo-dark);
+    }
+  </style>
 </head>
 
-<body class="bg-gray-950 text-white overflow-x-hidden">
+<body class="text-gray-800">
 
-  <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-lg z-50 border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+  <nav class="fixed top-0 w-full nav-gradient z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <img src="prabowo.jpg" class="w-10 h-10 rounded-2xl object-cover shadow-lg shadow-purple-500/30">
-        <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-          WOWO
-        </h1>
+        <div class="bg-white p-1 rounded-lg">
+          <img src="prabowo.jpg" class="w-8 h-8 rounded-md object-cover">
+        </div>
+        <h1 class="text-2xl font-extrabold text-white tracking-tight">WOWO</h1>
       </div>
-      <div class="space-x-6 text-lg hidden md:block">
-        <a href="#" class="hover:text-purple-400">Beranda</a>
-        <a href="#layanan" class="hover:text-purple-400">Layanan</a>
-        <a href="#why" class="hover:text-purple-400">Keunggulan</a>
-        <a href="#contact" class="hover:text-purple-400">Kontak</a>
+      <div class="hidden md:flex space-x-8 text-sm font-medium text-blue-100">
+        <a href="#" class="hover:text-white transition">Beranda</a>
+        <a href="#layanan" class="hover:text-white transition">Produk</a>
+        <a href="#why" class="hover:text-white transition">Bantuan</a>
+        <a href="https://wa.me/6283148583173" class="bg-orange-500 text-white px-4 py-1.5 rounded-full hover:bg-orange-600 transition">Hubungi Kami</a>
       </div>
     </div>
   </nav>
 
-  <section class="min-h-screen flex items-center relative pt-24">
-    <div class="absolute inset-0 bg-[radial-gradient(at_center,#6b21a8_0%,transparent_70%)] opacity-30"></div>
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
-        WOWO STORE<br>
-        <span class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-          Pulsa & Kuota Murah
-        </span>
-      </h2>
-      <p class="text-xl text-gray-400 mb-8">
-        Transaksi instan 24 jam • Aman • Cepat • Harga termurah
-      </p>
-      <a href="#layanan" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 rounded-2xl text-lg font-semibold hover:scale-105 transition">
-        Lihat Harga 🚀
-      </a>
+  <section class="hero-section pt-32 pb-48 text-white px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
+      <div class="md:w-1/2 text-center md:text-left">
+        <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+          Kemudahan Transaksi <br><span class="text-orange-400">Dalam Genggaman.</span>
+        </h2>
+        <p class="text-lg text-blue-100 mb-8 opacity-90">
+          Nikmati layanan pengisian pulsa, data, dan token listrik dengan standar keamanan tinggi dan harga kompetitif.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+          <a href="#layanan" class="bg-white text-blue-900 px-8 py-3 rounded-full font-bold shadow-xl hover:bg-blue-50 transition">Mulai Transaksi</a>
+          <div class="flex items-center gap-2 text-sm text-blue-100">
+            <i class="fa-solid fa-circle-check text-green-400"></i> Terverifikasi Keamanannya
+          </div>
+        </div>
+      </div>
+      <div class="hidden md:block md:w-1/3">
+         <i class="fa-solid fa-mobile-screen text-[180px] text-white/20 rotate-12"></i>
+      </div>
     </div>
   </section>
 
-  <section id="layanan" class="py-24 bg-black">
+  <section id="layanan" class="max-w-7xl mx-auto px-6 -mt-24 pb-20">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <div class="bg-white p-6 rounded-3xl shadow-sm service-card flex flex-col">
+        <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+          <i class="fa-solid fa-wallet text-blue-600 text-xl"></i>
+        </div>
+        <h3 class="font-bold text-gray-900 text-lg mb-4">Dompet Digital</h3>
+        <div class="flex-grow space-y-3 text-sm mb-6 text-gray-600">
+          <div class="flex justify-between border-b pb-2"><span>DANA 10k</span> <span class="font-bold text-blue-700">12.000</span></div>
+          <div class="flex justify-between border-b pb-2"><span>DANA 100k</span> <span class="font-bold text-blue-700">102.000</span></div>
+          <div class="flex justify-between border-b pb-2"><span>DANA 1jt</span> <span class="font-bold text-blue-700">1.002.000</span></div>
+        </div>
+        <a href="order.html?service=dana" class="w-full btn-brimo text-white py-2.5 rounded-xl text-center text-sm font-semibold">Top Up</a>
+      </div>
+
+      <div class="bg-white p-6 rounded-3xl shadow-sm service-card flex flex-col">
+        <div class="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center mb-6">
+          <i class="fa-solid fa-mobile-button text-purple-600 text-xl"></i>
+        </div>
+        <h3 class="font-bold text-gray-900 text-lg mb-4">Pulsa Reguler</h3>
+        <div class="flex-grow space-y-3 text-sm mb-6 text-gray-600">
+          <div class="flex justify-between border-b pb-2"><span>Pulsa 5k</span> <span class="font-bold text-blue-700">7.000</span></div>
+          <div class="flex justify-between border-b pb-2"><span>Pulsa 50k</span> <span class="font-bold text-blue-700">52.000</span></div>
+          <div class="flex justify-between border-b pb-2"><span>Pulsa 1jt</span> <span class="font-bold text-blue-700">1.002.000</span></div>
+        </div>
+        <a href="order.html?service=pulsa" class="w-full btn-brimo text-white py-2.5 rounded-xl text-center text-sm font-semibold">Beli Pulsa</a>
+      </div>
+
+      <div class="bg-white p-6 rounded-3xl shadow-sm service-card flex flex-col">
+        <div class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center mb-6">
+          <i class="fa-solid fa-wifi text-orange-600 text-xl"></i>
+        </div>
+        <h3 class="font-bold text-gray-900 text-lg mb-4">Paket Data</h3>
+        <div class="flex-grow space-y-3 text-sm mb-6 text-gray-600">
+          <div class="flex justify-between border-b pb-2"><span>Data 1 GB</span> <span class="font-bold text-blue-700">12.000</span></div>
+          <div class="flex justify-between border-b pb-2"><span>Data 5 GB</span> <span class="font-bold text-blue-700">37.000</span></div>
+          <div class="flex justify-between border-b pb-2"><span>Data 10 GB</span> <span class="font-bold text-blue-700">64.000</span></div>
+        </div>
+        <a href="order.html?service=kuota" class="w-full btn-brimo text-white py-2.5 rounded-xl text-center text-sm font-semibold">Beli Paket</a>
+      </div>
+
+      <div class="bg-white p-6 rounded-3xl shadow-sm service-card flex flex-col">
+        <div class="w-12 h-12 bg-cyan-50 rounded-2xl flex items-center justify-center mb-6">
+          <i class="fa-solid fa-lightbulb text-cyan-600 text-xl"></i>
+        </div>
+        <h3 class="font-bold text-gray-900 text-lg mb-4">Listrik PLN</h3>
+        <div class="flex-grow space-y-3 text-sm mb-6 text-gray-600">
+          <div class="flex justify-between border-b pb-2"><span>PLN 20k</span> <span class="font-bold text-blue-700">22.000</span></div>
+          <div class="flex justify-between border-b pb-2"><span>PLN 100k</span> <span class="font-bold text-blue-700">102.000</span></div>
+          <div class="flex justify-between border-b pb-2"><span>PLN 1jt</span> <span class="font-bold text-blue-700">1.002.000</span></div>
+        </div>
+        <a href="order.html?service=pln" class="w-full btn-brimo text-white py-2.5 rounded-xl text-center text-sm font-semibold">Beli Token</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="why" class="py-20 bg-white border-t border-gray-100">
     <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-5xl font-bold text-center mb-16">Daftar Layanan</h2>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group border-blue-500/20">
-          <i class="fa-solid fa-wallet text-5xl text-blue-500 mb-6 group-hover:scale-110 transition-transform"></i>
-          <h3 class="text-2xl font-bold mb-4">Top Up DANA</h3>
-          <div class="space-y-3 mb-8 flex-grow">
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>10.000</span> <span class="font-bold text-blue-400">Rp 12.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>100.000</span> <span class="font-bold text-blue-400">Rp 102.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>500.000</span> <span class="font-bold text-blue-400">Rp 502.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>1.000.000</span> <span class="font-bold text-blue-400">Rp 1.002.000</span></div>
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-blue-900">Keunggulan Layanan Kami</h2>
+        <p class="text-gray-500 mt-2">Memberikan pengalaman transaksi yang berkesan.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-12 text-center">
+        <div>
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa-solid fa-bolt text-blue-600 text-2xl"></i>
           </div>
-          <a href="order.html?service=dana" class="w-full text-center bg-blue-600 py-3 rounded-xl font-bold hover:bg-blue-700 transition">Order DANA</a>
+          <h4 class="text-xl font-bold text-gray-900 mb-2">Proses Real-Time</h4>
+          <p class="text-gray-600 text-sm">Pesanan diproses secara otomatis dalam hitungan detik setelah pembayaran dikonfirmasi.</p>
         </div>
-
-        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group border-purple-500/20">
-          <i class="fa-solid fa-mobile-screen-button text-5xl text-purple-500 mb-6 group-hover:scale-110 transition-transform"></i>
-          <h3 class="text-2xl font-bold mb-4">Pulsa All Operator</h3>
-          <div class="space-y-3 mb-8 flex-grow">
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>5.000</span> <span class="font-bold text-purple-400">Rp 7.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>10.000</span> <span class="font-bold text-purple-400">Rp 12.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>50.000</span> <span class="font-bold text-purple-400">Rp 52.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>1.000.000</span> <span class="font-bold text-purple-400">Rp 1.002.000</span></div>
+        <div>
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa-solid fa-shield-check text-blue-600 text-2xl"></i>
           </div>
-          <a href="order.html?service=pulsa" class="w-full text-center bg-purple-600 py-3 rounded-xl font-bold hover:bg-purple-700 transition">Order Pulsa</a>
+          <h4 class="text-xl font-bold text-gray-900 mb-2">Sistem Aman</h4>
+          <p class="text-gray-600 text-sm">Keamanan data pelanggan adalah prioritas utama kami dengan sistem enkripsi terbaru.</p>
         </div>
-
-        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group border-pink-500/20">
-          <i class="fa-solid fa-wifi text-5xl text-pink-500 mb-6 group-hover:scale-110 transition-transform"></i>
-          <h3 class="text-2xl font-bold mb-4">Kuota Internet</h3>
-          <div class="space-y-3 mb-8 flex-grow">
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>1 GB / 30 H</span> <span class="font-bold text-pink-400">Rp 12.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>5 GB / 30 H</span> <span class="font-bold text-pink-400">Rp 37.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>10 GB / 30 H</span> <span class="font-bold text-pink-400">Rp 64.000</span></div>
+        <div>
+          <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa-solid fa-headset text-blue-600 text-2xl"></i>
           </div>
-          <a href="order.html?service=kuota" class="w-full text-center bg-pink-600 py-3 rounded-xl font-bold hover:bg-pink-700 transition">Order Kuota</a>
+          <h4 class="text-xl font-bold text-gray-900 mb-2">Layanan 24/7</h4>
+          <p class="text-gray-600 text-sm">Tim kami siap membantu Anda kapan saja jika terjadi kendala dalam transaksi.</p>
         </div>
-
-        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col group border-cyan-500/20">
-          <i class="fa-solid fa-plug text-5xl text-cyan-500 mb-6 group-hover:scale-110 transition-transform"></i>
-          <h3 class="text-2xl font-bold mb-4">Token PLN</h3>
-          <div class="space-y-3 mb-8 flex-grow">
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 20k</span> <span class="font-bold text-cyan-400">Rp 22.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 100k</span> <span class="font-bold text-cyan-400">Rp 102.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 500k</span> <span class="font-bold text-cyan-400">Rp 502.000</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span>Nominal 1jt</span> <span class="font-bold text-cyan-400">Rp 1.002.000</span></div>
-          </div>
-          <a href="order.html?service=pln" class="w-full text-center bg-cyan-600 py-3 rounded-xl font-bold hover:bg-cyan-700 transition text-black">Order Token</a>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <section id="why" class="py-20 bg-gray-900">
+  <footer class="bg-gray-50 py-12 border-t border-gray-200">
     <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-4xl font-bold mb-12">Kenapa Pilih WOWO?</h2>
-      <div class="grid md:grid-cols-3 gap-10">
-        <div><i class="fa-solid fa-clock text-4xl text-purple-500 mb-4"></i><h4 class="text-xl font-semibold">24 Jam</h4><p class="text-gray-400">Nonstop</p></div>
-        <div><i class="fa-solid fa-shield-halved text-4xl text-pink-500 mb-4"></i><h4 class="text-xl font-semibold">Aman</h4><p class="text-gray-400">Terpercaya</p></div>
-        <div><i class="fa-solid fa-money-bill-wave text-4xl text-cyan-500 mb-4"></i><h4 class="text-xl font-semibold">Murah</h4><p class="text-gray-400">Harga terbaik</p></div>
+      <div class="flex justify-center gap-6 mb-8 text-gray-400 text-xl">
+        <a href="#" class="hover:text-blue-600 transition"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="hover:text-blue-600 transition"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://wa.me/6283148583173" class="hover:text-green-500 transition"><i class="fa-brands fa-whatsapp"></i></a>
       </div>
+      <p class="text-gray-500 text-sm">© 2026 WOWO STORE. Seluruh hak cipta dilindungi.</p>
+      <p class="text-gray-400 text-xs mt-2 italic text-center">Bukan aplikasi resmi perbankan, melainkan platform layanan digital independen.</p>
     </div>
-  </section>
-
-  <footer id="contact" class="bg-black border-t border-white/10 py-20 text-center">
-    <h2 class="text-4xl font-bold mb-6">Hubungi Kami</h2>
-    <a href="https://wa.me/6283148583173" target="_blank" class="inline-flex items-center gap-3 bg-green-500 px-8 py-4 rounded-2xl text-lg font-semibold hover:scale-105 transition">
-      <i class="fab fa-whatsapp"></i> WhatsApp
-    </a>
-    <p class="mt-10 text-gray-500">© 2026 WOWO</p>
   </footer>
 
 </body>

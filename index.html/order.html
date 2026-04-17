@@ -98,8 +98,11 @@
                   <option value="GoPay">GoPay</option>
                   <option value="ShopeePay">ShopeePay</option>
                   <option value="E-Toll">E-Toll</option>
+                  <option value="Kuota Telkomsel">Kuota Telkomsel</option>
+                  <option value="Kuota XL">Kuota XL Axiata</option>
+                  <option value="Kuota Indosat">Kuota Indosat</option>
+                  <option value="Kuota Tri">Kuota Tri</option>
                   <option value="Pulsa">Pulsa All Op</option>
-                  <option value="Kuota">Kuota Internet</option>
                   <option value="Token PLN">Token PLN</option>
                 </select>
             </div>
@@ -151,10 +154,14 @@
         { label: `${nama} 10.000 (Rp 12k)`, val: "10.000", hrg: "12.000" },
         { label: `${nama} 20.000 (Rp 22k)`, val: "20.000", hrg: "22.000" },
         { label: `${nama} 50.000 (Rp 52k)`, val: "50.000", hrg: "52.000" },
-        { label: `${nama} 100.000 (Rp 102k)`, val: "100.000", hrg: "102.000" },
-        { label: `${nama} 200.000 (Rp 202k)`, val: "200.000", hrg: "202.000" },
-        { label: `${nama} 500.000 (Rp 502k)`, val: "500.000", hrg: "502.000" },
-        { label: `${nama} 1.000.000 (Rp 1.002k)`, val: "1.000.000", hrg: "1.002.000" }
+        { label: `${nama} 100.000 (Rp 102k)`, val: "100.000", hrg: "102.000" }
+    ];
+
+    const listKuota = (provider) => [
+        { label: `Data ${provider} 1 GB (Rp 12k)`, val: "1 GB", hrg: "12.000" },
+        { label: `Data ${provider} 5 GB (Rp 37k)`, val: "5 GB", hrg: "37.000" },
+        { label: `Data ${provider} 10 GB (Rp 62k)`, val: "10 GB", hrg: "62.000" },
+        { label: `Data ${provider} Unlimited (Rp 100k)`, val: "Unlimited", hrg: "100.000" }
     ];
 
     const opsiHarga = {
@@ -163,18 +170,14 @@
       "ShopeePay": listNominalDefault("ShopeePay"),
       "E-Toll": [
           { label: "E-Toll 20.000 (Rp 25k)", val: "20.000", hrg: "25.000" },
-          { label: "E-Toll 50.000 (Rp 55k)", val: "50.000", hrg: "55.000" },
-          { label: "E-Toll 100.000 (Rp 105k)", val: "100.000", hrg: "105.000" },
-          { label: "E-Toll 200.000 (Rp 205k)", val: "200.000", hrg: "205.000" }
+          { label: "E-Toll 50.000 (Rp 55k)", val: "50.000", hrg: "55.000" }
       ],
       "Pulsa": listNominalDefault("Pulsa"),
       "Token PLN": listNominalDefault("PLN"),
-      "Kuota": [
-        { label: "Kuota 1 GB (Rp 12k)", val: "1 GB", hrg: "12.000" },
-        { label: "Kuota 5 GB (Rp 37k)", val: "5 GB", hrg: "37.000" },
-        { label: "Kuota 10 GB (Rp 62k)", val: "10 GB", hrg: "62.000" },
-        { label: "Kuota Unlimited (Rp 1jt)", val: "Unlimited", hrg: "1.000.000" }
-      ]
+      "Kuota Telkomsel": listKuota("Telkomsel"),
+      "Kuota XL": listKuota("XL"),
+      "Kuota Indosat": listKuota("Indosat"),
+      "Kuota Tri": listKuota("Tri")
     };
 
     const updateNominal = (layanan) => {
@@ -196,12 +199,15 @@
         const params = new URLSearchParams(window.location.search);
         const prod = params.get('prod');
         if(prod) {
-            if(prod.includes("DANA")) selectLayanan.value = "DANA";
-            else if(prod.includes("GoPay")) selectLayanan.value = "GoPay";
-            else if(prod.includes("ShopeePay")) selectLayanan.value = "ShopeePay";
-            else if(prod.includes("E-Toll")) selectLayanan.value = "E-Toll";
+            if(prod === "DANA") selectLayanan.value = "DANA";
+            else if(prod === "GoPay") selectLayanan.value = "GoPay";
+            else if(prod === "ShopeePay") selectLayanan.value = "ShopeePay";
+            else if(prod === "E-Toll") selectLayanan.value = "E-Toll";
+            else if(prod.includes("Telkomsel")) selectLayanan.value = "Kuota Telkomsel";
+            else if(prod.includes("XL")) selectLayanan.value = "Kuota XL";
+            else if(prod.includes("Indosat")) selectLayanan.value = "Kuota Indosat";
+            else if(prod.includes("Tri")) selectLayanan.value = "Kuota Tri";
             else if(prod.includes("Pulsa")) selectLayanan.value = "Pulsa";
-            else if(prod.includes("Data") || prod.includes("Kuota")) selectLayanan.value = "Kuota";
             else if(prod.includes("Token")) selectLayanan.value = "Token PLN";
             updateNominal(selectLayanan.value);
         }

@@ -33,6 +33,7 @@
       background: rgba(255, 255, 255, 0.03) !important;
       border: 1px solid rgba(255, 255, 255, 0.1) !important;
       transition: all 0.3s ease;
+      color: white;
     }
 
     input:focus, select:focus {
@@ -185,7 +186,7 @@
     const selectNominal = document.getElementById("nominal");
     let currentOrderId = null;
 
-    // LOGIKA HARGA
+    // LOGIKA HARGA LENGKAP
     const listNominalDefault = (nama) => [
         { label: `${nama} 10.000 (Rp 12k)`, val: "10.000", hrg: "12.000" },
         { label: `${nama} 20.000 (Rp 22k)`, val: "20.000", hrg: "22.000" },
@@ -196,7 +197,12 @@
     const opsiHarga = {
       "DANA": listNominalDefault("DANA"),
       "GoPay": listNominalDefault("GoPay"),
-      "ShopeePay": listNominalDefault("ShopeePay"),
+      "ShopeePay": listNominalDefault("SPay"),
+      "E-Toll": listNominalDefault("E-Toll"),
+      "Kuota Telkomsel": listNominalDefault("Tsel"),
+      "Kuota XL": listNominalDefault("XL"),
+      "Kuota Indosat": listNominalDefault("Isat"),
+      "Kuota Tri": listNominalDefault("Tri"),
       "Pulsa": listNominalDefault("Pulsa"),
       "Token PLN": listNominalDefault("PLN")
     };
@@ -254,23 +260,18 @@
       } catch (err) { alert("Error!"); btnKirim.disabled = false; }
     });
 
-    // LOGIKA RATING BINTANG
+    // LOGIKA RATING
     const stars = document.querySelectorAll("#starContainer i");
     stars.forEach(star => {
         star.addEventListener("click", async () => {
             const ratingValue = parseInt(star.getAttribute("data-rating"));
-            
-            // Update UI Bintang
             stars.forEach(s => {
                 const sVal = parseInt(s.getAttribute("data-rating"));
                 sVal <= ratingValue ? s.classList.add("star-active") : s.classList.remove("star-active");
             });
 
-            // Simpan ke Firebase
             try {
-                await updateDoc(doc(db, "order", currentOrderId), {
-                    rating: ratingValue
-                });
+                await updateDoc(doc(db, "order", currentOrderId), { rating: ratingValue });
                 document.getElementById("ratingStatus").innerText = "Terima kasih atas penilaiannya!";
                 document.getElementById("starContainer").style.pointerEvents = "none";
             } catch (e) { console.error(e); }

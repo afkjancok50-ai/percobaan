@@ -28,7 +28,7 @@
       background: linear-gradient(135deg, var(--brimo-dark) 0%, var(--brimo-blue) 100%); 
       clip-path: ellipse(150% 100% at 50% 0%); 
       position: relative;
-      z-index: 20; /* Menaruh hero di atas kartu */
+      z-index: 20; /* Menutupi bagian atas kartu */
     }
     
     .service-card { 
@@ -36,13 +36,13 @@
       border: 1px solid rgba(0, 82, 156, 0.08); 
       position: relative;
       z-index: 10;
-      /* Efek tersembunyi di bawah lekukan saat normal */
-      transform: translateY(-50px);
-      opacity: 0.8;
+      /* Kartu naik ke atas agar 'terpotong' oleh lekukan hero */
+      transform: translateY(-60px);
+      opacity: 0.7;
     }
     
     .service-card:hover { 
-      transform: translateY(0px); /* Muncul sepenuhnya saat disentuh */
+      transform: translateY(0px); /* Muncul penuh saat hover */
       box-shadow: 0 25px 50px rgba(0, 82, 156, 0.15); 
       z-index: 30;
       opacity: 1;
@@ -105,8 +105,8 @@
     </div>
   </section>
 
-  <section id="layanan" class="max-w-7xl mx-auto px-6 -mt-32 pb-24 relative">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <section id="layanan" class="max-w-7xl mx-auto px-6 -mt-32 pb-24">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
       <div class="bg-white p-8 rounded-[2.5rem] shadow-xl service-card border-b-4 border-blue-500">
         <h3 class="font-black text-gray-900 mb-8 uppercase tracking-widest text-xs opacity-50">Top Up E-Wallet</h3>
@@ -118,7 +118,6 @@
                 </div>
                 <span class="text-sm font-extrabold text-gray-700">DANA</span>
             </div>
-            <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-blue-500"></i>
           </a>
           <a href="order.html?prod=GoPay" class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl hover:bg-green-50 transition border border-gray-100 group">
             <div class="flex items-center gap-4">
@@ -127,7 +126,6 @@
                 </div>
                 <span class="text-sm font-extrabold text-gray-700">GoPay</span>
             </div>
-            <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-green-500"></i>
           </a>
         </div>
       </div>
@@ -140,9 +138,8 @@
                 <div class="logo-box">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Bank_Mandiri_logo_2016.svg/1200px-Bank_Mandiri_logo_2016.svg.png" class="provider-img">
                 </div>
-                <span class="text-sm font-extrabold text-gray-700">Mandiri E-Money</span>
+                <span class="text-sm font-extrabold text-gray-700">Mandiri</span>
             </div>
-            <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-emerald-500"></i>
           </a>
           <a href="order.html?prod=BRI+Brizzi" class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl hover:bg-emerald-50 transition border border-gray-100 group">
             <div class="flex items-center gap-4">
@@ -151,17 +148,35 @@
                 </div>
                 <span class="text-sm font-extrabold text-gray-700">BRI Brizzi</span>
             </div>
-            <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-emerald-500"></i>
           </a>
+        </div>
+      </div>
+
+      <div class="bg-white p-8 rounded-[2.5rem] shadow-xl service-card border-b-4 border-purple-500">
+        <h3 class="font-black text-gray-900 mb-8 uppercase tracking-widest text-xs opacity-50">Pulsa All Operator</h3>
+        <div class="space-y-3">
+          <a href="order.html?prod=Pulsa" class="flex items-center gap-4 p-4 bg-purple-50 rounded-2xl border border-purple-100 group">
+            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm">
+                <i class="fa-solid fa-mobile-screen text-purple-600"></i>
+            </div>
+            <div>
+                <p class="text-xs font-black text-gray-800 uppercase">Cek Harga</p>
+                <p class="text-[9px] text-purple-500 font-bold">Mulai Rp 10.000</p>
+            </div>
+          </a>
+          <div class="pt-4 space-y-2 opacity-60">
+             <div class="flex justify-between text-[10px] font-bold italic px-1"><span>Proses Instan</span> <i class="fa-solid fa-bolt"></i></div>
+             <div class="flex justify-between text-[10px] font-bold italic px-1"><span>Harga Bersaing</span> <i class="fa-solid fa-tags"></i></div>
+          </div>
         </div>
       </div>
 
       <div class="bg-white p-8 rounded-[2.5rem] shadow-xl service-card border-b-4 border-cyan-500 text-center">
         <h3 class="font-black text-gray-900 mb-8 uppercase tracking-widest text-xs opacity-50">Listrik PLN</h3>
-        <div class="mb-8 p-6 bg-cyan-50 rounded-3xl">
-            <i class="fa-solid fa-bolt-lightning text-cyan-500 text-5xl animate-pulse"></i>
+        <div class="mb-6 p-4 bg-cyan-50 rounded-3xl">
+            <i class="fa-solid fa-bolt-lightning text-cyan-500 text-4xl animate-pulse"></i>
         </div>
-        <a href="order.html?prod=Token+PLN" class="block w-full bg-cyan-600 text-white py-4 rounded-2xl font-black shadow-lg hover:bg-cyan-700 transition uppercase tracking-widest text-xs">Isi Token</a>
+        <a href="order.html?prod=Token+PLN" class="block w-full bg-cyan-600 text-white py-3 rounded-2xl font-black shadow-lg hover:bg-cyan-700 transition uppercase tracking-widest text-[10px]">Isi Token</a>
       </div>
 
     </div>

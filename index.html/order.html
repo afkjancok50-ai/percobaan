@@ -3,44 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order WOWO</title>
+  <title>Order WOWO - Solusi Transaksi Digital</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    /* Custom Scrollbar untuk Select Option */
+    select option { background: #1f2937; color: white; }
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center min-h-screen">
+<body class="bg-gradient-to-br from-gray-900 via-black to-purple-950 text-white flex items-center justify-center min-h-screen p-4">
 
-<div class="bg-gray-900/80 backdrop-blur-lg shadow-2xl p-6 rounded-2xl w-full max-w-lg border border-white/10">
-  <h2 class="text-2xl font-bold text-center mb-6 text-purple-400">🚀 Form Order WOWO</h2>
+<div class="bg-gray-900/40 backdrop-blur-xl shadow-2xl p-8 rounded-3xl w-full max-w-lg border border-white/10">
+  <div class="text-center mb-8">
+    <div class="inline-block p-3 bg-purple-500/10 rounded-2xl mb-4">
+        <i class="fa-solid fa-rocket text-purple-400 text-3xl"></i>
+    </div>
+    <h2 class="text-3xl font-black tracking-tight text-white">Form Order <span class="text-purple-400">WOWO</span></h2>
+    <p class="text-gray-400 text-sm mt-2">Proses otomatis, aman, dan terpercaya.</p>
+  </div>
   
-  <form id="orderForm" class="grid grid-cols-2 gap-4">
-    <input id="nama" type="text" placeholder="Nama Anda" class="col-span-2 p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
-    <input id="wa" type="number" placeholder="No WA (08xx)" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
-    <input id="tujuan" type="number" placeholder="No HP Tujuan / DANA" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
+  <form id="orderForm" class="space-y-4">
+    <div class="relative">
+        <i class="fa-solid fa-user absolute left-4 top-4 text-gray-500"></i>
+        <input id="nama" type="text" placeholder="Nama Lengkap" class="w-full pl-12 p-4 rounded-2xl bg-gray-800/50 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5 transition" required>
+    </div>
 
-    <select id="layanan" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5 text-gray-300" required>
-      <option value="" disabled selected>Pilih Layanan</option>
-      <option value="DANA">Top Up DANA</option>
-      <option value="Pulsa">Pulsa All Operator</option>
-      <option value="Kuota">Kuota Internet</option>
-      <option value="Token PLN">Token PLN</option>
-    </select>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="relative">
+            <i class="fa-brands fa-whatsapp absolute left-4 top-4 text-gray-500"></i>
+            <input id="wa" type="number" placeholder="WA (Contoh: 0812...)" class="w-full pl-12 p-4 rounded-2xl bg-gray-800/50 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5 transition" required>
+        </div>
+        <div class="relative">
+            <i class="fa-solid fa-phone-flip absolute left-4 top-4 text-gray-500"></i>
+            <input id="tujuan" type="number" placeholder="No HP Tujuan / ID" class="w-full pl-12 p-4 rounded-2xl bg-gray-800/50 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5 transition" required>
+        </div>
+    </div>
 
-    <select id="nominal" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5 text-gray-300" required>
-      <option value="" disabled selected>Pilih Nominal</option>
-    </select>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <select id="layanan" class="w-full p-4 rounded-2xl bg-gray-800/50 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5 text-gray-300 cursor-pointer" required>
+          <option value="" disabled selected>Pilih Layanan</option>
+          <option value="DANA">Top Up DANA</option>
+          <option value="GoPay">Top Up GoPay</option>
+          <option value="Pulsa">Pulsa All Operator</option>
+          <option value="Kuota">Kuota Internet</option>
+          <option value="Token PLN">Token PLN</option>
+        </select>
+
+        <select id="nominal" class="w-full p-4 rounded-2xl bg-gray-800/50 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5 text-gray-300 cursor-pointer" required disabled>
+          <option value="" disabled selected>Pilih Nominal</option>
+        </select>
+    </div>
     
-    <button type="submit" id="btnKirim" class="col-span-2 mt-2 bg-gradient-to-r from-purple-600 to-purple-800 p-3 rounded-xl font-semibold hover:scale-105 transition disabled:opacity-50">
-      Kirim Order
+    <button type="submit" id="btnKirim" class="w-full mt-4 bg-gradient-to-r from-purple-600 to-indigo-700 p-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:shadow-purple-500/30 active:scale-95 transition-all disabled:opacity-50">
+      Kirim Pesanan Sekarang
     </button>
   </form>
 </div>
 
-<div id="successPopup" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-center justify-center z-50">
-  <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-2xl max-w-sm w-full border border-purple-500/30">
-    <div class="text-green-400 text-6xl mb-4"><i class="fa-solid fa-circle-check"></i></div>
+<div id="successPopup" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center z-50 p-4">
+  <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-2xl max-w-sm w-full border border-purple-500/30 scale-90 transition-transform">
+    <div class="w-20 h-20 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
+        <i class="fa-solid fa-check"></i>
+    </div>
     <h2 class="text-2xl font-bold mb-2">Order Berhasil!</h2>
-    <p class="text-gray-400 mb-6">Data tersimpan & Notif dikirim ke WA.</p>
-    <button onclick="closePopup()" class="bg-purple-600 px-6 py-3 rounded-xl hover:bg-purple-700 transition">Tutup</button>
+    <p class="text-gray-400 mb-8">Pesanan Anda telah dicatat. Silakan selesaikan pembayaran di WhatsApp.</p>
+    <button onclick="closePopup()" class="w-full bg-white text-black font-bold py-4 rounded-2xl hover:bg-gray-200 transition">Tutup</button>
   </div>
 </div>
 
@@ -62,40 +90,41 @@ const btnKirim = document.getElementById("btnKirim");
 const selectLayanan = document.getElementById("layanan");
 const selectNominal = document.getElementById("nominal");
 
-// Data Nominal dengan Keuntungan +2rb
 const opsiHarga = {
   "DANA": [
-    { label: "DANA 10.000 (Harga: Rp 12.000)", val: "10.000" },
-    { label: "DANA 20.000 (Harga: Rp 22.000)", val: "20.000" },
-    { label: "DANA 50.000 (Harga: Rp 52.000)", val: "50.000" },
-    { label: "DANA 100.000 (Harga: Rp 102.000)", val: "100.000" },
-    { label: "DANA 200.000 (Harga: Rp 202.000)", val: "200.000" },
-    { label: "DANA 500.000 (Harga: Rp 502.000)", val: "500.000" },
-    { label: "DANA 1.000.000 (Harga: Rp 1.002.000)", val: "1.000.000" }
+    { label: "DANA 10k (Rp 12.000)", val: "10.000", hrg: "12.000" },
+    { label: "DANA 20k (Rp 22.000)", val: "20.000", hrg: "22.000" },
+    { label: "DANA 50k (Rp 52.000)", val: "50.000", hrg: "52.000" },
+    { label: "DANA 100k (Rp 102.000)", val: "100.000", hrg: "102.000" }
+  ],
+  "GoPay": [
+    { label: "GoPay 10k (Rp 12.000)", val: "10.000", hrg: "12.000" },
+    { label: "GoPay 20k (Rp 22.000)", val: "20.000", hrg: "22.000" }
   ],
   "Pulsa": [
-    { label: "5.000 (Rp 6.200)", val: "5.000" },
-    { label: "10.000 (Rp 11.150)", val: "10.000" },
-    { label: "20.000 (Rp 20.800)", val: "20.000" }
+    { label: "5.000 (Rp 7.000)", val: "5.000", hrg: "7.000" },
+    { label: "10.000 (Rp 12.000)", val: "10.000", hrg: "12.000" },
+    { label: "50.000 (Rp 52.000)", val: "50.000", hrg: "52.000" }
   ],
   "Kuota": [
-    { label: "1 GB (Rp 12.000)", val: "1 GB" },
-    { label: "5 GB (Rp 35.000)", val: "5 GB" }
+    { label: "1 GB (Rp 12.000)", val: "1 GB", hrg: "12.000" },
+    { label: "5 GB (Rp 37.000)", val: "5 GB", hrg: "37.000" }
   ],
   "Token PLN": [
-    { label: "20.000 (Rp 21.500)", val: "20.000" },
-    { label: "50.000 (Rp 51.500)", val: "50.000" }
+    { label: "20.000 (Rp 22.000)", val: "20.000", hrg: "22.000" },
+    { label: "50.000 (Rp 52.000)", val: "50.000", hrg: "52.000" }
   ]
 };
 
 selectLayanan.addEventListener("change", () => {
   const pilihan = selectLayanan.value;
   selectNominal.innerHTML = '<option value="" disabled selected>Pilih Nominal</option>';
+  selectNominal.disabled = false;
   
   if (opsiHarga[pilihan]) {
     opsiHarga[pilihan].forEach(item => {
       const option = document.createElement("option");
-      option.value = item.val;
+      option.value = `${item.val}|${item.hrg}`;
       option.textContent = item.label;
       selectNominal.appendChild(option);
     });
@@ -105,41 +134,48 @@ selectLayanan.addEventListener("change", () => {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   btnKirim.disabled = true;
-  btnKirim.innerText = "Memproses...";
+  btnKirim.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Mengamankan Pesanan...';
 
+  const [nomVal, hargaVal] = selectNominal.value.split('|');
+  
   const data = {
-    orderId: "WOWO-" + Math.floor(Math.random() * 1000000),
+    orderId: "WOWO-" + Math.floor(100000 + Math.random() * 900000),
     nama: document.getElementById("nama").value,
     wa_pelanggan: document.getElementById("wa").value,
     layanan: selectLayanan.value,
-    nominal: selectNominal.value,
+    nominal: nomVal,
+    total_harga: hargaVal,
     tujuan: document.getElementById("tujuan").value,
+    status: "Pending",
     createdAt: serverTimestamp()
   };
 
   try {
-    // Simpan ke Firebase koleksi 'order'
     await addDoc(collection(db, "order"), data);
 
-    // Kirim ke WhatsApp Admin
     const nomorAdmin = "6283148583173"; 
-    const pesanWA = `Halo Admin, ada pesanan baru!\n\n` +
-                    `*ID Order:* ${data.orderId}\n` +
-                    `*Nama:* ${data.nama}\n` +
-                    `*WA Pelanggan:* ${data.wa_pelanggan}\n` +
-                    `*Layanan:* ${data.layanan}\n` +
-                    `*Nominal:* ${data.nominal}\n` +
-                    `*Tujuan:* ${data.tujuan}`;
+    const pesanWA = `*ORDER BARU - WOWO STORE*\n` +
+                    `--------------------------------\n` +
+                    `*ID Order :* ${data.orderId}\n` +
+                    `*Nama :* ${data.nama}\n` +
+                    `*Layanan :* ${data.layanan}\n` +
+                    `*Nominal :* ${data.nominal}\n` +
+                    `*Tujuan :* ${data.tujuan}\n` +
+                    `*Total Bayar :* Rp ${data.total_harga}\n` +
+                    `--------------------------------\n` +
+                    `_Mohon segera diproses Admin!_`;
     
     window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesanWA)}`, '_blank');
 
     document.getElementById("successPopup").classList.replace("hidden", "flex");
     form.reset();
+    selectNominal.disabled = true;
   } catch (err) {
-    alert("Gagal mengirim! Cek koneksi atau Rules Firebase.");
+    alert("Maaf, terjadi kesalahan sistem. Silakan coba lagi.");
+    console.error(err);
   } finally {
     btnKirim.disabled = false;
-    btnKirim.innerText = "Kirim Order";
+    btnKirim.innerText = "Kirim Pesanan Sekarang";
   }
 });
 

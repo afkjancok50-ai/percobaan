@@ -121,20 +121,39 @@
     </div>
   </main>
 
-  <div id="successPopup" class="fixed inset-0 bg-black/95 backdrop-blur-2xl hidden items-center justify-center z-[100] p-6">
+  <div id="paymentPopup" class="fixed inset-0 bg-black/95 backdrop-blur-2xl hidden items-center justify-center z-[100] p-6">
     <div class="bg-zinc-900 p-10 rounded-[3rem] text-center shadow-2xl max-w-sm w-full border border-white/5 transform animate-in zoom-in duration-300">
-      <div class="w-24 h-24 bg-purple-500/10 text-purple-400 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl">
-          <i class="fa-solid fa-rocket"></i>
-      </div>
-      <h2 class="text-3xl font-black text-white mb-3">Selesai!</h2>
-      <p class="text-gray-400 mb-10 leading-relaxed">Pesanan Anda telah dicatat di database. Anda akan diarahkan ke WhatsApp Admin untuk pembayaran.</p>
-      <button onclick="closePopup()" class="w-full bg-white text-black font-black py-5 rounded-2xl hover:bg-purple-500 hover:text-white transition-all tracking-widest uppercase">Kembali</button>
+        
+        <div id="qrisSection">
+            <h2 class="text-2xl font-black text-white mb-2">Selesaikan Pembayaran</h2>
+            <p class="text-gray-400 text-sm mb-6 font-medium">Silakan scan kode QR di bawah ini</p>
+            <div class="bg-white p-5 rounded-[2rem] mb-6 shadow-inner">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=BIMA_STORE_PAYMENT" alt="QRIS" class="w-full h-auto rounded-lg">
+            </div>
+            <div class="bg-purple-500/10 p-4 rounded-2xl mb-6 border border-purple-500/20">
+                <p class="text-[10px] text-purple-400 font-bold uppercase tracking-widest">Total Bayar</p>
+                <p id="displayTotal" class="text-2xl font-black text-white">Rp 0</p>
+            </div>
+            <div class="flex items-center justify-center gap-3 text-gray-500 text-xs animate-pulse font-bold uppercase tracking-tighter">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                Menunggu Konfirmasi Pembayaran...
+            </div>
+        </div>
+
+        <div id="successSection" class="hidden">
+            <div class="w-24 h-24 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl">
+                <i class="fa-solid fa-check-double"></i>
+            </div>
+            <h2 class="text-3xl font-black text-white mb-3">Terima Kasih!</h2>
+            <p class="text-gray-400 mb-10 leading-relaxed font-medium">Pembayaran telah terverifikasi. Pesanan Anda segera kami proses ke tujuan.</p>
+            <button onclick="window.location.href='index.html'" class="w-full bg-white text-black font-black py-5 rounded-2xl hover:bg-green-500 hover:text-white transition-all tracking-widest uppercase shadow-xl">Selesai</button>
+        </div>
     </div>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyB9bCpEzdmfOlHGRwedqkofqgR44EiI4Xc",
@@ -172,8 +191,6 @@
           { label: "E-Toll 20.000 (Rp 25k)", val: "20.000", hrg: "25.000" },
           { label: "E-Toll 50.000 (Rp 55k)", val: "50.000", hrg: "55.000" },
           { label: "E-Toll 100.000 (Rp 105k)", val: "100.000", hrg: "105.000" },
-          { label: "E-Toll 200.000 (Rp 205k)", val: "200.000", hrg: "205.000" },
-          { label: "E-Toll 500.000 (Rp 505k)", val: "500.000", hrg: "505.000" },
           { label: "E-Toll 1.000.000 (Rp 1.005k)", val: "1.000.000", hrg: "1.005.000" }
       ],
       "Pulsa": listNominalDefault("Pulsa"),
@@ -199,31 +216,12 @@
 
     selectLayanan.addEventListener("change", () => updateNominal(selectLayanan.value));
 
-    window.addEventListener('DOMContentLoaded', () => {
-        const params = new URLSearchParams(window.location.search);
-        const prod = params.get('prod');
-        if(prod) {
-            if(prod === "DANA") selectLayanan.value = "DANA";
-            else if(prod === "GoPay") selectLayanan.value = "GoPay";
-            else if(prod === "ShopeePay") selectLayanan.value = "ShopeePay";
-            else if(prod === "E-Toll") selectLayanan.value = "E-Toll";
-            else if(prod.includes("Telkomsel")) selectLayanan.value = "Kuota Telkomsel";
-            else if(prod.includes("XL")) selectLayanan.value = "Kuota XL";
-            else if(prod.includes("Indosat")) selectLayanan.value = "Kuota Indosat";
-            else if(prod.includes("Tri")) selectLayanan.value = "Kuota Tri";
-            else if(prod.includes("Pulsa")) selectLayanan.value = "Pulsa";
-            else if(prod.includes("Token")) selectLayanan.value = "Token PLN";
-            updateNominal(selectLayanan.value);
-        }
-    });
-
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       btnKirim.disabled = true;
-      btnKirim.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-3"></i> Memproses...';
+      btnKirim.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
 
       const [nomVal, hargaVal] = selectNominal.value.split('|');
-      
       const data = {
         orderId: "WOWO-" + Math.floor(100000 + Math.random() * 900000),
         nama: document.getElementById("nama").value,
@@ -232,39 +230,32 @@
         nominal: nomVal,
         total_harga: hargaVal,
         tujuan: document.getElementById("tujuan").value,
-        status: "Pending",
+        status: "Waiting Payment",
         createdAt: serverTimestamp()
       };
 
       try {
-        await addDoc(collection(db, "order"), data);
-        const nomorAdmin = "6283148583173"; 
-        const pesanWA = `*ORDER BARU - WOWO STORE*\n` +
-                        `━━━━━━━━━━━━━━━━\n` +
-                        `*ID Order :* ${data.orderId}\n` +
-                        `*Nama :* ${data.nama}\n` +
-                        `*Layanan :* ${data.layanan}\n` +
-                        `*Nominal :* ${data.nominal}\n` +
-                        `*Tujuan :* ${data.tujuan}\n` +
-                        `*Total Bayar :* Rp ${data.total_harga}\n` +
-                        `━━━━━━━━━━━━━━━━\n` +
-                        `_Mohon segera diproses!_`;
+        const docRef = await addDoc(collection(db, "order"), data);
         
-        window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesanWA)}`, '_blank');
-        document.getElementById("successPopup").classList.replace("hidden", "flex");
-        form.reset();
-      } catch (err) {
-        alert("Terjadi kesalahan sistem.");
-      } finally {
-        btnKirim.disabled = false;
-        btnKirim.innerText = "Kirim Pesanan";
-      }
-    });
+        // Tampilkan Popup QRIS
+        document.getElementById("displayTotal").innerText = `Rp ${hargaVal}`;
+        document.getElementById("paymentPopup").classList.replace("hidden", "flex");
 
-    window.closePopup = () => {
-      document.getElementById("successPopup").classList.replace("flex", "hidden");
-      window.location.href = "index.html";
-    };
+        // Hubungkan ke WhatsApp Admin (Opsional)
+        const pesanWA = `*KONFIRMASI PEMBAYARAN*\nID Order: ${data.orderId}\nNama: ${data.nama}\nTotal: Rp ${data.total_harga}`;
+        window.open(`https://wa.me/6283148583173?text=${encodeURIComponent(pesanWA)}`, '_blank');
+
+        // REAL-TIME LISTENER: Pantau jika Admin mengubah status jadi "Success"
+        const unsub = onSnapshot(doc(db, "order", docRef.id), (snap) => {
+            if (snap.exists() && snap.data().status === "Success") {
+                document.getElementById("qrisSection").classList.add("hidden");
+                document.getElementById("successSection").classList.remove("hidden");
+                unsub();
+            }
+        });
+
+      } catch (err) { alert("Sistem sibuk, silakan coba lagi."); btnKirim.disabled = false; }
+    });
   </script>
 </body>
 </html>

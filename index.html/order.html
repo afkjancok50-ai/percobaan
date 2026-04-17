@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Konfirmasi Pesanan - WOWO</title>
+  <title>Konfirmasi Pesanan - WOWO Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
@@ -12,115 +12,119 @@
     body { 
       font-family: 'Plus Jakarta Sans', sans-serif; 
       background-color: #050505; 
-      background-image: radial-gradient(circle at 50% -20%, rgba(147, 51, 234, 0.1) 0%, rgba(0, 0, 0, 0) 50%);
+      background-image: radial-gradient(circle at 50% -20%, rgba(147, 51, 234, 0.15) 0%, rgba(0, 0, 0, 0) 50%);
+      color: #e2e8f0;
     }
     
     .glass-nav {
-      background: rgba(10, 10, 10, 0.7);
-      backdrop-filter: blur(15px);
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .order-card {
-      background: rgba(20, 20, 20, 0.6);
+      background: rgba(18, 18, 18, 0.6);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
     }
 
     input, select {
       background: rgba(255, 255, 255, 0.03) !important;
-      border: 1px solid rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
       transition: all 0.3s ease;
     }
 
     input:focus, select:focus {
-      border-color: rgba(168, 85, 247, 0.5) !important;
+      border-color: #a855f7 !important;
       background: rgba(168, 85, 247, 0.05) !important;
-      box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
     }
 
-    select option { background: #121212; color: white; }
+    select option { background: #0f172a; color: white; }
   </style>
 </head>
-<body class="text-gray-200 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col">
 
   <nav class="fixed top-0 w-full glass-nav z-50">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <a href="index.html" class="flex items-center gap-3 group">
-        <div class="p-1 bg-gray-800 rounded-lg group-hover:bg-purple-600 transition-colors">
-            <i class="fa-solid fa-arrow-left text-white text-xs p-1"></i>
+        <div class="p-2 bg-zinc-800 rounded-xl group-hover:bg-purple-600 transition-all">
+            <i class="fa-solid fa-arrow-left text-white text-sm"></i>
         </div>
-        <h1 class="text-xl font-black tracking-tighter text-white">WOWO<span class="text-purple-500">.</span></h1>
+        <h1 class="text-xl font-black tracking-tighter text-white uppercase">WOWO<span class="text-purple-500">.</span></h1>
       </a>
-      <span class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Secure Checkout</span>
+      <div class="hidden md:block">
+        <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 border border-white/10 px-3 py-1 rounded-full">Secure Payment Gateway</span>
+      </div>
     </div>
   </nav>
 
-  <main class="flex-grow flex items-center justify-center p-6 pt-24 pb-12">
+  <main class="flex-grow flex items-center justify-center p-6 pt-28 pb-12">
     <div class="order-card p-8 md:p-10 rounded-[2.5rem] w-full max-w-lg relative overflow-hidden">
-      <div class="absolute -top-24 -right-24 w-48 h-48 bg-purple-600/10 blur-[80px]"></div>
+      <div class="absolute -top-24 -right-24 w-64 h-64 bg-purple-600/10 blur-[100px]"></div>
 
       <div class="text-center mb-10">
-        <h2 class="text-3xl font-black text-white tracking-tight">Konfirmasi <span class="text-purple-500">Order</span></h2>
-        <p class="text-gray-500 text-sm mt-2 font-medium">Lengkapi data untuk memproses pesanan Anda.</p>
+        <h2 class="text-4xl font-black text-white tracking-tight">Checkout</h2>
+        <p class="text-gray-400 text-sm mt-2 font-medium">Lengkapi detail pesanan Anda di bawah ini.</p>
       </div>
 
-      <form id="orderForm" class="space-y-5">
+      <form id="orderForm" class="space-y-6">
         <div class="space-y-4">
             <div class="relative">
-                <i class="fa-solid fa-user absolute left-5 top-5 text-gray-600 text-sm"></i>
+                <i class="fa-solid fa-user absolute left-5 top-5 text-gray-500"></i>
                 <input id="nama" type="text" placeholder="Nama Lengkap" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="relative">
-                    <i class="fa-brands fa-whatsapp absolute left-5 top-5 text-gray-600 text-sm"></i>
-                    <input id="wa" type="number" placeholder="No. WhatsApp" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
+                    <i class="fa-brands fa-whatsapp absolute left-5 top-5 text-gray-500"></i>
+                    <input id="wa" type="number" placeholder="Nomor WA" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
                 </div>
                 <div class="relative">
-                    <i class="fa-solid fa-id-card absolute left-5 top-5 text-gray-600 text-sm"></i>
-                    <input id="tujuan" type="number" placeholder="No HP Tujuan" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
+                    <i class="fa-solid fa-bullseye absolute left-5 top-5 text-gray-500"></i>
+                    <input id="tujuan" type="text" placeholder="No HP Tujuan / ID" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
                 </div>
             </div>
         </div>
 
-        <div class="h-px bg-white/5 my-6"></div>
+        <div class="h-px bg-white/5 my-2"></div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="space-y-2">
-                <label class="text-[10px] font-bold text-gray-500 uppercase ml-2 tracking-widest">Layanan</label>
+                <label class="text-[10px] font-bold text-gray-500 uppercase ml-2 tracking-widest">Pilih Layanan</label>
                 <select id="layanan" class="w-full p-4 rounded-2xl outline-none text-white font-bold cursor-pointer" required>
                   <option value="" disabled selected>Pilih</option>
                   <option value="DANA">DANA</option>
                   <option value="GoPay">GoPay</option>
-                  <option value="Pulsa">Pulsa</option>
-                  <option value="Kuota">Kuota</option>
+                  <option value="ShopeePay">ShopeePay</option>
+                  <option value="Pulsa">Pulsa All Op</option>
+                  <option value="Kuota">Kuota Internet</option>
                   <option value="Token PLN">Token PLN</option>
                 </select>
             </div>
             <div class="space-y-2">
-                <label class="text-[10px] font-bold text-gray-500 uppercase ml-2 tracking-widest">Nominal</label>
+                <label class="text-[10px] font-bold text-gray-500 uppercase ml-2 tracking-widest">Nominal Produk</label>
                 <select id="nominal" class="w-full p-4 rounded-2xl outline-none text-white font-bold cursor-pointer" required disabled>
-                  <option value="" disabled selected>Pilih</option>
+                  <option value="" disabled selected>Pilih Layanan Dahulu</option>
                 </select>
             </div>
         </div>
         
-        <button type="submit" id="btnKirim" class="w-full mt-6 bg-gradient-to-r from-purple-600 to-indigo-600 p-5 rounded-2xl font-black text-white hover:shadow-[0_0_30px_rgba(147,51,234,0.3)] active:scale-[0.98] transition-all disabled:opacity-50 tracking-widest uppercase text-sm">
-          Konfirmasi & Bayar
+        <button type="submit" id="btnKirim" class="w-full mt-6 bg-gradient-to-r from-purple-600 to-indigo-600 p-5 rounded-2xl font-black text-white hover:shadow-[0_10px_40px_rgba(147,51,234,0.3)] active:scale-[0.97] transition-all disabled:opacity-50 tracking-widest uppercase">
+          Kirim Pesanan
         </button>
       </form>
     </div>
   </main>
 
-  <div id="successPopup" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center z-[100] p-6">
-    <div class="bg-zinc-900 p-10 rounded-[3rem] text-center shadow-2xl max-w-sm w-full border border-white/5 transform transition-all">
-      <div class="w-24 h-24 bg-green-500/10 text-green-400 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl">
-          <i class="fa-solid fa-check"></i>
+  <div id="successPopup" class="fixed inset-0 bg-black/95 backdrop-blur-2xl hidden items-center justify-center z-[100] p-6">
+    <div class="bg-zinc-900 p-10 rounded-[3rem] text-center shadow-2xl max-w-sm w-full border border-white/5 transform animate-in zoom-in duration-300">
+      <div class="w-24 h-24 bg-purple-500/10 text-purple-400 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl">
+          <i class="fa-solid fa-rocket"></i>
       </div>
-      <h2 class="text-3xl font-black text-white mb-3 tracking-tight">Berhasil!</h2>
-      <p class="text-gray-500 mb-10 leading-relaxed font-medium">Data pesanan sudah masuk. Klik tombol di bawah untuk lanjut ke WhatsApp.</p>
-      <button onclick="closePopup()" class="w-full bg-white text-black font-black py-5 rounded-2xl hover:bg-purple-500 hover:text-white transition-all tracking-widest uppercase text-xs">Selesai</button>
+      <h2 class="text-3xl font-black text-white mb-3">Selesai!</h2>
+      <p class="text-gray-400 mb-10 leading-relaxed">Pesanan Anda telah dicatat di database. Anda akan diarahkan ke WhatsApp Admin untuk pembayaran.</p>
+      <button onclick="closePopup()" class="w-full bg-white text-black font-black py-5 rounded-2xl hover:bg-purple-500 hover:text-white transition-all tracking-widest uppercase">Kembali</button>
     </div>
   </div>
 
@@ -142,39 +146,36 @@
     const selectLayanan = document.getElementById("layanan");
     const selectNominal = document.getElementById("nominal");
 
+    // DATA PRODUK SAMPAI 1 JUTA
+    const listNominalDefault = (nama) => [
+        { label: `${nama} 10.000 (Rp 12k)`, val: "10.000", hrg: "12.000" },
+        { label: `${nama} 20.000 (Rp 22k)`, val: "20.000", hrg: "22.000" },
+        { label: `${nama} 50.000 (Rp 52k)`, val: "50.000", hrg: "52.000" },
+        { label: `${nama} 100.000 (Rp 102k)`, val: "100.000", hrg: "102.000" },
+        { label: `${nama} 200.000 (Rp 202k)`, val: "200.000", hrg: "202.000" },
+        { label: `${nama} 500.000 (Rp 502k)`, val: "500.000", hrg: "502.000" },
+        { label: `${nama} 1.000.000 (Rp 1.002k)`, val: "1.000.000", hrg: "1.002.000" }
+    ];
+
     const opsiHarga = {
-      "DANA": [
-        { label: "10.000 (Rp 12k)", val: "10.000", hrg: "12.000" },
-        { label: "100.000 (Rp 102k)", val: "100.000", hrg: "102.000" },
-        { label: "500.000 (Rp 502k)", val: "500.000", hrg: "502.000" },
-        { label: "1.000.000 (Rp 1.002k)", val: "1.000.000", hrg: "1.002.000" }
-      ],
-      "GoPay": [
-        { label: "10k (Rp 12.000)", val: "10.000", hrg: "12.000" },
-        { label: "20k (Rp 22.000)", val: "20.000", hrg: "22.000" }
-      ],
-      "Pulsa": [
-        { label: "5.000 (Rp 7k)", val: "5.000", hrg: "7.000" },
-        { label: "10.000 (Rp 12k)", val: "10.000", hrg: "12.000" },
-        { label: "50.000 (Rp 52k)", val: "50.000", hrg: "52.000" },
-        { label: "1.000.000 (Rp 1.002k)", val: "1.000.000", hrg: "1.002.000" }
-      ],
+      "DANA": listNominalDefault("DANA"),
+      "GoPay": listNominalDefault("GoPay"),
+      "ShopeePay": listNominalDefault("ShopeePay"),
+      "Pulsa": listNominalDefault("Pulsa"),
+      "Token PLN": listNominalDefault("PLN"),
       "Kuota": [
-        { label: "1 GB (Rp 12k)", val: "1 GB", hrg: "12.000" },
-        { label: "5 GB (Rp 37k)", val: "5 GB", hrg: "37.000" },
-        { label: "10 GB (Rp 64k)", val: "10 GB", hrg: "64.000" }
-      ],
-      "Token PLN": [
-        { label: "20k (Rp 22k)", val: "20.000", hrg: "22.000" },
-        { label: "100k (Rp 102k)", val: "100.000", hrg: "102.000" },
-        { label: "500k (Rp 502k)", val: "500.000", hrg: "502.000" },
-        { label: "1jt (Rp 1.002k)", val: "1.000.000", hrg: "1.002.000" }
+        { label: "Kuota 1 GB (Rp 12k)", val: "1 GB", hrg: "12.000" },
+        { label: "Kuota 5 GB (Rp 37k)", val: "5 GB", hrg: "37.000" },
+        { label: "Kuota 10 GB (Rp 62k)", val: "10 GB", hrg: "62.000" },
+        { label: "Kuota 20 GB (Rp 115k)", val: "20 GB", hrg: "115.000" },
+        { label: "Kuota 50 GB (Rp 250k)", val: "50 GB", hrg: "250.000" },
+        { label: "Kuota 100 GB (Rp 480k)", val: "100 GB", hrg: "480.000" },
+        { label: "Kuota Unlimited (Rp 1jt)", val: "Unlimited", hrg: "1.000.000" }
       ]
     };
 
-    // Fungsi isi nominal
     const updateNominal = (layanan) => {
-        selectNominal.innerHTML = '<option value="" disabled selected>Pilih</option>';
+        selectNominal.innerHTML = '<option value="" disabled selected>Pilih Nominal</option>';
         selectNominal.disabled = false;
         if (opsiHarga[layanan]) {
             opsiHarga[layanan].forEach(item => {
@@ -188,18 +189,17 @@
 
     selectLayanan.addEventListener("change", () => updateNominal(selectLayanan.value));
 
-    // Tangkap data dari URL (Auto-fill)
+    // AUTO-FILL DARI INDEX.HTML
     window.addEventListener('DOMContentLoaded', () => {
         const params = new URLSearchParams(window.location.search);
         const prod = params.get('prod');
         if(prod) {
-            // Logika pencocokan URL parameter ke select
             if(prod.includes("DANA")) selectLayanan.value = "DANA";
             else if(prod.includes("GoPay")) selectLayanan.value = "GoPay";
+            else if(prod.includes("ShopeePay")) selectLayanan.value = "ShopeePay";
             else if(prod.includes("Pulsa")) selectLayanan.value = "Pulsa";
-            else if(prod.includes("Data")) selectLayanan.value = "Kuota";
+            else if(prod.includes("Data") || prod.includes("Kuota")) selectLayanan.value = "Kuota";
             else if(prod.includes("Token")) selectLayanan.value = "Token PLN";
-            
             updateNominal(selectLayanan.value);
         }
     });
@@ -207,7 +207,7 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       btnKirim.disabled = true;
-      btnKirim.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-3"></i> Memproses...';
+      btnKirim.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-3"></i> Memproses...';
 
       const [nomVal, hargaVal] = selectNominal.value.split('|');
       
@@ -241,10 +241,10 @@
         document.getElementById("successPopup").classList.replace("hidden", "flex");
         form.reset();
       } catch (err) {
-        alert("Gagal mengirim! Periksa koneksi.");
+        alert("Terjadi kesalahan sistem.");
       } finally {
         btnKirim.disabled = false;
-        btnKirim.innerText = "Konfirmasi & Bayar";
+        btnKirim.innerText = "Kirim Pesanan";
       }
     });
 

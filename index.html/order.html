@@ -42,6 +42,8 @@
     }
 
     select option { background: #0f172a; color: white; }
+    
+    .star-active { color: #fbbf24 !important; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -141,19 +143,32 @@
         </div>
 
         <div id="successSection" class="hidden">
-            <div class="w-24 h-24 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl">
+            <div class="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
                 <i class="fa-solid fa-check-double"></i>
             </div>
-            <h2 class="text-3xl font-black text-white mb-3">Terima Kasih!</h2>
-            <p class="text-gray-400 mb-10 leading-relaxed font-medium">Pembayaran telah terverifikasi. Pesanan Anda segera kami proses ke tujuan.</p>
-            <button onclick="window.location.href='index.html'" class="w-full bg-white text-black font-black py-5 rounded-2xl hover:bg-green-500 hover:text-white transition-all tracking-widest uppercase shadow-xl">Selesai</button>
+            <h2 class="text-2xl font-black text-white mb-2">Terima Kasih!</h2>
+            <p class="text-gray-400 text-sm mb-6 leading-relaxed">Pembayaran terverifikasi. Pesanan sedang diproses.</p>
+            
+            <div id="ratingBox" class="bg-white/5 p-5 rounded-2xl border border-white/10 mb-8">
+                <p class="text-[10px] font-bold text-purple-400 uppercase tracking-widest mb-3">Rate Pelayanan Kami</p>
+                <div class="flex justify-center gap-3 text-2xl text-gray-600 mb-2" id="starContainer">
+                    <i class="fa-solid fa-star cursor-pointer transition-all hover:scale-125" data-rating="1"></i>
+                    <i class="fa-solid fa-star cursor-pointer transition-all hover:scale-125" data-rating="2"></i>
+                    <i class="fa-solid fa-star cursor-pointer transition-all hover:scale-125" data-rating="3"></i>
+                    <i class="fa-solid fa-star cursor-pointer transition-all hover:scale-125" data-rating="4"></i>
+                    <i class="fa-solid fa-star cursor-pointer transition-all hover:scale-125" data-rating="5"></i>
+                </div>
+                <p id="ratingStatus" class="text-[9px] text-gray-500 italic">Klik bintang untuk memberi nilai</p>
+            </div>
+
+            <button onclick="window.location.href='index.html'" class="w-full bg-white text-black font-black py-4 rounded-2xl hover:bg-green-500 hover:text-white transition-all tracking-widest uppercase text-sm">Selesai</button>
         </div>
     </div>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, doc, onSnapshot, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyB9bCpEzdmfOlHGRwedqkofqgR44EiI4Xc",
@@ -168,7 +183,9 @@
     const btnKirim = document.getElementById("btnKirim");
     const selectLayanan = document.getElementById("layanan");
     const selectNominal = document.getElementById("nominal");
+    let currentOrderId = null;
 
+    // LOGIKA HARGA
     const listNominalDefault = (nama) => [
         { label: `${nama} 10.000 (Rp 12k)`, val: "10.000", hrg: "12.000" },
         { label: `${nama} 20.000 (Rp 22k)`, val: "20.000", hrg: "22.000" },
@@ -176,46 +193,28 @@
         { label: `${nama} 100.000 (Rp 102k)`, val: "100.000", hrg: "102.000" }
     ];
 
-    const listKuota = (provider) => [
-        { label: `Data ${provider} 1 GB (Rp 12k)`, val: "1 GB", hrg: "12.000" },
-        { label: `Data ${provider} 5 GB (Rp 37k)`, val: "5 GB", hrg: "37.000" },
-        { label: `Data ${provider} 10 GB (Rp 62k)`, val: "10 GB", hrg: "62.000" },
-        { label: `Data ${provider} Unlimited (Rp 100k)`, val: "Unlimited", hrg: "100.000" }
-    ];
-
     const opsiHarga = {
       "DANA": listNominalDefault("DANA"),
       "GoPay": listNominalDefault("GoPay"),
       "ShopeePay": listNominalDefault("ShopeePay"),
-      "E-Toll": [
-          { label: "E-Toll 20.000 (Rp 25k)", val: "20.000", hrg: "25.000" },
-          { label: "E-Toll 50.000 (Rp 55k)", val: "50.000", hrg: "55.000" },
-          { label: "E-Toll 100.000 (Rp 105k)", val: "100.000", hrg: "105.000" },
-          { label: "E-Toll 1.000.000 (Rp 1.005k)", val: "1.000.000", hrg: "1.005.000" }
-      ],
       "Pulsa": listNominalDefault("Pulsa"),
-      "Token PLN": listNominalDefault("PLN"),
-      "Kuota Telkomsel": listKuota("Telkomsel"),
-      "Kuota XL": listKuota("XL"),
-      "Kuota Indosat": listKuota("Indosat"),
-      "Kuota Tri": listKuota("Tri")
+      "Token PLN": listNominalDefault("PLN")
     };
 
-    const updateNominal = (layanan) => {
+    selectLayanan.addEventListener("change", () => {
         selectNominal.innerHTML = '<option value="" disabled selected>Pilih Nominal</option>';
         selectNominal.disabled = false;
-        if (opsiHarga[layanan]) {
-            opsiHarga[layanan].forEach(item => {
+        if (opsiHarga[selectLayanan.value]) {
+            opsiHarga[selectLayanan.value].forEach(item => {
                 const option = document.createElement("option");
                 option.value = `${item.val}|${item.hrg}`;
                 option.textContent = item.label;
                 selectNominal.appendChild(option);
             });
         }
-    };
+    });
 
-    selectLayanan.addEventListener("change", () => updateNominal(selectLayanan.value));
-
+    // SUBMIT PESANAN
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       btnKirim.disabled = true;
@@ -231,34 +230,51 @@
         total_harga: hargaVal,
         tujuan: document.getElementById("tujuan").value,
         status: "Waiting Payment",
+        rating: 0,
         createdAt: serverTimestamp()
       };
 
       try {
         const docRef = await addDoc(collection(db, "order"), data);
+        currentOrderId = docRef.id;
         
-        // Generate QRIS otomatis ke nomor DANA kamu
-        const qrisData = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://link.dana.id/qr/083148583173";
-        document.getElementById("qrisImg").src = qrisData;
-
-        // Tampilkan Popup QRIS
+        document.getElementById("qrisImg").src = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://link.dana.id/qr/083148583173";
         document.getElementById("displayTotal").innerText = `Rp ${hargaVal}`;
         document.getElementById("paymentPopup").classList.replace("hidden", "flex");
 
-        // Hubungkan ke WhatsApp Admin
-        const pesanWA = `*KONFIRMASI PEMBAYARAN*\nID Order: ${data.orderId}\nNama: ${data.nama}\nTotal: Rp ${data.total_harga}`;
-        window.open(`https://wa.me/6283148583173?text=${encodeURIComponent(pesanWA)}`, '_blank');
+        window.open(`https://wa.me/6283148583173?text=Konfirmasi%20Order%20${data.orderId}`, '_blank');
 
-        // REAL-TIME LISTENER: Pantau status Success
-        const unsub = onSnapshot(doc(db, "order", docRef.id), (snap) => {
+        onSnapshot(doc(db, "order", currentOrderId), (snap) => {
             if (snap.exists() && snap.data().status === "Success") {
                 document.getElementById("qrisSection").classList.add("hidden");
                 document.getElementById("successSection").classList.remove("hidden");
-                unsub();
             }
         });
 
-      } catch (err) { alert("Sistem sibuk, silakan coba lagi."); btnKirim.disabled = false; }
+      } catch (err) { alert("Error!"); btnKirim.disabled = false; }
+    });
+
+    // LOGIKA RATING BINTANG
+    const stars = document.querySelectorAll("#starContainer i");
+    stars.forEach(star => {
+        star.addEventListener("click", async () => {
+            const ratingValue = parseInt(star.getAttribute("data-rating"));
+            
+            // Update UI Bintang
+            stars.forEach(s => {
+                const sVal = parseInt(s.getAttribute("data-rating"));
+                sVal <= ratingValue ? s.classList.add("star-active") : s.classList.remove("star-active");
+            });
+
+            // Simpan ke Firebase
+            try {
+                await updateDoc(doc(db, "order", currentOrderId), {
+                    rating: ratingValue
+                });
+                document.getElementById("ratingStatus").innerText = "Terima kasih atas penilaiannya!";
+                document.getElementById("starContainer").style.pointerEvents = "none";
+            } catch (e) { console.error(e); }
+        });
     });
   </script>
 </body>

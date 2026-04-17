@@ -39,20 +39,23 @@
       box-shadow: 0 20px 40px rgba(0, 82, 156, 0.12); 
     }
 
-    .logo-container {
+    .logo-box {
+      width: 40px;
+      height: 40px;
       background: white;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       overflow: hidden;
     }
 
-    .provider-icon { 
-      width: 32px; 
-      height: 32px; 
-      object-fit: contain; 
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+    .provider-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
   </style>
 </head>
@@ -92,30 +95,36 @@
         <div class="space-y-4">
           <a href="order.html?prod=DANA" class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl hover:bg-blue-50 transition border border-gray-100 group">
             <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center p-1.5">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_danain.png" class="w-full h-full object-contain">
+                <div class="logo-box">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo_danain.png/640px-Logo_danain.png" 
+                         onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-wallet text-blue-500\'></i>'" 
+                         class="provider-img">
                 </div>
                 <span class="text-sm font-extrabold text-gray-700">DANA</span>
             </div>
-            <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-blue-500 group-hover:translate-x-1 transition"></i>
+            <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-blue-500 transition"></i>
           </a>
           <a href="order.html?prod=GoPay" class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl hover:bg-green-50 transition border border-gray-100 group">
             <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center p-1.5">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Gopay_logo.svg" class="w-full h-full object-contain">
+                <div class="logo-box">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Gopay_logo.svg/1024px-Gopay_logo.svg.png" 
+                         onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-leaf text-green-500\'></i>'" 
+                         class="provider-img">
                 </div>
                 <span class="text-sm font-extrabold text-gray-700">GoPay</span>
             </div>
-            <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-green-500 group-hover:translate-x-1 transition"></i>
+            <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-green-500 transition"></i>
           </a>
           <a href="order.html?prod=ShopeePay" class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl hover:bg-orange-50 transition border border-gray-100 group">
             <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center p-1.5">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/ShopeePay_logo.svg" class="w-full h-full object-contain">
+                <div class="logo-box">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/ShopeePay_logo.svg/512px-ShopeePay_logo.svg.png" 
+                         onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-bag-shopping text-orange-600\'></i>'" 
+                         class="provider-img">
                 </div>
                 <span class="text-sm font-extrabold text-gray-700">ShopeePay</span>
             </div>
-            <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-orange-500 group-hover:translate-x-1 transition"></i>
+            <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 group-hover:text-orange-500 transition"></i>
           </a>
         </div>
       </div>
@@ -124,19 +133,35 @@
         <h3 class="font-black text-gray-900 mb-8 uppercase tracking-widest text-xs opacity-50">Kuota Data</h3>
         <div class="grid grid-cols-2 gap-4">
           <a href="order.html?prod=Data+Telkomsel" class="p-4 bg-gray-50 rounded-2xl hover:shadow-md transition border border-gray-100 group">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Telkomsel_2021_icon.svg" class="w-10 h-10 mx-auto mb-2 object-contain group-hover:scale-110 transition">
+            <div class="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Telkomsel_2021_icon.svg/512px-Telkomsel_2021_icon.svg.png" 
+                     onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-signal text-red-600\'></i>'" 
+                     class="provider-img group-hover:scale-110 transition">
+            </div>
             <span class="text-[10px] font-black text-gray-600 uppercase">Telkomsel</span>
           </a>
           <a href="order.html?prod=Data+XL" class="p-4 bg-gray-50 rounded-2xl hover:shadow-md transition border border-gray-100 group">
-            <img src="https://upload.wikimedia.org/wikipedia/en/5/55/XL_Axiata_logo_2016.svg" class="w-10 h-10 mx-auto mb-2 object-contain group-hover:scale-110 transition">
+            <div class="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/55/XL_Axiata_logo_2016.svg/512px-XL_Axiata_logo_2016.svg.png" 
+                     onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-signal text-blue-600\'></i>'" 
+                     class="provider-img group-hover:scale-110 transition">
+            </div>
             <span class="text-[10px] font-black text-gray-600 uppercase">XL Axiata</span>
           </a>
           <a href="order.html?prod=Data+Indosat" class="p-4 bg-gray-50 rounded-2xl hover:shadow-md transition border border-gray-100 group">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Indosat_Ooredoo_logo.svg" class="w-10 h-10 mx-auto mb-2 object-contain group-hover:scale-110 transition">
+            <div class="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Indosat_Ooredoo_logo.svg/512px-Indosat_Ooredoo_logo.svg.png" 
+                     onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-signal text-yellow-500\'></i>'" 
+                     class="provider-img group-hover:scale-110 transition">
+            </div>
             <span class="text-[10px] font-black text-gray-600 uppercase">Indosat</span>
           </a>
           <a href="order.html?prod=Data+Tri" class="p-4 bg-gray-50 rounded-2xl hover:shadow-md transition border border-gray-100 group">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Three_Logo.svg" class="w-10 h-10 mx-auto mb-2 object-contain group-hover:scale-110 transition">
+            <div class="w-10 h-10 mx-auto mb-2 flex items-center justify-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Three_Logo.svg/512px-Three_Logo.svg.png" 
+                     onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-signal text-gray-800\'></i>'" 
+                     class="provider-img group-hover:scale-110 transition">
+            </div>
             <span class="text-[10px] font-black text-gray-600 uppercase">Tri</span>
           </a>
         </div>

@@ -8,43 +8,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-    
-    body { 
-      font-family: 'Plus Jakarta Sans', sans-serif; 
-      background-color: #050505; 
-      background-image: radial-gradient(circle at 50% -20%, rgba(147, 51, 234, 0.15) 0%, rgba(0, 0, 0, 0) 50%);
-      color: #e2e8f0;
-    }
-    
-    .glass-nav {
-      background: rgba(10, 10, 10, 0.8);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .order-card {
-      background: rgba(18, 18, 18, 0.6);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-    }
-
-    input, select {
-      background: rgba(255, 255, 255, 0.03) !important;
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      transition: all 0.3s ease;
-      color: white;
-    }
-
-    input:focus, select:focus {
-      border-color: #a855f7 !important;
-      background: rgba(168, 85, 247, 0.05) !important;
-      box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
-    }
-
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: #e2e8f0; background-image: radial-gradient(circle at 50% -20%, rgba(147, 51, 234, 0.15) 0%, rgba(0, 0, 0, 0) 50%); }
+    .glass-nav { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .order-card { background: rgba(18, 18, 18, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); }
+    input, select { background: rgba(255, 255, 255, 0.03) !important; border: 1px solid rgba(255, 255, 255, 0.1) !important; color: white; transition: all 0.3s ease; }
+    input:focus, select:focus { border-color: #a855f7 !important; background: rgba(168, 85, 247, 0.05) !important; }
+    .star-active { color: #fbbf24 !important; transform: scale(1.2); }
     select option { background: #0f172a; color: white; }
-    
-    .star-active { color: #fbbf24 !important; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -57,112 +27,78 @@
         </div>
         <h1 class="text-xl font-black tracking-tighter text-white uppercase">WOWO<span class="text-purple-500">.</span></h1>
       </a>
-      <div class="hidden md:block">
-        <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 border border-white/10 px-3 py-1 rounded-full">Secure Payment Gateway</span>
-      </div>
+      <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 border border-white/10 px-3 py-1 rounded-full">Secure Payment</span>
     </div>
   </nav>
 
   <main class="flex-grow flex items-center justify-center p-6 pt-28 pb-12">
     <div class="order-card p-8 md:p-10 rounded-[2.5rem] w-full max-w-lg relative overflow-hidden">
       <div class="absolute -top-24 -right-24 w-64 h-64 bg-purple-600/10 blur-[100px]"></div>
-
       <div class="text-center mb-10">
         <h2 class="text-4xl font-black text-white tracking-tight">Checkout</h2>
-        <p class="text-gray-400 text-sm mt-2 font-medium">Lengkapi detail pesanan Anda di bawah ini.</p>
+        <p class="text-gray-400 text-sm mt-2 font-medium">Lengkapi detail pesanan Anda.</p>
       </div>
 
       <form id="orderForm" class="space-y-6">
         <div class="space-y-4">
-            <div class="relative">
-                <i class="fa-solid fa-user absolute left-5 top-5 text-gray-500"></i>
-                <input id="nama" type="text" placeholder="Nama Lengkap" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="relative">
-                    <i class="fa-brands fa-whatsapp absolute left-5 top-5 text-gray-500"></i>
-                    <input id="wa" type="number" placeholder="Nomor WA" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
-                </div>
-                <div class="relative">
-                    <i class="fa-solid fa-bullseye absolute left-5 top-5 text-gray-500"></i>
-                    <input id="tujuan" type="text" placeholder="No HP Tujuan / ID" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
-                </div>
+            <input id="nama" type="text" placeholder="Nama Lengkap" class="w-full p-4 rounded-2xl outline-none font-semibold" required>
+            <div class="grid grid-cols-2 gap-4">
+                <input id="wa" type="number" placeholder="Nomor WA" class="w-full p-4 rounded-2xl outline-none font-semibold" required>
+                <input id="tujuan" type="text" placeholder="No HP/ID Tujuan" class="w-full p-4 rounded-2xl outline-none font-semibold" required>
             </div>
         </div>
-
-        <div class="h-px bg-white/5 my-2"></div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="space-y-2">
-                <label class="text-[10px] font-bold text-gray-500 uppercase ml-2 tracking-widest">Pilih Layanan</label>
-                <select id="layanan" class="w-full p-4 rounded-2xl outline-none text-white font-bold cursor-pointer" required>
-                  <option value="" disabled selected>Pilih</option>
-                  <option value="DANA">DANA</option>
-                  <option value="GoPay">GoPay</option>
-                  <option value="ShopeePay">ShopeePay</option>
-                  <option value="E-Toll">E-Toll</option>
-                  <option value="Kuota Telkomsel">Kuota Telkomsel</option>
-                  <option value="Kuota XL">Kuota XL Axiata</option>
-                  <option value="Kuota Indosat">Kuota Indosat</option>
-                  <option value="Kuota Tri">Kuota Tri</option>
-                  <option value="Pulsa">Pulsa All Op</option>
-                  <option value="Token PLN">Token PLN</option>
-                </select>
-            </div>
-            <div class="space-y-2">
-                <label class="text-[10px] font-bold text-gray-500 uppercase ml-2 tracking-widest">Nominal Produk</label>
-                <select id="nominal" class="w-full p-4 rounded-2xl outline-none text-white font-bold cursor-pointer" required disabled>
-                  <option value="" disabled selected>Pilih Layanan Dahulu</option>
-                </select>
-            </div>
+        <div class="grid grid-cols-2 gap-4">
+            <select id="layanan" class="w-full p-4 rounded-2xl outline-none font-bold cursor-pointer" required>
+              <option value="" disabled selected>Layanan</option>
+              <option value="DANA">DANA</option>
+              <option value="GoPay">GoPay</option>
+              <option value="ShopeePay">ShopeePay</option>
+              <option value="E-Toll">E-Toll</option>
+              <option value="Pulsa">Pulsa</option>
+              <option value="Token PLN">Token PLN</option>
+            </select>
+            <select id="nominal" class="w-full p-4 rounded-2xl outline-none font-bold cursor-pointer" required disabled>
+              <option value="" disabled selected>Nominal</option>
+            </select>
         </div>
-        
-        <button type="submit" id="btnKirim" class="w-full mt-6 bg-gradient-to-r from-purple-600 to-indigo-600 p-5 rounded-2xl font-black text-white hover:shadow-[0_10px_40px_rgba(147,51,234,0.3)] active:scale-[0.97] transition-all disabled:opacity-50 tracking-widest uppercase">
-          Kirim Pesanan
-        </button>
+        <button type="submit" id="btnKirim" class="w-full mt-6 bg-gradient-to-r from-purple-600 to-indigo-600 p-5 rounded-2xl font-black text-white tracking-widest uppercase">Kirim Pesanan</button>
       </form>
     </div>
   </main>
 
   <div id="paymentPopup" class="fixed inset-0 bg-black/95 backdrop-blur-2xl hidden items-center justify-center z-[100] p-6">
-    <div class="bg-zinc-900 p-10 rounded-[3rem] text-center shadow-2xl max-w-sm w-full border border-white/5 transform animate-in zoom-in duration-300">
+    <div class="bg-zinc-900 p-10 rounded-[3rem] text-center shadow-2xl max-w-sm w-full border border-white/5">
         
         <div id="qrisSection">
-            <h2 class="text-2xl font-black text-white mb-2">Selesaikan Pembayaran</h2>
-            <p class="text-gray-400 text-sm mb-6 font-medium">Silakan scan kode QR di bawah ini</p>
-            <div class="bg-white p-5 rounded-[2rem] mb-6 shadow-inner">
+            <h2 class="text-2xl font-black text-white mb-2 uppercase">Bayar Sekarang</h2>
+            <div class="bg-white p-4 rounded-[2rem] my-6">
                 <img id="qrisImg" src="" alt="QRIS" class="w-full h-auto rounded-lg">
             </div>
             <div class="bg-purple-500/10 p-4 rounded-2xl mb-6 border border-purple-500/20">
-                <p class="text-[10px] text-purple-400 font-bold uppercase tracking-widest">Total Bayar</p>
-                <p id="displayTotal" class="text-2xl font-black text-white">Rp 0</p>
+                <p id="displayTotal" class="text-2xl font-black text-white italic">Rp 0</p>
             </div>
-            <div class="flex items-center justify-center gap-3 text-gray-500 text-xs animate-pulse font-bold uppercase tracking-tighter">
-                <i class="fa-solid fa-circle-notch fa-spin"></i>
-                Menunggu Konfirmasi Pembayaran...
-            </div>
+            <p class="text-gray-500 text-[10px] animate-pulse font-bold uppercase">Menunggu Verifikasi Admin...</p>
         </div>
 
         <div id="successSection" class="hidden">
-            <div class="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
+            <div class="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl animate-bounce">
                 <i class="fa-solid fa-check-double"></i>
             </div>
-            <h2 class="text-2xl font-black text-white mb-2">Terima Kasih!</h2>
-            <p class="text-gray-400 text-sm mb-6 leading-relaxed">Pembayaran terverifikasi. Pesanan sedang diproses.</p>
+            <h2 class="text-2xl font-black text-white mb-2 uppercase">Sukses!</h2>
+            <p class="text-gray-400 text-xs mb-6">Pesanan Anda berhasil diproses.</p>
             
             <div id="ratingBox" class="bg-white/5 p-5 rounded-2xl border border-white/10 mb-8">
-                <p class="text-[10px] font-bold text-purple-400 uppercase tracking-widest mb-3">Rate Pelayanan Kami</p>
+                <p class="text-[10px] font-bold text-purple-400 uppercase tracking-widest mb-3">Berikan Rating</p>
                 <div class="flex justify-center gap-3 text-2xl text-gray-600 mb-2" id="starContainer">
-                    <i class="fa-solid fa-star cursor-pointer transition-all hover:scale-125" data-rating="1"></i>
-                    <i class="fa-solid fa-star cursor-pointer transition-all hover:scale-125" data-rating="2"></i>
-                    <i class="fa-solid fa-star cursor-pointer transition-all hover:scale-125" data-rating="3"></i>
-                    <i class="fa-solid fa-star cursor-pointer transition-all hover:scale-125" data-rating="4"></i>
-                    <i class="fa-solid fa-star cursor-pointer transition-all hover:scale-125" data-rating="5"></i>
+                    <i class="fa-solid fa-star cursor-pointer transition-all" data-rating="1"></i>
+                    <i class="fa-solid fa-star cursor-pointer transition-all" data-rating="2"></i>
+                    <i class="fa-solid fa-star cursor-pointer transition-all" data-rating="3"></i>
+                    <i class="fa-solid fa-star cursor-pointer transition-all" data-rating="4"></i>
+                    <i class="fa-solid fa-star cursor-pointer transition-all" data-rating="5"></i>
                 </div>
-                <p id="ratingStatus" class="text-[9px] text-gray-500 italic">Klik bintang untuk memberi nilai</p>
+                <p id="ratingStatus" class="text-[9px] text-gray-500 italic">Puas dengan layanan kami?</p>
             </div>
-
-            <button onclick="window.location.href='index.html'" class="w-full bg-white text-black font-black py-4 rounded-2xl hover:bg-green-500 hover:text-white transition-all tracking-widest uppercase text-sm">Selesai</button>
+            <button onclick="window.location.href='index.html'" class="w-full bg-white text-black font-black py-4 rounded-2xl uppercase text-sm">Kembali ke Beranda</button>
         </div>
     </div>
   </div>
@@ -186,12 +122,10 @@
     const selectNominal = document.getElementById("nominal");
     let currentOrderId = null;
 
-    // LOGIKA HARGA LENGKAP
     const listNominalDefault = (nama) => [
-        { label: `${nama} 10.000 (Rp 12k)`, val: "10.000", hrg: "12.000" },
-        { label: `${nama} 20.000 (Rp 22k)`, val: "20.000", hrg: "22.000" },
-        { label: `${nama} 50.000 (Rp 52k)`, val: "50.000", hrg: "52.000" },
-        { label: `${nama} 100.000 (Rp 102k)`, val: "100.000", hrg: "102.000" }
+        { label: `${nama} 10rb`, val: "10.000", hrg: "12.000" },
+        { label: `${nama} 20rb`, val: "20.000", hrg: "22.000" },
+        { label: `${nama} 50rb`, val: "50.000", hrg: "52.000" }
     ];
 
     const opsiHarga = {
@@ -199,10 +133,6 @@
       "GoPay": listNominalDefault("GoPay"),
       "ShopeePay": listNominalDefault("SPay"),
       "E-Toll": listNominalDefault("E-Toll"),
-      "Kuota Telkomsel": listNominalDefault("Tsel"),
-      "Kuota XL": listNominalDefault("XL"),
-      "Kuota Indosat": listNominalDefault("Isat"),
-      "Kuota Tri": listNominalDefault("Tri"),
       "Pulsa": listNominalDefault("Pulsa"),
       "Token PLN": listNominalDefault("PLN")
     };
@@ -214,21 +144,20 @@
             opsiHarga[selectLayanan.value].forEach(item => {
                 const option = document.createElement("option");
                 option.value = `${item.val}|${item.hrg}`;
-                option.textContent = item.label;
+                option.textContent = `${item.label} (Rp ${item.hrg})`;
                 selectNominal.appendChild(option);
             });
         }
     });
 
-    // SUBMIT PESANAN
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       btnKirim.disabled = true;
-      btnKirim.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+      btnKirim.innerHTML = "Processing...";
 
       const [nomVal, hargaVal] = selectNominal.value.split('|');
       const data = {
-        orderId: "WOWO-" + Math.floor(100000 + Math.random() * 900000),
+        orderId: "WOWO-" + Math.floor(1000 + Math.random() * 9000),
         nama: document.getElementById("nama").value,
         wa: document.getElementById("wa").value,
         layanan: selectLayanan.value,
@@ -248,8 +177,10 @@
         document.getElementById("displayTotal").innerText = `Rp ${hargaVal}`;
         document.getElementById("paymentPopup").classList.replace("hidden", "flex");
 
-        window.open(`https://wa.me/6283148583173?text=Konfirmasi%20Order%20${data.orderId}`, '_blank');
+        // Kirim notif WA
+        window.open(`https://wa.me/6283148583173?text=Halo%20Admin,%20Saya%20order%20${data.layanan}%20${data.nominal}%20dengan%20ID%20${data.orderId}.%20Mohon%20proses%20setelah%20pembayaran.`, '_blank');
 
+        // Monitor Perubahan Status (Berubah jika Admin edit di Firebase jadi "Success")
         onSnapshot(doc(db, "order", currentOrderId), (snap) => {
             if (snap.exists() && snap.data().status === "Success") {
                 document.getElementById("qrisSection").classList.add("hidden");
@@ -257,7 +188,7 @@
             }
         });
 
-      } catch (err) { alert("Error!"); btnKirim.disabled = false; }
+      } catch (err) { alert("Terjadi kesalahan!"); btnKirim.disabled = false; }
     });
 
     // LOGIKA RATING
@@ -265,16 +196,26 @@
     stars.forEach(star => {
         star.addEventListener("click", async () => {
             const ratingValue = parseInt(star.getAttribute("data-rating"));
+            
+            // Visual Update
             stars.forEach(s => {
                 const sVal = parseInt(s.getAttribute("data-rating"));
                 sVal <= ratingValue ? s.classList.add("star-active") : s.classList.remove("star-active");
             });
 
+            // Update ke Firebase
             try {
-                await updateDoc(doc(db, "order", currentOrderId), { rating: ratingValue });
-                document.getElementById("ratingStatus").innerText = "Terima kasih atas penilaiannya!";
+                const orderRef = doc(db, "order", currentOrderId);
+                await updateDoc(orderRef, { 
+                    rating: ratingValue,
+                    // Kita paksa status Success jika user sudah sampai tahap rating agar muncul di depan
+                    status: "Success" 
+                });
+                document.getElementById("ratingStatus").innerText = "Terima kasih! Rating telah terkirim.";
                 document.getElementById("starContainer").style.pointerEvents = "none";
-            } catch (e) { console.error(e); }
+            } catch (e) { 
+                console.error("Error rating:", e); 
+            }
         });
     });
   </script>

@@ -13,11 +13,22 @@
   <h2 class="text-2xl font-bold text-center mb-6 text-purple-400">🚀 Form Order WOWO</h2>
   
   <form id="orderForm" class="grid grid-cols-2 gap-4">
-    <input id="nama" type="text" placeholder="Nama" class="col-span-2 p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
+    <input id="nama" type="text" placeholder="Nama Anda" class="col-span-2 p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
+    
     <input id="wa" type="number" placeholder="No WA (08xx)" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
-    <input id="layanan" type="text" placeholder="Layanan" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
-    <input id="nominal" type="text" placeholder="Nominal" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
-    <input id="tujuan" type="number" placeholder="No Tujuan" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
+
+    <input id="tujuan" type="number" placeholder="No HP Tujuan" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5" required>
+
+    <select id="layanan" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5 text-gray-300" required>
+      <option value="" disabled selected>Pilih Layanan</option>
+      <option value="Pulsa">Pulsa All Operator</option>
+      <option value="Kuota">Kuota Internet</option>
+      <option value="Token PLN">Token PLN</option>
+    </select>
+
+    <select id="nominal" class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none border border-white/5 text-gray-300" required>
+      <option value="" disabled selected>Pilih Nominal</option>
+      </select>
     
     <button type="submit" id="btnKirim" class="col-span-2 mt-2 bg-gradient-to-r from-purple-600 to-purple-800 p-3 rounded-xl font-semibold hover:scale-105 transition disabled:opacity-50">
       Kirim Order
@@ -46,13 +57,48 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
 const form = document.getElementById("orderForm");
 const btnKirim = document.getElementById("btnKirim");
+const selectLayanan = document.getElementById("layanan");
+const selectNominal = document.getElementById("nominal");
+
+// Data Nominal Berdasarkan Daftar Harga
+const opsiHarga = {
+  "Pulsa": [
+    { label: "5.000 (Rp 6.200)", val: "5.000" },
+    { label: "10.000 (Rp 11.150)", val: "10.000" },
+    { label: "20.000 (Rp 20.800)", val: "20.000" }
+  ],
+  "Kuota": [
+    { label: "1 GB / 30 Hari (Rp 12.000)", val: "1 GB" },
+    { label: "5 GB / 30 Hari (Rp 35.000)", val: "5 GB" },
+    { label: "10 GB / 30 Hari (Rp 62.000)", val: "10 GB" }
+  ],
+  "Token PLN": [
+    { label: "Nominal 20.000 (Rp 21.500)", val: "20.000" },
+    { label: "Nominal 50.000 (Rp 51.500)", val: "50.000" },
+    { label: "Nominal 100.000 (Rp 101.500)", val: "100.000" }
+  ]
+};
+
+// Fungsi Update Pilihan Nominal secara Otomatis
+selectLayanan.addEventListener("change", () => {
+  const pilihan = selectLayanan.value;
+  selectNominal.innerHTML = '<option value="" disabled selected>Pilih Nominal</option>';
+  
+  if (opsiHarga[pilihan]) {
+    opsiHarga[pilihan].forEach(item => {
+      const option = document.createElement("option");
+      option.value = item.val;
+      option.textContent = item.label;
+      selectNominal.appendChild(option);
+    });
+  }
+});
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  
-  // Matikan tombol agar tidak double click
   btnKirim.disabled = true;
   btnKirim.innerText = "Sedang Memproses...";
 
@@ -60,17 +106,17 @@ form.addEventListener("submit", async (e) => {
     orderId: "WOWO-" + Math.floor(Math.random() * 1000000),
     nama: document.getElementById("nama").value,
     wa_pelanggan: document.getElementById("wa").value,
-    layanan: document.getElementById("layanan").value,
-    nominal: document.getElementById("nominal").value,
+    layanan: selectLayanan.value,
+    nominal: selectNominal.value,
     tujuan: document.getElementById("tujuan").value,
     createdAt: serverTimestamp()
   };
 
   try {
-    // 1. ALUR PERTAMA: SIMPAN KE FIREBASE
+    // 1. Simpan ke Firebase
     await addDoc(collection(db, "order"), data);
 
-    // 2. ALUR KEDUA: KIRIM KE WHATSAPP ADMIN
+    // 2. Kirim Notif ke WA Admin
     const nomorAdmin = "6283148583173"; 
     const pesanWA = `Halo Admin, ada pesanan baru!\n\n` +
                     `*ID Order:* ${data.orderId}\n` +
@@ -82,21 +128,21 @@ form.addEventListener("submit", async (e) => {
     
     window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesanWA)}`, '_blank');
 
-    // 3. TAMPILKAN POPUP SUKSES
-    const popup = document.getElementById("successPopup");
-    popup.classList.replace("hidden", "flex");
+    // 3. Tampilkan Popup
+    document.getElementById("successPopup").classList.replace("hidden", "flex");
     form.reset();
+    selectNominal.innerHTML = '<option value="" disabled selected>Pilih Nominal</option>';
 
   } catch (err) {
     console.error("Firebase Error:", err);
-    alert("❌ Gagal masuk ke database! Pastikan 'Rules' di Firebase sudah 'allow read, write: if true;'");
+    alert("Gagal mengirim! Pastikan Rules Firebase diatur ke 'true'.");
   } finally {
     btnKirim.disabled = false;
     btnKirim.innerText = "Kirim Order";
   }
 });
 
-window.closePopup = function () {
+window.closePopup = () => {
   document.getElementById("successPopup").classList.replace("flex", "hidden");
 };
 </script>

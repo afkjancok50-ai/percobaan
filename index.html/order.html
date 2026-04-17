@@ -1,113 +1,260 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order WOWO</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background-color: #0d0d15;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-        }
-        .form-container {
-            background-color: #1c1c28;
-            padding: 2.5rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 500px;
-            border: 1px solid #2d2d3f;
-        }
-        .input-field {
-            background-color: #2d2d3f;
-            border: 1px solid #3d3d52;
-            color: #ffffff;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-        .input-field:focus {
-            outline: none;
-            border-color: #8b5cf6;
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
-        }
-        .btn-submit {
-            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-            color: white;
-            font-weight: 700;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            width: 100%;
-            margin-top: 1.5rem;
-            transition: transform 0.2s;
-        }
-        .btn-submit:active {
-            transform: scale(0.98);
-        }
-    </style>
-</head>
-<body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konfirmasi Pesanan - WOWO Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+    
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background-color: #050505; 
+      background-image: radial-gradient(circle at 50% -20%, rgba(147, 51, 234, 0.15) 0%, rgba(0, 0, 0, 0) 50%);
+      color: #e2e8f0;
+    }
+    
+    .glass-nav {
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
 
-    <div class="form-container">
-        <div class="text-center mb-8">
-            <h1 class="text-2xl font-bold text-white flex items-center justify-center gap-2">
-                🚀 Form Order WOWO
-            </h1>
+    .order-card {
+      background: rgba(18, 18, 18, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    input, select {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: #a855f7 !important;
+      background: rgba(168, 85, 247, 0.05) !important;
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
+    }
+
+    select option { background: #0f172a; color: white; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <nav class="fixed top-0 w-full glass-nav z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="p-2 bg-zinc-800 rounded-xl group-hover:bg-purple-600 transition-all">
+            <i class="fa-solid fa-arrow-left text-white text-sm"></i>
+        </div>
+        <h1 class="text-xl font-black tracking-tighter text-white uppercase">WOWO<span class="text-purple-500">.</span></h1>
+      </a>
+      <div class="hidden md:block">
+        <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 border border-white/10 px-3 py-1 rounded-full">Secure Payment Gateway</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow flex items-center justify-center p-6 pt-28 pb-12">
+    <div class="order-card p-8 md:p-10 rounded-[2.5rem] w-full max-w-lg relative overflow-hidden">
+      <div class="absolute -top-24 -right-24 w-64 h-64 bg-purple-600/10 blur-[100px]"></div>
+
+      <div class="text-center mb-10">
+        <h2 class="text-4xl font-black text-white tracking-tight">Checkout</h2>
+        <p class="text-gray-400 text-sm mt-2 font-medium">Lengkapi detail pesanan Anda di bawah ini.</p>
+      </div>
+
+      <form id="orderForm" class="space-y-6">
+        <div class="space-y-4">
+            <div class="relative">
+                <i class="fa-solid fa-user absolute left-5 top-5 text-gray-500"></i>
+                <input id="nama" type="text" placeholder="Nama Lengkap" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="relative">
+                    <i class="fa-brands fa-whatsapp absolute left-5 top-5 text-gray-500"></i>
+                    <input id="wa" type="number" placeholder="Nomor WA" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
+                </div>
+                <div class="relative">
+                    <i class="fa-solid fa-bullseye absolute left-5 top-5 text-gray-500"></i>
+                    <input id="tujuan" type="text" placeholder="No HP Tujuan / ID" class="w-full pl-12 p-4 rounded-2xl outline-none text-white font-semibold" required>
+                </div>
+            </div>
         </div>
 
-        <form id="orderForm" class="space-y-4">
-            <div>
-                <input type="text" id="nama" placeholder="Nama" class="input-field" required>
-            </div>
+        <div class="h-px bg-white/5 my-2"></div>
 
-            <div class="grid grid-cols-2 gap-4">
-                <input type="number" id="wa" placeholder="No WA" class="input-field" required>
-                <input type="text" id="layanan" class="input-field" placeholder="Layanan" readonly>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+                <label class="text-[10px] font-bold text-gray-500 uppercase ml-2 tracking-widest">Pilih Layanan</label>
+                <select id="layanan" class="w-full p-4 rounded-2xl outline-none text-white font-bold cursor-pointer" required>
+                  <option value="" disabled selected>Pilih</option>
+                  <option value="DANA">DANA</option>
+                  <option value="GoPay">GoPay</option>
+                  <option value="ShopeePay">ShopeePay</option>
+                  <option value="E-Toll">E-Toll (Untung 5k)</option>
+                  <option value="Pulsa">Pulsa All Op</option>
+                  <option value="Kuota">Kuota Internet</option>
+                  <option value="Token PLN">Token PLN</option>
+                </select>
             </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <input type="text" id="nominal" placeholder="Nominal" class="input-field" required>
-                <input type="text" id="tujuan" placeholder="Tujuan" class="input-field" required>
+            <div class="space-y-2">
+                <label class="text-[10px] font-bold text-gray-500 uppercase ml-2 tracking-widest">Nominal Produk</label>
+                <select id="nominal" class="w-full p-4 rounded-2xl outline-none text-white font-bold cursor-pointer" required disabled>
+                  <option value="" disabled selected>Pilih Layanan Dahulu</option>
+                </select>
             </div>
-
-            <button type="submit" class="btn-submit">Kirim Order</button>
-        </form>
+        </div>
+        
+        <button type="submit" id="btnKirim" class="w-full mt-6 bg-gradient-to-r from-purple-600 to-indigo-600 p-5 rounded-2xl font-black text-white hover:shadow-[0_10px_40px_rgba(147,51,234,0.3)] active:scale-[0.97] transition-all disabled:opacity-50 tracking-widest uppercase">
+          Kirim Pesanan
+        </button>
+      </form>
     </div>
+  </main>
 
-    <script>
-        // Mengambil parameter 'prod' dari URL (contoh: order.html?prod=DANA)
-        const urlParams = new URLSearchParams(window.location.search);
-        const produk = urlParams.get('prod');
-        if (produk) {
-            document.getElementById('layanan').value = produk;
+  <div id="successPopup" class="fixed inset-0 bg-black/95 backdrop-blur-2xl hidden items-center justify-center z-[100] p-6">
+    <div class="bg-zinc-900 p-10 rounded-[3rem] text-center shadow-2xl max-w-sm w-full border border-white/5 transform animate-in zoom-in duration-300">
+      <div class="w-24 h-24 bg-purple-500/10 text-purple-400 rounded-full flex items-center justify-center mx-auto mb-8 text-5xl">
+          <i class="fa-solid fa-rocket"></i>
+      </div>
+      <h2 class="text-3xl font-black text-white mb-3">Selesai!</h2>
+      <p class="text-gray-400 mb-10 leading-relaxed">Pesanan Anda telah dicatat di database. Anda akan diarahkan ke WhatsApp Admin untuk pembayaran.</p>
+      <button onclick="closePopup()" class="w-full bg-white text-black font-black py-5 rounded-2xl hover:bg-purple-500 hover:text-white transition-all tracking-widest uppercase">Kembali</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB9bCpEzdmfOlHGRwedqkofqgR44EiI4Xc",
+      authDomain: "uasbima-2c5d7.firebaseapp.com",
+      projectId: "uasbima-2c5d7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("orderForm");
+    const btnKirim = document.getElementById("btnKirim");
+    const selectLayanan = document.getElementById("layanan");
+    const selectNominal = document.getElementById("nominal");
+
+    const listNominalDefault = (nama) => [
+        { label: `${nama} 10.000 (Rp 12k)`, val: "10.000", hrg: "12.000" },
+        { label: `${nama} 20.000 (Rp 22k)`, val: "20.000", hrg: "22.000" },
+        { label: `${nama} 50.000 (Rp 52k)`, val: "50.000", hrg: "52.000" },
+        { label: `${nama} 100.000 (Rp 102k)`, val: "100.000", hrg: "102.000" },
+        { label: `${nama} 200.000 (Rp 202k)`, val: "200.000", hrg: "202.000" },
+        { label: `${nama} 500.000 (Rp 502k)`, val: "500.000", hrg: "502.000" },
+        { label: `${nama} 1.000.000 (Rp 1.002k)`, val: "1.000.000", hrg: "1.002.000" }
+    ];
+
+    const opsiHarga = {
+      "DANA": listNominalDefault("DANA"),
+      "GoPay": listNominalDefault("GoPay"),
+      "ShopeePay": listNominalDefault("ShopeePay"),
+      "E-Toll": [
+          { label: "E-Toll 20.000 (Rp 25k)", val: "20.000", hrg: "25.000" },
+          { label: "E-Toll 50.000 (Rp 55k)", val: "50.000", hrg: "55.000" },
+          { label: "E-Toll 100.000 (Rp 105k)", val: "100.000", hrg: "105.000" },
+          { label: "E-Toll 200.000 (Rp 205k)", val: "200.000", hrg: "205.000" }
+      ],
+      "Pulsa": listNominalDefault("Pulsa"),
+      "Token PLN": listNominalDefault("PLN"),
+      "Kuota": [
+        { label: "Kuota 1 GB (Rp 12k)", val: "1 GB", hrg: "12.000" },
+        { label: "Kuota 5 GB (Rp 37k)", val: "5 GB", hrg: "37.000" },
+        { label: "Kuota 10 GB (Rp 62k)", val: "10 GB", hrg: "62.000" },
+        { label: "Kuota Unlimited (Rp 1jt)", val: "Unlimited", hrg: "1.000.000" }
+      ]
+    };
+
+    const updateNominal = (layanan) => {
+        selectNominal.innerHTML = '<option value="" disabled selected>Pilih Nominal</option>';
+        selectNominal.disabled = false;
+        if (opsiHarga[layanan]) {
+            opsiHarga[layanan].forEach(item => {
+                const option = document.createElement("option");
+                option.value = `${item.val}|${item.hrg}`;
+                option.textContent = item.label;
+                selectNominal.appendChild(option);
+            });
         }
+    };
 
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nama = document.getElementById('nama').value;
-            const wa = document.getElementById('wa').value;
-            const layanan = document.getElementById('layanan').value;
-            const nominal = document.getElementById('nominal').value;
-            const tujuan = document.getElementById('tujuan').value;
+    selectLayanan.addEventListener("change", () => updateNominal(selectLayanan.value));
 
-            // Format Pesan WhatsApp
-            const pesan = `Halo WOWO, saya ingin order:%0A%0A` +
-                          `*Nama:* ${nama}%0A` +
-                          `*No WA:* ${wa}%0A` +
-                          `*Layanan:* ${layanan}%0A` +
-                          `*Nominal:* ${nominal}%0A` +
-                          `*Tujuan/ID:* ${tujuan}`;
+    window.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const prod = params.get('prod');
+        if(prod) {
+            if(prod.includes("DANA")) selectLayanan.value = "DANA";
+            else if(prod.includes("GoPay")) selectLayanan.value = "GoPay";
+            else if(prod.includes("ShopeePay")) selectLayanan.value = "ShopeePay";
+            else if(prod.includes("E-Toll")) selectLayanan.value = "E-Toll";
+            else if(prod.includes("Pulsa")) selectLayanan.value = "Pulsa";
+            else if(prod.includes("Data") || prod.includes("Kuota")) selectLayanan.value = "Kuota";
+            else if(prod.includes("Token")) selectLayanan.value = "Token PLN";
+            updateNominal(selectLayanan.value);
+        }
+    });
 
-            window.open(`https://wa.me/6283148583173?text=${pesan}`, '_blank');
-        });
-    </script>
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      btnKirim.disabled = true;
+      btnKirim.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-3"></i> Memproses...';
+
+      const [nomVal, hargaVal] = selectNominal.value.split('|');
+      
+      const data = {
+        orderId: "WOWO-" + Math.floor(100000 + Math.random() * 900000),
+        nama: document.getElementById("nama").value,
+        wa: document.getElementById("wa").value,
+        layanan: selectLayanan.value,
+        nominal: nomVal,
+        total_harga: hargaVal,
+        tujuan: document.getElementById("tujuan").value,
+        status: "Pending",
+        createdAt: serverTimestamp()
+      };
+
+      try {
+        await addDoc(collection(db, "order"), data);
+        const nomorAdmin = "6283148583173"; 
+        const pesanWA = `*ORDER BARU - WOWO STORE*\n` +
+                        `━━━━━━━━━━━━━━━━\n` +
+                        `*ID Order :* ${data.orderId}\n` +
+                        `*Nama :* ${data.nama}\n` +
+                        `*Layanan :* ${data.layanan}\n` +
+                        `*Nominal :* ${data.nominal}\n` +
+                        `*Tujuan :* ${data.tujuan}\n` +
+                        `*Total Bayar :* Rp ${data.total_harga}\n` +
+                        `━━━━━━━━━━━━━━━━\n` +
+                        `_Mohon segera diproses!_`;
+        
+        window.open(`https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesanWA)}`, '_blank');
+        document.getElementById("successPopup").classList.replace("hidden", "flex");
+        form.reset();
+      } catch (err) {
+        alert("Terjadi kesalahan sistem.");
+      } finally {
+        btnKirim.disabled = false;
+        btnKirim.innerText = "Kirim Pesanan";
+      }
+    });
+
+    window.closePopup = () => {
+      document.getElementById("successPopup").classList.replace("flex", "hidden");
+      window.location.href = "index.html";
+    };
+  </script>
 </body>
 </html>

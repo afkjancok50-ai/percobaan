@@ -97,6 +97,7 @@
                   <option value="DANA">DANA</option>
                   <option value="GoPay">GoPay</option>
                   <option value="ShopeePay">ShopeePay</option>
+                  <option value="E-Toll">E-Toll (Untung 5k)</option>
                   <option value="Pulsa">Pulsa All Op</option>
                   <option value="Kuota">Kuota Internet</option>
                   <option value="Token PLN">Token PLN</option>
@@ -146,7 +147,6 @@
     const selectLayanan = document.getElementById("layanan");
     const selectNominal = document.getElementById("nominal");
 
-    // DATA PRODUK SAMPAI 1 JUTA
     const listNominalDefault = (nama) => [
         { label: `${nama} 10.000 (Rp 12k)`, val: "10.000", hrg: "12.000" },
         { label: `${nama} 20.000 (Rp 22k)`, val: "20.000", hrg: "22.000" },
@@ -161,15 +161,18 @@
       "DANA": listNominalDefault("DANA"),
       "GoPay": listNominalDefault("GoPay"),
       "ShopeePay": listNominalDefault("ShopeePay"),
+      "E-Toll": [
+          { label: "E-Toll 20.000 (Rp 25k)", val: "20.000", hrg: "25.000" },
+          { label: "E-Toll 50.000 (Rp 55k)", val: "50.000", hrg: "55.000" },
+          { label: "E-Toll 100.000 (Rp 105k)", val: "100.000", hrg: "105.000" },
+          { label: "E-Toll 200.000 (Rp 205k)", val: "200.000", hrg: "205.000" }
+      ],
       "Pulsa": listNominalDefault("Pulsa"),
       "Token PLN": listNominalDefault("PLN"),
       "Kuota": [
         { label: "Kuota 1 GB (Rp 12k)", val: "1 GB", hrg: "12.000" },
         { label: "Kuota 5 GB (Rp 37k)", val: "5 GB", hrg: "37.000" },
         { label: "Kuota 10 GB (Rp 62k)", val: "10 GB", hrg: "62.000" },
-        { label: "Kuota 20 GB (Rp 115k)", val: "20 GB", hrg: "115.000" },
-        { label: "Kuota 50 GB (Rp 250k)", val: "50 GB", hrg: "250.000" },
-        { label: "Kuota 100 GB (Rp 480k)", val: "100 GB", hrg: "480.000" },
         { label: "Kuota Unlimited (Rp 1jt)", val: "Unlimited", hrg: "1.000.000" }
       ]
     };
@@ -189,7 +192,6 @@
 
     selectLayanan.addEventListener("change", () => updateNominal(selectLayanan.value));
 
-    // AUTO-FILL DARI INDEX.HTML
     window.addEventListener('DOMContentLoaded', () => {
         const params = new URLSearchParams(window.location.search);
         const prod = params.get('prod');
@@ -197,6 +199,7 @@
             if(prod.includes("DANA")) selectLayanan.value = "DANA";
             else if(prod.includes("GoPay")) selectLayanan.value = "GoPay";
             else if(prod.includes("ShopeePay")) selectLayanan.value = "ShopeePay";
+            else if(prod.includes("E-Toll")) selectLayanan.value = "E-Toll";
             else if(prod.includes("Pulsa")) selectLayanan.value = "Pulsa";
             else if(prod.includes("Data") || prod.includes("Kuota")) selectLayanan.value = "Kuota";
             else if(prod.includes("Token")) selectLayanan.value = "Token PLN";

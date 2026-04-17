@@ -1,125 +1,113 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order WOWO</title>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order WOWO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #0d0d15;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        .form-container {
+            background-color: #1c1c28;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid #2d2d3f;
+        }
+        .input-field {
+            background-color: #2d2d3f;
+            border: 1px solid #3d3d52;
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            color: white;
+            font-weight: 700;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            width: 100%;
+            margin-top: 1.5rem;
+            transition: transform 0.2s;
+        }
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+    </style>
 </head>
+<body>
 
-<body class="bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center min-h-screen">
+    <div class="form-container">
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-white flex items-center justify-center gap-2">
+                🚀 Form Order WOWO
+            </h1>
+        </div>
 
-<!-- FORM -->
-<div class="bg-gray-900/80 backdrop-blur-lg shadow-2xl p-6 rounded-2xl w-full max-w-lg">
+        <form id="orderForm" class="space-y-4">
+            <div>
+                <input type="text" id="nama" placeholder="Nama" class="input-field" required>
+            </div>
 
-  <h2 class="text-2xl font-bold text-center mb-6 text-purple-400">
-    🚀 Form Order WOWO
-  </h2>
+            <div class="grid grid-cols-2 gap-4">
+                <input type="number" id="wa" placeholder="No WA" class="input-field" required>
+                <input type="text" id="layanan" class="input-field" placeholder="Layanan" readonly>
+            </div>
 
-  <form id="orderForm" class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" id="nominal" placeholder="Nominal" class="input-field" required>
+                <input type="text" id="tujuan" placeholder="Tujuan" class="input-field" required>
+            </div>
 
-    <input id="nama" placeholder="Nama"
-      class="col-span-2 p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
-
-    <input id="wa" placeholder="No WA"
-      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
-
-    <input id="layanan" placeholder="Layanan"
-      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
-
-    <input id="nominal" placeholder="Nominal"
-      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
-
-    <input id="tujuan" placeholder="Tujuan"
-      class="p-3 rounded bg-gray-800 focus:ring-2 focus:ring-purple-500 outline-none" required>
-
-    <button
-      class="col-span-2 mt-2 bg-gradient-to-r from-purple-600 to-purple-800 p-3 rounded-xl font-semibold hover:scale-105 transition">
-      Kirim Order
-    </button>
-
-  </form>
-
-</div>
-
-<!-- ✅ POPUP SUCCESS -->
-<div id="successPopup" class="fixed inset-0 bg-black/70 backdrop-blur-md hidden items-center justify-center z-50">
-  <div class="bg-gray-900 p-8 rounded-3xl text-center shadow-2xl max-w-sm w-full">
-
-    <div class="text-green-400 text-6xl mb-4">
-      <i class="fa-solid fa-circle-check"></i>
+            <button type="submit" class="btn-submit">Kirim Order</button>
+        </form>
     </div>
 
-    <h2 class="text-2xl font-bold mb-2">Order Berhasil!</h2>
-    <p class="text-gray-400 mb-6">Pesanan kamu sudah masuk ke admin</p>
+    <script>
+        // Mengambil parameter 'prod' dari URL (contoh: order.html?prod=DANA)
+        const urlParams = new URLSearchParams(window.location.search);
+        const produk = urlParams.get('prod');
+        if (produk) {
+            document.getElementById('layanan').value = produk;
+        }
 
-    <button onclick="closePopup()"
-      class="bg-purple-600 px-6 py-3 rounded-xl hover:bg-purple-700 transition">
-      Tutup
-    </button>
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nama = document.getElementById('nama').value;
+            const wa = document.getElementById('wa').value;
+            const layanan = document.getElementById('layanan').value;
+            const nominal = document.getElementById('nominal').value;
+            const tujuan = document.getElementById('tujuan').value;
 
-  </div>
-</div>
+            // Format Pesan WhatsApp
+            const pesan = `Halo WOWO, saya ingin order:%0A%0A` +
+                          `*Nama:* ${nama}%0A` +
+                          `*No WA:* ${wa}%0A` +
+                          `*Layanan:* ${layanan}%0A` +
+                          `*Nominal:* ${nominal}%0A` +
+                          `*Tujuan/ID:* ${tujuan}`;
 
-<!-- 🔥 FIREBASE SCRIPT -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyB9bCpEzdmfOlHGRwedqkofqgR44EiI4Xc",
-  authDomain: "uasbima-2c5d7.firebaseapp.com",
-  projectId: "uasbima-2c5d7"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-const form = document.getElementById("orderForm");
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  try {
-    const data = {
-      id: "WOWO-" + Date.now().toString().slice(-8),
-      nama: document.getElementById("nama").value,
-      wa: document.getElementById("wa").value,
-      layanan: document.getElementById("layanan").value,
-      nominal: document.getElementById("nominal").value,
-      tujuan: document.getElementById("tujuan").value,
-      createdAt: serverTimestamp()
-    };
-
-    await addDoc(collection(db, "booking_bus"), data);
-
-    // ✅ tampilkan popup
-    const popup = document.getElementById("successPopup");
-    popup.classList.remove("hidden");
-    popup.classList.add("flex");
-
-    form.reset();
-
-    // ✅ auto close 2 detik
-    setTimeout(() => {
-      closePopup();
-    }, 2000);
-
-  } catch (err) {
-    console.error("ERROR:", err);
-    alert("❌ Gagal kirim order!");
-  }
-});
-
-// tombol close popup
-window.closePopup = function () {
-  const popup = document.getElementById("successPopup");
-  popup.classList.remove("flex");
-  popup.classList.add("hidden");
-};
-</script>
-
+            window.open(`https://wa.me/6283148583173?text=${pesan}`, '_blank');
+        });
+    </script>
 </body>
 </html>

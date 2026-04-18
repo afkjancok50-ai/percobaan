@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Konfirmasi Pesanan - WOWO Store</title>
+  <title>Konfirmasi Pesanan - BIMA Store</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
@@ -25,7 +25,7 @@
         <div class="p-2 bg-zinc-800 rounded-xl group-hover:bg-purple-600 transition-all">
             <i class="fa-solid fa-arrow-left text-white text-sm"></i>
         </div>
-        <h1 class="text-xl font-black tracking-tighter text-white uppercase">WOWO<span class="text-purple-500">.</span></h1>
+        <h1 class="text-xl font-black tracking-tighter text-white uppercase">BIMA<span class="text-purple-500">.</span></h1>
       </a>
       <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 border border-white/10 px-3 py-1 rounded-full">Secure Payment</span>
     </div>
@@ -157,7 +157,8 @@
 
       const [nomVal, hargaVal] = selectNominal.value.split('|');
       const data = {
-        orderId: "WOWO-" + Math.floor(1000 + Math.random() * 9000),
+        // BAGIAN PREFIX ID PESANAN (MENGGANTI WOWO JADI BIMA)
+        orderId: "BIMAZ-" + Math.floor(1000 + Math.random() * 9000),
         nama: document.getElementById("nama").value,
         wa: document.getElementById("wa").value,
         layanan: selectLayanan.value,
@@ -177,10 +178,8 @@
         document.getElementById("displayTotal").innerText = `Rp ${hargaVal}`;
         document.getElementById("paymentPopup").classList.replace("hidden", "flex");
 
-        // Kirim notif WA
         window.open(`https://wa.me/6283148583173?text=Halo%20Admin,%20Saya%20order%20${data.layanan}%20${data.nominal}%20dengan%20ID%20${data.orderId}.%20Mohon%20proses%20setelah%20pembayaran.`, '_blank');
 
-        // Monitor Perubahan Status (Berubah jika Admin edit di Firebase jadi "Success")
         onSnapshot(doc(db, "order", currentOrderId), (snap) => {
             if (snap.exists() && snap.data().status === "Success") {
                 document.getElementById("qrisSection").classList.add("hidden");
@@ -191,24 +190,20 @@
       } catch (err) { alert("Terjadi kesalahan!"); btnKirim.disabled = false; }
     });
 
-    // LOGIKA RATING
     const stars = document.querySelectorAll("#starContainer i");
     stars.forEach(star => {
         star.addEventListener("click", async () => {
             const ratingValue = parseInt(star.getAttribute("data-rating"));
             
-            // Visual Update
             stars.forEach(s => {
                 const sVal = parseInt(s.getAttribute("data-rating"));
                 sVal <= ratingValue ? s.classList.add("star-active") : s.classList.remove("star-active");
             });
 
-            // Update ke Firebase
             try {
                 const orderRef = doc(db, "order", currentOrderId);
                 await updateDoc(orderRef, { 
                     rating: ratingValue,
-                    // Kita paksa status Success jika user sudah sampai tahap rating agar muncul di depan
                     status: "Success" 
                 });
                 document.getElementById("ratingStatus").innerText = "Terima kasih! Rating telah terkirim.";

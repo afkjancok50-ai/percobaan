@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EWO - Solusi Transaksi Digital</title>
+  <title>WOWO STORE - Solusi Transaksi Digital</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
@@ -11,102 +11,104 @@
     :root { --brimo-blue: #00529C; --brimo-dark: #002D57; --brimo-light: #F4F7FA; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--brimo-light); }
     .nav-gradient { background: linear-gradient(to right, var(--brimo-dark), var(--brimo-blue)); }
-    .hero-section { background: linear-gradient(135deg, var(--brimo-dark) 0%, var(--brimo-blue) 100%); clip-path: ellipse(150% 100% at 50% 0%); position: relative; z-index: 20; }
-    .service-card { transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(0, 82, 156, 0.08); position: relative; z-index: 10; transform: translateY(-50px); }
-    .service-card:hover { transform: translateY(0px); box-shadow: 0 20px 40px rgba(0, 82, 156, 0.12); z-index: 30; }
-    .logo-box { width: 40px; height: 40px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; }
-    .provider-img { width: 100%; height: 100%; object-fit: contain; }
-    .profile-img-container { width: 42px; height: 42px; border-radius: 9999px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.3); background: white; }
-    .testi-card { background: white; border-radius: 1.5rem; padding: 1.5rem; border: 1px solid rgba(0,0,0,0.05); transition: transform 0.3s ease; }
-    .testi-card:hover { transform: scale(1.02); }
+    .hero-section { background: linear-gradient(135deg, var(--brimo-dark) 0%, var(--brimo-blue) 100%); clip-path: ellipse(150% 100% at 50% 0%); position: relative; z-index: 10; }
+    
+    /* Style Kartu Desktop */
+    .service-card { background: white; border-radius: 2.5rem; padding: 2rem; border: 1px solid rgba(0, 82, 156, 0.08); transition: all 0.4s ease; transform: translateY(-50px); }
+    .service-card:hover { transform: translateY(-55px); box-shadow: 0 20px 40px rgba(0, 82, 156, 0.12); }
+
+    /* Style Item Menu Mobile (Tanpa Kartu) */
+    .mobile-menu-item { background: white; border-radius: 1rem; padding: 0.75rem; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.02); }
+
+    .logo-box { width: 32px; height: 32px; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .logo-box img { width: 100%; height: 100%; object-fit: contain; }
+    
+    .profile-img-container { width: 40px; height: 40px; border-radius: 9999px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.3); background: white; }
+    .testi-card { background: white; border-radius: 1.25rem; padding: 1rem; border: 1px solid rgba(0,0,0,0.05); }
     .star-gold { color: #fbbf24; }
   </style>
 </head>
 <body class="text-gray-800">
 
   <nav class="fixed top-0 w-full nav-gradient z-50 shadow-lg">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="max-w-7xl mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
       <div class="flex items-center gap-3">
         <div class="profile-img-container shadow-md">
           <img src="prabowo.jpg" alt="Profile" class="w-full h-full object-cover">
         </div>
-        <h1 class="text-2xl font-black text-white tracking-tighter uppercase">WOWO<span class="text-orange-400">.</span></h1>
+        <h1 class="text-xl md:text-2xl font-black text-white tracking-tighter uppercase">WOWO<span class="text-orange-400">.</span></h1>
       </div>
-      <div class="flex items-center space-x-4 md:space-x-8 text-sm font-bold text-blue-100 uppercase tracking-widest">
-        <a href="#" class="hidden md:block hover:text-white transition">Beranda</a>
-        <a href="https://wa.me/6283148583173" class="bg-orange-500 text-white px-4 md:px-6 py-2 rounded-full hover:bg-orange-600 shadow-lg transition transform hover:scale-105 active:scale-95">Hubungi Kami</a>
-      </div>
+      <a href="https://wa.me/6283148583173" class="bg-orange-500 text-white px-5 py-2 rounded-full text-xs font-bold shadow-lg uppercase tracking-wider">CS</a>
     </div>
   </nav>
 
-  <section class="hero-section pt-40 pb-52 text-white px-6 text-center md:text-left">
-    <div class="max-w-7xl mx-auto">
-      <div class="inline-block px-4 py-1.5 bg-blue-400/20 backdrop-blur-md rounded-full text-xs font-bold tracking-[0.2em] mb-6 border border-white/10 uppercase">
+  <section class="hero-section pt-32 pb-40 md:pt-40 md:pb-52 text-white px-6 text-center md:text-left">
+    <div class="max-w-7xl mx-auto text-center md:text-left">
+      <div class="inline-block px-4 py-1 bg-blue-400/20 backdrop-blur-md rounded-full text-[10px] md:text-xs font-bold mb-4 border border-white/10 uppercase">
         🚀 Tercepat & Terpercaya
       </div>
-      <h2 class="text-5xl md:text-6xl font-black mb-6 leading-tight uppercase">Transaksi Digital <br><span class="text-orange-400 text-4xl md:text-5xl">WOWO STORE.</span></h2>
-      <p class="text-lg text-blue-100 mb-10 opacity-80 max-w-2xl font-medium">Top Up E-Wallet, Pulsa, dan Token Listrik instan 24 jam nonstop.</p>
+      <h2 class="text-3xl md:text-6xl font-black mb-4 leading-tight uppercase">WOWO STORE</h2>
+      <p class="text-sm md:text-lg text-blue-100 opacity-80 max-w-2xl font-medium">Top Up Instan & Otomatis 24 Jam</p>
     </div>
   </section>
 
-  <section id="layanan" class="max-w-7xl mx-auto px-6 -mt-32 pb-24">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="bg-white p-8 rounded-[2.5rem] shadow-xl service-card border-b-4 border-blue-500">
-        <h3 class="font-black text-gray-900 mb-8 uppercase tracking-widest text-xs opacity-50">Top Up E-Wallet</h3>
+  <section class="max-w-7xl mx-auto px-4 -mt-20 md:-mt-32 pb-16">
+    
+    <div class="grid grid-cols-3 gap-3 md:hidden">
+      <a href="order.html?prod=DANA" class="mobile-menu-item"><div class="logo-box"><img src="dana.jpg"></div><span class="text-[9px] font-black uppercase">DANA</span></a>
+      <a href="order.html?prod=GoPay" class="mobile-menu-item"><div class="logo-box"><img src="gopay.jpg"></div><span class="text-[9px] font-black uppercase">GoPay</span></a>
+      <a href="order.html?prod=ShopeePay" class="mobile-menu-item"><div class="logo-box"><img src="shopepay.jpg"></div><span class="text-[9px] font-black uppercase">SPay</span></a>
+      <a href="order.html?prod=Data+Telkomsel" class="mobile-menu-item"><div class="logo-box"><img src="telkomsel.jpg"></div><span class="text-[9px] font-black uppercase">TSEL</span></a>
+      <a href="order.html?prod=Data+XL" class="mobile-menu-item"><div class="logo-box"><img src="xl.jpg"></div><span class="text-[9px] font-black uppercase">XL</span></a>
+      <a href="order.html?prod=Data+Indosat" class="mobile-menu-item"><div class="logo-box"><img src="indosat.jpg"></div><span class="text-[9px] font-black uppercase">ISAT</span></a>
+      <a href="order.html?prod=Data+Tri" class="mobile-menu-item"><div class="logo-box"><img src="tri.jpg"></div><span class="text-[9px] font-black uppercase">TRI</span></a>
+      <a href="order.html?prod=Pulsa" class="mobile-menu-item"><div class="logo-box text-purple-600 text-xl"><i class="fa-solid fa-mobile-screen"></i></div><span class="text-[9px] font-black uppercase">PULSA</span></a>
+      <a href="order.html?prod=Token+PLN" class="mobile-menu-item"><div class="logo-box text-cyan-500 text-xl"><i class="fa-solid fa-bolt-lightning"></i></div><span class="text-[9px] font-black uppercase">PLN</span></a>
+      <a href="order.html?prod=E-Toll" class="mobile-menu-item col-span-3 py-4 flex-row gap-3"><div class="logo-box text-emerald-600 text-xl mb-0"><i class="fa-solid fa-road"></i></div><span class="text-[9px] font-black uppercase">Layanan E-Toll & Lainnya</span></a>
+    </div>
+
+    <div class="hidden md:grid grid-cols-4 gap-8">
+      <div class="service-card border-b-4 border-blue-500">
+        <h3 class="font-black text-gray-400 mb-6 uppercase tracking-widest text-xs">E-Wallet</h3>
         <div class="space-y-4">
-          <a href="order.html?prod=DANA" class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border border-gray-100 group"><div class="flex items-center gap-4"><div class="logo-box"><img src="dana.jpg" class="provider-img"></div><span class="text-sm font-extrabold text-gray-700">DANA</span></div></a>
-          <a href="order.html?prod=GoPay" class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border border-gray-100 group"><div class="flex items-center gap-4"><div class="logo-box"><img src="gopay.jpg" class="provider-img"></div><span class="text-sm font-extrabold text-gray-700">GoPay</span></div></a>
-          <a href="order.html?prod=ShopeePay" class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border border-gray-100 group"><div class="flex items-center gap-4"><div class="logo-box"><img src="shopepay.jpg" class="provider-img"></div><span class="text-sm font-extrabold text-gray-700">ShopeePay</span></div></a>
-          <a href="order.html?prod=E-Toll" class="flex items-center justify-between p-4 bg-emerald-50 rounded-2xl border border-emerald-100 group"><div class="flex items-center gap-4"><div class="logo-box"><i class="fa-solid fa-road text-emerald-600 text-xl"></i></div><span class="text-sm font-extrabold text-emerald-700">E-Toll</span></div></a>
+          <a href="order.html?prod=DANA" class="flex items-center gap-4 p-3 bg-gray-50 rounded-xl hover:bg-blue-50 transition"><div class="logo-box mb-0"><img src="dana.jpg"></div><span class="text-sm font-bold">DANA</span></a>
+          <a href="order.html?prod=GoPay" class="flex items-center gap-4 p-3 bg-gray-50 rounded-xl hover:bg-blue-50 transition"><div class="logo-box mb-0"><img src="gopay.jpg"></div><span class="text-sm font-bold">GoPay</span></a>
         </div>
       </div>
-
-      <div class="bg-white p-8 rounded-[2.5rem] shadow-xl service-card border-b-4 border-orange-500 text-center">
-        <h3 class="font-black text-gray-900 mb-8 uppercase tracking-widest text-xs opacity-50">Kuota Data</h3>
+      <div class="service-card border-b-4 border-orange-500">
+        <h3 class="font-black text-gray-400 mb-6 uppercase tracking-widest text-xs text-center">Data</h3>
         <div class="grid grid-cols-2 gap-4">
-          <a href="order.html?prod=Data+Telkomsel" class="p-4 bg-gray-50 rounded-2xl border border-gray-100 group"><div class="w-10 h-10 mx-auto mb-2"><img src="telkomsel.jpg" class="provider-img"></div><span class="text-[10px] font-black text-gray-600 uppercase">Telkomsel</span></a>
-          <a href="order.html?prod=Data+XL" class="p-4 bg-gray-50 rounded-2xl border border-gray-100 group"><div class="w-10 h-10 mx-auto mb-2"><img src="xl.jpg" class="provider-img"></div><span class="text-[10px] font-black text-gray-600 uppercase">XL Axiata</span></a>
-          <a href="order.html?prod=Data+Indosat" class="p-4 bg-gray-50 rounded-2xl border border-gray-100 group"><div class="w-10 h-10 mx-auto mb-2"><img src="indosat.jpg" class="provider-img"></div><span class="text-[10px] font-black text-gray-600 uppercase">Indosat</span></a>
-          <a href="order.html?prod=Data+Tri" class="p-4 bg-gray-50 rounded-2xl border border-gray-100 group"><div class="w-10 h-10 mx-auto mb-2"><img src="tri.jpg" class="provider-img"></div><span class="text-[10px] font-black text-gray-600 uppercase">Tri</span></a>
+          <a href="order.html?prod=Data+Telkomsel" class="p-3 bg-gray-50 rounded-xl text-center"><img src="telkomsel.jpg" class="w-8 h-8 mx-auto"><span class="text-[10px] font-bold">TSEL</span></a>
+          <a href="order.html?prod=Data+XL" class="p-3 bg-gray-50 rounded-xl text-center"><img src="xl.jpg" class="w-8 h-8 mx-auto"><span class="text-[10px] font-bold">XL</span></a>
         </div>
       </div>
+      <div class="service-card border-b-4 border-purple-500 flex flex-col justify-between">
+        <h3 class="font-black text-gray-400 mb-6 uppercase tracking-widest text-xs">Pulsa</h3>
+        <a href="order.html?prod=Pulsa" class="p-6 bg-purple-50 rounded-2xl text-center border border-purple-100">
+          <i class="fa-solid fa-mobile-screen text-3xl text-purple-600 mb-2"></i>
+          <p class="text-sm font-bold">Cek Harga</p>
+        </a>
+      </div>
+      <div class="service-card border-b-4 border-cyan-500 flex flex-col justify-between">
+        <h3 class="font-black text-gray-400 mb-6 uppercase tracking-widest text-xs text-center">Listrik</h3>
+        <i class="fa-solid fa-bolt-lightning text-4xl text-cyan-500 mb-4 mx-auto animate-pulse"></i>
+        <a href="order.html?prod=Token+PLN" class="block w-full bg-cyan-600 text-white py-3 rounded-xl font-bold text-center">Isi Token</a>
+      </div>
+    </div>
 
-      <div class="bg-white p-8 rounded-[2.5rem] shadow-xl service-card border-b-4 border-purple-500">
-        <h3 class="font-black text-gray-900 mb-8 uppercase tracking-widest text-xs opacity-50">Pulsa All Operator</h3>
-        <div class="space-y-3">
-          <a href="order.html?prod=Pulsa" class="flex items-center gap-4 p-4 bg-purple-50 rounded-2xl border border-purple-100">
-            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm"><i class="fa-solid fa-mobile-screen text-purple-600 text-xl"></i></div>
-            <div><p class="text-sm font-black text-gray-800">Cek Harga</p><p class="text-[10px] text-purple-500 font-bold uppercase tracking-tighter">Mulai Rp 10.000</p></div>
-          </a>
+  </section>
+
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-xl font-black text-gray-900 uppercase mb-8">Apa Kata Mereka?</h2>
+      <div id="testiContainer" class="grid grid-cols-2 md:grid-cols-3 gap-3">
         </div>
-      </div>
-
-      <div class="bg-white p-8 rounded-[2.5rem] shadow-xl service-card border-b-4 border-cyan-500 text-center">
-        <h3 class="font-black text-gray-900 mb-8 uppercase tracking-widest text-xs opacity-50">Listrik PLN</h3>
-        <div class="mb-8 p-6 bg-cyan-50 rounded-3xl"><i class="fa-solid fa-bolt-lightning text-cyan-500 text-5xl animate-pulse"></i></div>
-        <a href="order.html?prod=Token+PLN" class="block w-full bg-cyan-600 text-white py-4 rounded-2xl font-black shadow-lg hover:bg-cyan-700 uppercase tracking-widest text-xs">Isi Token</a>
-      </div>
     </div>
   </section>
 
-  <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <div class="mb-16">
-        <h2 class="text-3xl font-black text-gray-900 uppercase">Apa Kata Mereka?</h2>
-        <div class="h-1.5 w-20 bg-orange-400 mx-auto mt-4 rounded-full"></div>
-      </div>
-      <div id="testiContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="col-span-full text-center text-gray-400 animate-pulse uppercase font-bold text-xs tracking-widest">Memuat penilaian terbaru...</div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="bg-gray-50 py-12 border-t text-center">
-    <div class="max-w-7xl mx-auto px-6">
-        <h4 class="text-xl font-black text-gray-900 mb-2 uppercase">EWO STORE</h4>
-        <p class="text-gray-400 text-sm font-medium mb-6">Partner Terpercaya Kebutuhan Digital.</p>
-        <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest">© 2026 EWO STORE. Seluruh hak cipta dilindungi.</p>
-    </div>
+  <footer class="bg-gray-50 py-10 border-t text-center">
+    <h4 class="text-sm font-black text-gray-900 uppercase">WOWO STORE</h4>
+    <p class="text-[9px] text-gray-400 font-bold mt-2 tracking-widest uppercase">© 2026 Seluruh hak cipta dilindungi.</p>
   </footer>
 
   <script type="module">
@@ -123,47 +125,24 @@
     const db = getFirestore(app);
     const testiContainer = document.getElementById("testiContainer");
 
-    const q = query(
-      collection(db, "order"), 
-      where("status", "==", "Success"), 
-      where("rating", ">", 0),
-      orderBy("rating", "desc"),
-      limit(6)
-    );
+    const q = query(collection(db, "order"), where("status", "==", "Success"), where("rating", ">", 0), orderBy("rating", "desc"), limit(6));
 
     onSnapshot(q, (snapshot) => {
-      if (snapshot.empty) {
-        testiContainer.innerHTML = '<p class="col-span-full text-center text-gray-400 italic font-bold">Belum ada penilaian Success.</p>';
-        return;
-      }
-
       testiContainer.innerHTML = "";
       snapshot.forEach((doc) => {
         const data = doc.data();
-        const nama = data.nama || "User";
-        const namaSensor = nama.length > 2 ? nama.substring(0, 2) + "***" : nama;
-        
-        let starsHtml = "";
-        for (let i = 1; i <= 5; i++) {
-          starsHtml += `<i class="fa-solid fa-star ${i <= (data.rating || 0) ? 'star-gold' : 'text-gray-200'} text-xs"></i>`;
-        }
-
+        let stars = "";
+        for (let i = 1; i <= 5; i++) stars += `<i class="fa-solid fa-star ${i <= data.rating ? 'star-gold' : 'text-gray-200'} text-[8px]"></i>`;
         testiContainer.innerHTML += `
           <div class="testi-card text-left">
-            <div class="flex justify-between items-start mb-4">
-              <div>
-                <h4 class="font-black text-gray-800 text-sm uppercase">${namaSensor}</h4>
-                <p class="text-[9px] text-blue-500 font-bold uppercase">${data.layanan || ''} - ${data.nominal || ''}</p>
-              </div>
-              <div class="flex gap-0.5">${starsHtml}</div>
+            <div class="flex justify-between items-center mb-1">
+              <h4 class="font-black text-gray-800 text-[9px] uppercase">${data.nama ? data.nama.substring(0,2)+'***' : 'User'}</h4>
+              <div class="flex gap-0.5">${stars}</div>
             </div>
-            <p class="text-xs text-gray-500 leading-relaxed italic">"Transaksi sangat cepat dan aman. Terima kasih EWO Store!"</p>
+            <p class="text-[7px] text-blue-500 font-bold uppercase">${data.layanan || ''}</p>
           </div>
         `;
       });
-    }, (error) => {
-      console.error(error);
-      testiContainer.innerHTML = '<p class="text-red-500 text-center col-span-full font-bold uppercase text-xs">Gagal memuat data.</p>';
     });
   </script>
 </body>

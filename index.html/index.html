@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EWO - Solusi Transaksi Digital</title>
+  <title>WOWO STORE - Solusi Transaksi Digital</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
@@ -11,107 +11,114 @@
     :root { --brimo-blue: #00529C; --brimo-dark: #002D57; --brimo-light: #F4F7FA; }
     body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--brimo-light); }
     .nav-gradient { background: linear-gradient(to right, var(--brimo-dark), var(--brimo-blue)); }
-    .hero-section { background: linear-gradient(135deg, var(--brimo-dark) 0%, var(--brimo-blue) 100%); clip-path: ellipse(150% 100% at 50% 0%); position: relative; z-index: 20; }
+    .hero-section { background: linear-gradient(135deg, var(--brimo-dark) 0%, var(--brimo-blue) 100%); clip-path: ellipse(150% 100% at 50% 0%); position: relative; z-index: 10; }
     
-    /* Layout Card */
-    .service-card { border: 1px solid rgba(0, 82, 156, 0.08); background: white; height: 100%; transition: all 0.3s ease; }
+    /* Menu Item Style */
+    .menu-item { background: white; border-radius: 1.25rem; border: 1px solid rgba(0, 82, 156, 0.08); transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+    .menu-item:active { transform: scale(0.95); background-color: #f0f7ff; }
     
-    @media (min-width: 768px) {
-      .service-card { transform: translateY(-50px); }
-      .service-card:hover { transform: translateY(-55px); box-shadow: 0 20px 40px rgba(0, 82, 156, 0.12); }
-    }
-
-    .logo-box { width: 32px; height: 32px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center; padding: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; }
-    .provider-img { width: 100%; height: 100%; object-fit: contain; }
+    .logo-box { width: 36px; height: 36px; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; }
+    .logo-box img { width: 100%; height: 100%; object-fit: contain; }
+    
     .profile-img-container { width: 40px; height: 40px; border-radius: 9999px; overflow: hidden; border: 2px solid rgba(255, 255, 255, 0.3); background: white; }
-    .testi-card { background: white; border-radius: 1.5rem; padding: 1.25rem; border: 1px solid rgba(0,0,0,0.05); }
+    .testi-card { background: white; border-radius: 1.25rem; padding: 1rem; border: 1px solid rgba(0,0,0,0.05); }
     .star-gold { color: #fbbf24; }
   </style>
 </head>
 <body class="text-gray-800">
 
   <nav class="fixed top-0 w-full nav-gradient z-50 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div class="profile-img-container">
+        <div class="profile-img-container shadow-md">
           <img src="prabowo.jpg" alt="Profile" class="w-full h-full object-cover">
         </div>
-        <h1 class="text-xl md:text-2xl font-black text-white tracking-tighter uppercase">WOWO<span class="text-orange-400">.</span></h1>
+        <h1 class="text-xl font-black text-white tracking-tighter uppercase">WOWO<span class="text-orange-400">.</span></h1>
       </div>
-      <a href="https://wa.me/6283148583173" class="bg-orange-500 text-white px-4 md:px-6 py-2 rounded-full text-xs font-bold hover:bg-orange-600 shadow-lg transition transform active:scale-95 uppercase">Hubungi</a>
+      <a href="https://wa.me/6283148583173" class="bg-orange-500 text-white px-5 py-2 rounded-full text-xs font-bold shadow-lg uppercase tracking-wider">CS</a>
     </div>
   </nav>
 
-  <section class="hero-section pt-32 pb-44 md:pt-40 md:pb-52 text-white px-6 text-center md:text-left">
+  <section class="hero-section pt-32 pb-40 text-white px-6 text-center">
     <div class="max-w-7xl mx-auto">
-      <div class="inline-block px-4 py-1.5 bg-blue-400/20 backdrop-blur-md rounded-full text-[10px] md:text-xs font-bold tracking-[0.2em] mb-6 border border-white/10 uppercase">
+      <div class="inline-block px-4 py-1 bg-blue-400/20 backdrop-blur-md rounded-full text-[10px] font-bold tracking-[0.2em] mb-4 border border-white/10 uppercase">
         🚀 Tercepat & Terpercaya
       </div>
-      <h2 class="text-3xl md:text-6xl font-black mb-4 leading-tight uppercase">Transaksi Digital <br><span class="text-orange-400 text-2xl md:text-5xl">WOWO STORE.</span></h2>
-      <p class="text-sm md:text-lg text-blue-100 opacity-80 max-w-2xl font-medium">Top Up E-Wallet, Pulsa, dan Token Listrik instan 24 jam nonstop.</p>
+      <h2 class="text-3xl font-black mb-3 leading-tight uppercase">WOWO STORE</h2>
+      <p class="text-xs text-blue-100 opacity-80 font-medium">Top Up Instan & Otomatis 24 Jam</p>
     </div>
   </section>
 
-  <section id="layanan" class="max-w-7xl mx-auto px-4 -mt-24 md:-mt-32 pb-24">
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
+  <section class="max-w-7xl mx-auto px-4 -mt-20 pb-16 relative z-30">
+    <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
       
-      <div class="bg-white p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] shadow-xl service-card border-b-4 border-blue-500">
-        <h3 class="font-black text-gray-900 mb-4 md:mb-8 uppercase tracking-widest text-[10px] md:text-xs opacity-50">E-Wallet</h3>
-        <div class="space-y-2 md:space-y-4">
-          <a href="order.html?prod=DANA" class="flex items-center gap-2 md:gap-4 p-2 md:p-4 bg-gray-50 rounded-xl border border-gray-100 group"><div class="logo-box"><img src="dana.jpg" class="provider-img"></div><span class="text-[10px] md:text-sm font-extrabold text-gray-700">DANA</span></a>
-          <a href="order.html?prod=GoPay" class="flex items-center gap-2 md:gap-4 p-2 md:p-4 bg-gray-50 rounded-xl border border-gray-100 group"><div class="logo-box"><img src="gopay.jpg" class="provider-img"></div><span class="text-[10px] md:text-sm font-extrabold text-gray-700">GoPay</span></a>
-          <a href="order.html?prod=ShopeePay" class="flex items-center gap-2 md:gap-4 p-2 md:p-4 bg-gray-50 rounded-xl border border-gray-100 group"><div class="logo-box"><img src="shopepay.jpg" class="provider-img"></div><span class="text-[10px] md:text-sm font-extrabold text-gray-700">SPay</span></a>
-          <a href="order.html?prod=E-Toll" class="flex items-center gap-2 md:gap-4 p-2 md:p-4 bg-emerald-50 rounded-xl border border-emerald-100 group"><div class="logo-box"><i class="fa-solid fa-road text-emerald-600 text-sm"></i></div><span class="text-[10px] md:text-sm font-extrabold text-emerald-700">E-Toll</span></a>
-        </div>
-      </div>
+      <a href="order.html?prod=DANA" class="menu-item group">
+        <div class="logo-box"><img src="dana.jpg" alt="DANA"></div>
+        <span class="text-[10px] font-black text-gray-700 uppercase">DANA</span>
+      </a>
+      
+      <a href="order.html?prod=GoPay" class="menu-item">
+        <div class="logo-box"><img src="gopay.jpg" alt="GoPay"></div>
+        <span class="text-[10px] font-black text-gray-700 uppercase">GoPay</span>
+      </a>
 
-      <div class="bg-white p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] shadow-xl service-card border-b-4 border-orange-500 text-center">
-        <h3 class="font-black text-gray-900 mb-4 md:mb-8 uppercase tracking-widest text-[10px] md:text-xs opacity-50">Kuota Data</h3>
-        <div class="grid grid-cols-2 gap-2 md:gap-4">
-          <a href="order.html?prod=Data+Telkomsel" class="p-2 md:p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col items-center"><img src="telkomsel.jpg" class="w-6 h-6 mb-1 object-contain"><span class="text-[8px] md:text-[10px] font-black text-gray-600 uppercase">Tsel</span></a>
-          <a href="order.html?prod=Data+XL" class="p-2 md:p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col items-center"><img src="xl.jpg" class="w-6 h-6 mb-1 object-contain"><span class="text-[8px] md:text-[10px] font-black text-gray-600 uppercase">XL</span></a>
-          <a href="order.html?prod=Data+Indosat" class="p-2 md:p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col items-center"><img src="indosat.jpg" class="w-6 h-6 mb-1 object-contain"><span class="text-[8px] md:text-[10px] font-black text-gray-600 uppercase">Isat</span></a>
-          <a href="order.html?prod=Data+Tri" class="p-2 md:p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col items-center"><img src="tri.jpg" class="w-6 h-6 mb-1 object-contain"><span class="text-[8px] md:text-[10px] font-black text-gray-600 uppercase">Tri</span></a>
-        </div>
-      </div>
+      <a href="order.html?prod=ShopeePay" class="menu-item">
+        <div class="logo-box"><img src="shopepay.jpg" alt="ShopeePay"></div>
+        <span class="text-[10px] font-black text-gray-700 uppercase">SPay</span>
+      </a>
 
-      <div class="bg-white p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] shadow-xl service-card border-b-4 border-purple-500">
-        <h3 class="font-black text-gray-900 mb-4 md:mb-8 uppercase tracking-widest text-[10px] md:text-xs opacity-50 text-center">Pulsa</h3>
-        <div class="space-y-3">
-          <a href="order.html?prod=Pulsa" class="flex flex-col items-center justify-center gap-2 p-4 md:p-6 bg-purple-50 rounded-2xl border border-purple-100 text-center">
-            <div class="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center shadow-sm"><i class="fa-solid fa-mobile-screen text-purple-600 text-lg md:text-xl"></i></div>
-            <div><p class="text-[10px] md:text-sm font-black text-gray-800 uppercase">All Operator</p><p class="text-[8px] md:text-[10px] text-purple-500 font-bold uppercase tracking-tighter">Mulai Rp 10rb</p></div>
-          </a>
-        </div>
-      </div>
+      <a href="order.html?prod=Data+Telkomsel" class="menu-item">
+        <div class="logo-box"><img src="telkomsel.jpg" alt="Telkomsel"></div>
+        <span class="text-[10px] font-black text-gray-700 uppercase">TSEL</span>
+      </a>
 
-      <div class="bg-white p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] shadow-xl service-card border-b-4 border-cyan-500 text-center flex flex-col justify-between">
-        <h3 class="font-black text-gray-900 mb-4 md:mb-8 uppercase tracking-widest text-[10px] md:text-xs opacity-50">Listrik PLN</h3>
-        <div class="mb-4 p-4 md:p-6 bg-cyan-50 rounded-3xl"><i class="fa-solid fa-bolt-lightning text-cyan-500 text-3xl md:text-5xl animate-pulse"></i></div>
-        <a href="order.html?prod=Token+PLN" class="block w-full bg-cyan-600 text-white py-3 md:py-4 rounded-xl font-black shadow-lg hover:bg-cyan-700 uppercase tracking-widest text-[10px] md:text-xs">Isi Token</a>
-      </div>
+      <a href="order.html?prod=Data+XL" class="menu-item">
+        <div class="logo-box"><img src="xl.jpg" alt="XL"></div>
+        <span class="text-[10px] font-black text-gray-700 uppercase">XL</span>
+      </a>
+
+      <a href="order.html?prod=Data+Indosat" class="menu-item">
+        <div class="logo-box"><img src="indosat.jpg" alt="Indosat"></div>
+        <span class="text-[10px] font-black text-gray-700 uppercase">ISAT</span>
+      </a>
+
+      <a href="order.html?prod=Data+Tri" class="menu-item">
+        <div class="logo-box"><img src="tri.jpg" alt="Tri"></div>
+        <span class="text-[10px] font-black text-gray-700 uppercase">TRI</span>
+      </a>
+
+      <a href="order.html?prod=Pulsa" class="menu-item">
+        <div class="logo-box text-purple-600 text-2xl"><i class="fa-solid fa-mobile-screen"></i></div>
+        <span class="text-[10px] font-black text-gray-700 uppercase">PULSA</span>
+      </a>
+
+      <a href="order.html?prod=Token+PLN" class="menu-item">
+        <div class="logo-box text-cyan-500 text-2xl"><i class="fa-solid fa-bolt-lightning"></i></div>
+        <span class="text-[10px] font-black text-gray-700 uppercase">PLN</span>
+      </a>
+
+      <a href="order.html?prod=E-Toll" class="menu-item">
+        <div class="logo-box text-emerald-600 text-2xl"><i class="fa-solid fa-road"></i></div>
+        <span class="text-[10px] font-black text-gray-700 uppercase">E-TOLL</span>
+      </a>
 
     </div>
   </section>
 
-  <section class="py-16 md:py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 md:px-6 text-center">
-      <div class="mb-12 md:mb-16">
-        <h2 class="text-2xl md:text-3xl font-black text-gray-900 uppercase">Apa Kata Mereka?</h2>
-        <div class="h-1.5 w-16 bg-orange-400 mx-auto mt-4 rounded-full"></div>
-      </div>
-      <div id="testiContainer" class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
-        <div class="col-span-full text-center text-gray-400 animate-pulse uppercase font-bold text-[10px]">Memuat penilaian...</div>
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-xl font-black text-gray-900 uppercase mb-2">Testimoni</h2>
+      <div class="h-1 w-12 bg-orange-400 mx-auto mb-8 rounded-full"></div>
+      
+      <div id="testiContainer" class="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div class="col-span-full text-center text-gray-400 text-[10px] animate-pulse">Memuat...</div>
       </div>
     </div>
   </section>
 
-  <footer class="bg-gray-50 py-12 border-t text-center px-4">
-    <div class="max-w-7xl mx-auto">
-        <h4 class="text-lg font-black text-gray-900 mb-2 uppercase">WOWO STORE</h4>
-        <p class="text-gray-400 text-xs font-medium mb-6">Partner Terpercaya Kebutuhan Digital.</p>
-        <p class="text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-widest">© 2026 WOWO STORE. Seluruh hak cipta dilindungi.</p>
-    </div>
+  <footer class="bg-gray-50 py-10 border-t text-center px-4">
+    <h4 class="text-sm font-black text-gray-900 uppercase">WOWO STORE</h4>
+    <p class="text-[9px] text-gray-400 font-bold mt-2 tracking-widest uppercase">© 2026 Seluruh hak cipta dilindungi.</p>
   </footer>
 
   <script type="module">
@@ -138,10 +145,9 @@
 
     onSnapshot(q, (snapshot) => {
       if (snapshot.empty) {
-        testiContainer.innerHTML = '<p class="col-span-full text-center text-gray-400 italic text-[10px]">Belum ada penilaian.</p>';
+        testiContainer.innerHTML = '<p class="col-span-full text-xs text-gray-400 italic">Belum ada penilaian.</p>';
         return;
       }
-
       testiContainer.innerHTML = "";
       snapshot.forEach((doc) => {
         const data = doc.data();
@@ -150,19 +156,17 @@
         
         let starsHtml = "";
         for (let i = 1; i <= 5; i++) {
-          starsHtml += `<i class="fa-solid fa-star ${i <= (data.rating || 0) ? 'star-gold' : 'text-gray-200'} text-[8px] md:text-xs"></i>`;
+          starsHtml += `<i class="fa-solid fa-star ${i <= (data.rating || 0) ? 'star-gold' : 'text-gray-200'} text-[8px]"></i>`;
         }
 
         testiContainer.innerHTML += `
-          <div class="testi-card text-left flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-start mb-2">
-                <h4 class="font-black text-gray-800 text-[9px] md:text-sm uppercase">${namaSensor}</h4>
-                <div class="flex gap-0.5">${starsHtml}</div>
-              </div>
-              <p class="text-[7px] md:text-[9px] text-blue-500 font-bold uppercase mb-2">${data.layanan || ''} - ${data.nominal || ''}</p>
+          <div class="testi-card text-left">
+            <div class="flex justify-between items-center mb-1">
+              <h4 class="font-black text-gray-800 text-[9px] uppercase">${namaSensor}</h4>
+              <div class="flex gap-0.5">${starsHtml}</div>
             </div>
-            <p class="text-[9px] md:text-xs text-gray-500 leading-tight italic line-clamp-2">"Sangat cepat dan aman!"</p>
+            <p class="text-[7px] text-blue-500 font-bold uppercase mb-1">${data.layanan || ''}</p>
+            <p class="text-[8px] text-gray-500 italic">"Mantap, cepat!"</p>
           </div>
         `;
       });

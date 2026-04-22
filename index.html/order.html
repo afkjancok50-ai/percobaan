@@ -1,107 +1,3 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konfirmasi Pesanan - NEXTGEN</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #F3F4F6; }
-        .receipt-shape { position: relative; background: white; border-radius: 2.5rem; }
-        .receipt-shape::after {
-            content: ""; position: absolute; bottom: -10px; left: 0; width: 100%; height: 20px;
-            background-image: radial-gradient(circle, white 70%, transparent 75%);
-            background-size: 20px 20px; background-position: 0 -10px;
-        }
-        .animate-pop { animation: pop 0.4s cubic-bezier(0.26, 0.53, 0.74, 1.48); }
-        @keyframes pop {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-    </style>
-</head>
-
-<body class="min-h-screen flex items-center justify-center p-6 text-[#1e1b7e]">
-
-<div class="w-full max-w-md animate-pop">
-
-    <div class="text-center mb-8">
-        <img src="NEXTGENLOGO.png" class="h-14 mx-auto">
-    </div>
-
-    <div class="receipt-shape shadow-2xl overflow-hidden">
-
-        <div class="bg-[#1e1b7e] p-6 text-white text-center">
-            <h2 class="text-xl font-black uppercase">Ringkasan Order</h2>
-            <p id="orderId" class="text-[10px] opacity-60 tracking-[0.3em] mt-1 font-bold"></p>
-        </div>
-
-        <div class="p-8 space-y-6">
-
-            <div>
-                <p class="text-gray-400 text-xs font-bold uppercase">Layanan</p>
-                <p id="resWallet" class="font-black text-xl">---</p>
-            </div>
-
-            <div>
-                <p class="text-gray-400 text-xs font-bold uppercase">Nomor Tujuan</p>
-                <p id="resPhone" class="font-black text-xl">---</p>
-            </div>
-
-            <hr>
-
-            <div class="space-y-2 text-sm">
-                <div class="flex justify-between">
-                    <span>Nominal</span>
-                    <span id="resNominal">Rp 0</span>
-                </div>
-                <div class="flex justify-between">
-                    <span>Biaya Admin</span>
-                    <span>Rp 2.000</span>
-                </div>
-            </div>
-
-            <div class="bg-orange-50 p-4 rounded-2xl flex justify-between">
-                <span class="font-bold">Total</span>
-                <span id="resTotal" class="text-[#f37021] text-xl font-black">Rp 0</span>
-            </div>
-
-            <!-- BUTTON -->
-            <button onclick="bayarSekarang()"
-                class="w-full bg-[#1e1b7e] text-white py-4 rounded-2xl font-black">
-                BAYAR SEKARANG
-            </button>
-
-        </div>
-    </div>
-
-</div>
-
-<!-- MODAL QR -->
-<div id="qrModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center">
-
-    <div class="bg-white p-6 rounded-3xl text-center max-w-sm w-full">
-
-        <h3 class="font-bold mb-4">Scan QR Pembayaran</h3>
-
-        <img id="qrImage" class="w-48 mx-auto mb-4">
-
-        <p id="resTotalModal" class="font-black text-xl mb-4">Rp 0</p>
-
-        <button onclick="kirimWA()"
-            class="w-full bg-green-500 text-white py-3 rounded-xl font-bold">
-            Kirim Bukti ke WhatsApp
-        </button>
-
-    </div>
-</div>
-
 <script>
     const params = new URLSearchParams(window.location.search);
     const phone = params.get('phone');
@@ -109,20 +5,26 @@
     const wallet = params.get('wallet');
 
     let globalTotal = "";
+    let orderIdGlobal = "";
 
     if(phone && nominal && wallet){
 
-        document.getElementById('orderId').innerText = "NG-" + Math.floor(Math.random() * 1000000);
-        document.getElementById('resWallet').innerText = wallet;
+        orderIdGlobal = "NG-" + Math.floor(Math.random() * 1000000);
+
+        document.getElementById('orderId').innerText = orderIdGlobal;
+        document.getElementById('resWallet').innerText = wallet + " TOP UP";
         document.getElementById('resPhone').innerText = phone;
         document.getElementById('resNominal').innerText = "Rp " + nominal;
 
-        const total = parseInt(nominal.replace(/\./g,'')) + 2000;
+        const adminFee = 2000;
+        const total = parseInt(nominal.replace(/\./g,'')) + adminFee;
+
         globalTotal = total.toLocaleString('id-ID');
 
         document.getElementById('resTotal').innerText = "Rp " + globalTotal;
         document.getElementById('resTotalModal').innerText = "Rp " + globalTotal;
 
+        // QR langsung ke nomor DANA kamu
         document.getElementById('qrImage').src =
             `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=083148583173`;
 
@@ -130,28 +32,35 @@
         window.location.href = "topup.html";
     }
 
-    // 🔥 LANGSUNG TAMPIL QR
-    function bayarSekarang(){
-        document.getElementById('qrModal').classList.remove('hidden');
-        document.getElementById('qrModal').classList.add('flex');
+    // 🔥 LANGSUNG TAMPILKAN QR TANPA LAG
+    function showQRCode(){
+        const modal = document.getElementById('qrModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('active');
     }
 
-    // 🔥 LANGSUNG KE WA KIRIM BUKTI
-    function kirimWA(){
-        const orderId = document.getElementById('orderId').innerText;
+    function closeModal(){
+        const modal = document.getElementById('qrModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('active');
+    }
+
+    function sendWhatsApp(){
 
         const message =
-            `Halo Admin,%0A` +
-            `Saya sudah transfer.%0A%0A` +
-            `ID: ${orderId}%0A` +
-            `Layanan: ${wallet}%0A` +
-            `Nomor: ${phone}%0A` +
-            `Total: Rp ${globalTotal}%0A%0A` +
-            `Berikut bukti transfer saya.`;
+            `Halo Admin NextGen,%0A%0A` +
+            `Saya sudah melakukan pembayaran dengan detail:%0A%0A` +
+            `🧾 ID Order: ${orderIdGlobal}%0A` +
+            `📦 Layanan: ${wallet}%0A` +
+            `📱 Nomor Tujuan: ${phone}%0A` +
+            `💰 Total Bayar: Rp ${globalTotal}%0A%0A` +
+            `Mohon diproses ya.%0A%0A` +
+            `Saya akan kirim *bukti transfer yang jelas* (tidak blur & lengkap).`;
 
         window.open(`https://wa.me/6283148583173?text=${message}`, '_blank');
     }
-</script>
 
-</body>
-</html>
+    // AUTO OPEN QR SAAT KLIK BAYAR
+    document.querySelector("button[onclick='showQRCode()']")
+        .addEventListener("click", showQRCode);
+</script>

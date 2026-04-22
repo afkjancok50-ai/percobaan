@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXTGEN - Top Up Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+        }
+
+        /* Container Motif Diperbesar */
+        .hero-image-container {
+            position: absolute;
+            top: 0;
+            right: -5%; /* Sedikit keluar layar agar bisa lebih besar */
+            width: 60%;  /* Diperbesar dari 50% ke 60% */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            z-index: 1;
+        }
+
+        .motif-img {
+            height: 110%; /* Diperbesar melewati batas container */
+            width: auto;
+            object-fit: contain;
+            object-position: right center;
+            opacity: 1; /* Full opacity agar lebih jelas */
+            filter: drop-shadow(-20px 20px 50px rgba(0,0,0,0.1)); /* Tambah bayangan halus */
+            transform: rotate(-2deg); /* Sedikit kemiringan artistik */
+        }
+
+        .z-content { position: relative; z-index: 10; }
+
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #f37021;
+            transition: width .3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <nav class="relative z-50 flex items-center justify-between px-10 md:px-20 py-4 bg-white shadow-sm">
+        <div class="flex items-center">
+            <img src="NEXTGENLOGO.png" alt="NextGen Logo" class="h-20 w-auto object-contain">
+        </div>
+
+        <div class="hidden md:flex space-x-10 items-center font-bold text-xs text-[#1e1b7e]">
+            <a href="#" class="nav-link hover:text-[#f37021] uppercase transition tracking-wider">Beranda</a>
+            <a href="cara kerja.html" class="nav-link hover:text-[#f37021] uppercase transition tracking-wider">Cara Kerja</a>
+            <a href="#" class="bg-[#1e1b7e] text-white px-8 py-3 rounded-lg uppercase hover:bg-blue-900 transition shadow-lg transform hover:scale-105 active:scale-95">
+                Hubungi Kami
+            </a>
+        </div>
+    </nav>
+
+    <section class="relative min-h-[90vh] flex items-center px-10 md:px-20 overflow-hidden bg-white">
+        
+        <div class="hero-image-container hidden md:flex">
+            <img src="xxxx.png" alt="NextGen Motif" class="motif-img">
+        </div>
+
+        <div class="z-content max-w-4xl">
+            <h1 class="text-6xl md:text-[85px] font-black italic leading-[1.05] text-[#1e1b7e] tracking-tighter">
+                <span class="text-[#f37021]">TRANSAKSI</span><br>
+                DIGITAL NEXTGEN.
+            </h1>
+            
+            <div class="w-20 h-2 bg-[#f37021] my-8 rounded-full"></div>
+            
+            <p class="text-gray-500 text-xl md:text-2xl max-w-md font-medium leading-relaxed">
+                Top Up E-Wallet, Pulsa, dan Token Listrik instan <span class="text-[#1e1b7e] font-bold">24 jam</span> nonstop.
+            </p>
+
+            <div class="mt-12 flex items-center space-x-6">
+                <a href="top up.html" class="bg-[#1e1b7e] text-white px-12 py-5 rounded-xl font-black uppercase text-base shadow-[0_20px_50px_rgba(30,27,126,0.3)] hover:translate-y-[-4px] hover:shadow-[0_25px_60px_rgba(30,27,126,0.4)] transition-all duration-300 text-center tracking-widest">
+                    TOP UP SEKARANG
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#f37021] via-[#1e1b7e] to-transparent opacity-20"></div>
+
+</body>
+</html>

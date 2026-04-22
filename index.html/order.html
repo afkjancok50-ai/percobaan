@@ -24,21 +24,17 @@
             0% { opacity: 0; transform: scale(0.9); }
             100% { opacity: 1; transform: scale(1); }
         }
-        #qrModal { display: none; }
-        #qrModal.active { display: flex; }
     </style>
 </head>
 
 <body class="min-h-screen flex items-center justify-center p-6 text-[#1e1b7e]">
 
-<div id="mainContent" class="w-full max-w-md animate-pop">
+<div class="w-full max-w-md animate-pop">
 
-    <!-- LOGO -->
     <div class="text-center mb-8">
-        <img src="NEXTGENLOGO.png" alt="Logo" class="h-14 mx-auto">
+        <img src="NEXTGENLOGO.png" class="h-14 mx-auto">
     </div>
 
-    <!-- CARD -->
     <div class="receipt-shape shadow-2xl overflow-hidden">
 
         <div class="bg-[#1e1b7e] p-6 text-white text-center">
@@ -49,75 +45,61 @@
         <div class="p-8 space-y-6">
 
             <div>
-                <p class="text-gray-400 text-[10px] font-bold uppercase">Layanan</p>
+                <p class="text-gray-400 text-xs font-bold uppercase">Layanan</p>
                 <p id="resWallet" class="font-black text-xl">---</p>
             </div>
 
             <div>
-                <p class="text-gray-400 text-[10px] font-bold uppercase">Nomor Tujuan</p>
+                <p class="text-gray-400 text-xs font-bold uppercase">Nomor Tujuan</p>
                 <p id="resPhone" class="font-black text-xl">---</p>
             </div>
 
-            <hr class="border-dashed">
+            <hr>
 
-            <div class="space-y-3 text-sm font-semibold">
+            <div class="space-y-2 text-sm">
                 <div class="flex justify-between">
-                    <span class="text-gray-400">Nominal</span>
+                    <span>Nominal</span>
                     <span id="resNominal">Rp 0</span>
                 </div>
-
                 <div class="flex justify-between">
-                    <span class="text-gray-400">Biaya Admin</span>
+                    <span>Biaya Admin</span>
                     <span>Rp 2.000</span>
                 </div>
             </div>
 
-            <div class="bg-orange-50 p-5 rounded-[2rem] flex justify-between">
-                <span class="font-bold text-gray-900">Total Bayar</span>
-                <span id="resTotal" class="text-[#f37021] text-2xl font-black">Rp 0</span>
+            <div class="bg-orange-50 p-4 rounded-2xl flex justify-between">
+                <span class="font-bold">Total</span>
+                <span id="resTotal" class="text-[#f37021] text-xl font-black">Rp 0</span>
             </div>
 
-            <button onclick="showQRCode()"
-                class="w-full bg-[#1e1b7e] text-white py-5 rounded-2xl font-black shadow-lg">
+            <!-- BUTTON -->
+            <button onclick="bayarSekarang()"
+                class="w-full bg-[#1e1b7e] text-white py-4 rounded-2xl font-black">
                 BAYAR SEKARANG
             </button>
 
-            <button onclick="window.history.back()"
-                class="w-full text-gray-400 font-bold text-xs uppercase">
-                Kembali & Ubah
-            </button>
-
         </div>
     </div>
+
 </div>
 
 <!-- MODAL QR -->
-<div id="qrModal" class="fixed inset-0 bg-black/80 flex items-center justify-center p-6 hidden">
+<div id="qrModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center">
 
-    <div class="bg-white w-full max-w-sm rounded-[3rem] overflow-hidden shadow-2xl">
+    <div class="bg-white p-6 rounded-3xl text-center max-w-sm w-full">
 
-        <div class="bg-[#008CFF] p-6 text-white text-center">
-            <h3 class="font-black text-sm uppercase">Pembayaran via Dana</h3>
-        </div>
+        <h3 class="font-bold mb-4">Scan QR Pembayaran</h3>
 
-        <div class="p-8 text-center">
+        <img id="qrImage" class="w-48 mx-auto mb-4">
 
-            <img id="qrImage" class="w-48 h-48 mx-auto mb-4">
+        <p id="resTotalModal" class="font-black text-xl mb-4">Rp 0</p>
 
-            <p id="resTotalModal" class="font-black text-2xl mb-4">Rp 0</p>
+        <button onclick="kirimWA()"
+            class="w-full bg-green-500 text-white py-3 rounded-xl font-bold">
+            Kirim Bukti ke WhatsApp
+        </button>
 
-            <button onclick="sendWhatsApp()"
-                class="w-full bg-[#25D366] text-white py-4 rounded-2xl font-black mb-2">
-                KONFIRMASI WA
-            </button>
-
-            <button onclick="closeModal()" class="text-gray-400 text-xs">
-                Tutup
-            </button>
-
-        </div>
     </div>
-
 </div>
 
 <script>
@@ -131,13 +113,11 @@
     if(phone && nominal && wallet){
 
         document.getElementById('orderId').innerText = "NG-" + Math.floor(Math.random() * 1000000);
-        document.getElementById('resWallet').innerText = wallet + " TOP UP";
+        document.getElementById('resWallet').innerText = wallet;
         document.getElementById('resPhone').innerText = phone;
         document.getElementById('resNominal').innerText = "Rp " + nominal;
 
-        const adminFee = 2000;
-        const total = parseInt(nominal.replace(/\./g,'')) + adminFee;
-
+        const total = parseInt(nominal.replace(/\./g,'')) + 2000;
         globalTotal = total.toLocaleString('id-ID');
 
         document.getElementById('resTotal').innerText = "Rp " + globalTotal;
@@ -150,23 +130,24 @@
         window.location.href = "topup.html";
     }
 
-    function showQRCode(){
+    // 🔥 LANGSUNG TAMPIL QR
+    function bayarSekarang(){
         document.getElementById('qrModal').classList.remove('hidden');
+        document.getElementById('qrModal').classList.add('flex');
     }
 
-    function closeModal(){
-        document.getElementById('qrModal').classList.add('hidden');
-    }
-
-    function sendWhatsApp(){
+    // 🔥 LANGSUNG KE WA KIRIM BUKTI
+    function kirimWA(){
         const orderId = document.getElementById('orderId').innerText;
 
         const message =
-            `Halo Admin NextGen,%0A%0A` +
+            `Halo Admin,%0A` +
+            `Saya sudah transfer.%0A%0A` +
             `ID: ${orderId}%0A` +
             `Layanan: ${wallet}%0A` +
             `Nomor: ${phone}%0A` +
-            `Total: Rp ${globalTotal}`;
+            `Total: Rp ${globalTotal}%0A%0A` +
+            `Berikut bukti transfer saya.`;
 
         window.open(`https://wa.me/6283148583173?text=${message}`, '_blank');
     }

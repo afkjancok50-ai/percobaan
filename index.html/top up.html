@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Kami - NEXTGEN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #1C1C52;
+            --accent-orange: #FF5A0D;
+            --bg-light: #F8F9FD;
+            --text-gray: #666;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- DASHBOARD HEADER --- */
+        .dashboard-header {
+            background-color: white;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between; /* logo kiri, tombol kanan */
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 75px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Tombol kembali */
+        .btn-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 8px;
+            background: var(--primary-blue);
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-back i {
+            font-size: 0.8rem;
+        }
+
+        .btn-back:hover {
+            background: var(--accent-orange);
+        }
+
+        /* --- HIASAN DEKORATIF --- */
+        .hero-decoration {
+            background: linear-gradient(180deg, white 0%, #eef1f7 100%);
+            padding: 60px 20px 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-decoration h2 {
+            color: var(--primary-blue);
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .orange-divider {
+            height: 5px;
+            width: 70px;
+            background: var(--accent-orange);
+            display: inline-block;
+            border-radius: 3px;
+            margin-top: 15px;
+        }
+
+        /* --- MENU LAYANAN --- */
+        .container {
+            max-width: 1200px;
+            margin: -50px auto 50px; 
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(28, 28, 82, 0.1);
+            border-color: rgba(255, 90, 13, 0.2);
+        }
+
+        .icon-box {
+            min-width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .bg-blue { background-color: var(--primary-blue); }
+        .bg-orange { background-color: var(--accent-orange); }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .content h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .content p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+
+        .btn-topup {
+            margin-top: 10px;
+            padding: 8px 20px;
+            border: 1.5px solid var(--primary-blue);
+            background: transparent;
+            color: var(--primary-blue);
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .service-card:hover .btn-topup {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header { padding: 10px 20px; }
+            .logo-img { height: 55px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .hero-decoration h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="dashboard-header">
+        <div class="logo-container">
+            <img src="NEXTGENLOGO.png" alt="NEXTGEN Logo" class="logo-img">
+        </div>
+
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Beranda
+        </a>
+    </header>
+
+    <section class="hero-decoration">
+        <h2>Layanan Digital Terlengkap</h2>
+        <div class="orange-divider"></div>
+    </section>
+
+    <div class="container">
+        <div class="services-grid">
+            
+            <a href="topup-ewallet.html" class="service-card">
+                <div class="icon-box bg-blue">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <div class="content">
+                    <h3>E-WALLET</h3>
+                    <p>Top up saldo Dana, Ovo, GoPay, dan lainnya.</p>
+                    <button class="btn-topup">TOP UP</button>
+                </div>
+            </a>
+
+            <a href="topup-pulsa.html" class="service-card">
+                <div class="icon-box bg-orange">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="content">
+                    <h3>PULSA</h3>
+                    <p>Tersedia untuk semua operator Indonesia.</p>
+                    <button class="btn-topup">TOP UP</button>
+                </div>
+            </a>
+
+            <a href="paket-data.html" class="service-card">
+                <div class="icon-box bg-blue">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <div class="content">
+                    <h3>PAKET DATA</h3>
+                    <p>Kuota internet termurah dan terlengkap.</p>
+                    <button class="btn-topup">TOP UP</button>
+                </div>
+            </a>
+
+            <a href="token-listrik.html" class="service-card">
+                <div class="icon-box bg-orange">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="content">
+                    <h3>TOKEN LISTRIK</h3>
+                    <p>Isi ulang daya PLN prabayar 24 Jam.</p>
+                    <button class="btn-topup">TOP UP</button>
+                </div>
+            </a>
+
+            <a href="voucher-game.html" class="service-card">
+                <div class="icon-box bg-blue">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="content">
+                    <h3>VOUCHER GAME</h3>
+                    <p>Top up MLBB, Free Fire, PUBG, dan lainnya.</p>
+                    <button class="btn-topup">TOP UP</button>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+
+</body>
+</html>

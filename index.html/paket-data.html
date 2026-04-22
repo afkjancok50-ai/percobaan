@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paket Data - NEXTGEN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #F8F9FD; min-height: 100vh; }
+        .glass-card { background: white; border-radius: 2.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08); }
+        
+        /* Gaya Logo Provider */
+        .provider-img { 
+            height: 45px; 
+            width: auto;
+            filter: grayscale(1); 
+            opacity: 0.2; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            object-fit: contain;
+        }
+        
+        .provider-img.active { 
+            filter: grayscale(0); 
+            opacity: 1; 
+            transform: scale(1.8); 
+            z-index: 20;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+        }
+
+        .pkg-card { border: 2px solid #f3f4f6; transition: 0.3s; cursor: pointer; border-radius: 1.5rem; }
+        .pkg-card:hover { border-color: #f37021; background-color: #fffaf7; }
+        .selected-pkg { border-color: #f37021 !important; background-color: #fffaf7 !important; }
+        
+        #packageSection { display: none; }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade { animation: slideUp 0.4s ease-out forwards; }
+    </style>
+</head>
+<body class="py-10">
+
+    <main class="max-w-md mx-auto px-4">
+        <div class="mb-6">
+            <a href="top up.html" class="inline-flex items-center gap-2 text-[#1e1b7e] font-bold text-sm hover:text-[#f37021] transition-colors">
+                <i class="fas fa-arrow-left"></i> Kembali ke Layanan
+            </a>
+        </div>
+
+        <div class="text-center mb-10">
+            <img src="NEXTGENLOGO.png" alt="Nextgen Logo" class="mx-auto h-16 w-auto mb-2">
+            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em]">Premium Digital Store</p>
+        </div>
+
+        <div class="glass-card p-8">
+            <div class="mb-8">
+                <label class="block text-[#1e1b7e] font-bold text-[10px] uppercase tracking-widest mb-3 opacity-60">Masukkan Nomor HP</label>
+                <div class="relative">
+                    <span class="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-lg">+62</span>
+                    <input id="phoneInput" type="text" oninput="handleDetection()" placeholder="812345678" class="w-full pl-16 pr-6 py-5 rounded-[1.5rem] border-2 border-gray-100 focus:border-[#f37021] outline-none font-black text-xl tracking-widest transition-all">
+                </div>
+
+                <div class="flex justify-around items-center mt-14 bg-gray-50/50 p-10 rounded-[1.5rem] border border-gray-100">
+                    <img src="telkomsel.png" class="provider-img" id="logo-telkomsel">
+                    <img src="indosat.png" class="provider-img" id="logo-indosat">
+                    <img src="xl.png" class="provider-img" id="logo-xl">
+                    <img src="axis.png" class="provider-img" id="logo-axis">
+                    <img src="tree.png" class="provider-img" id="logo-tri">
+                </div>
+            </div>
+
+            <div id="packageSection" class="animate-fade">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="h-1 w-6 bg-[#f37021] rounded-full"></div>
+                    <h3 class="text-[#1e1b7e] font-black text-xs uppercase tracking-widest">Paket <span id="targetProvider" class="text-[#f37021]"></span> Tersedia</h3>
+                </div>
+                
+                <div id="packageContainer" class="grid gap-4"></div>
+
+                <button onclick="checkout()" class="w-full mt-10 bg-[#1e1b7e] text-white py-6 rounded-[1.5rem] font-black uppercase tracking-[0.2em] shadow-xl shadow-blue-100 hover:bg-blue-900 transition-all active:scale-95 flex items-center justify-center gap-3">
+                    BELI SEKARANG <i class="fas fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let selectedData = { name: "", price: "" };
+        let activeProvider = "";
+
+        const databasePaket = {
+            telkomsel: [
+                { name: "Internet OMG! 5GB", price: "36.000", desc: "30 Hari - Kuota Utama 24 Jam" },
+                { name: "Internet OMG! 15GB", price: "98.000", desc: "30 Hari - Full Nasional" }
+            ],
+            axis: [
+                { name: "5GB", price: "13.970", desc: "3 Hari - Promo Bronet 24Jam" },
+                { name: "10GB", price: "33.450", desc: "10 Hari - Kuota Utama + Chat" },
+                { name: "45GB", price: "96.970", desc: "30 Hari - 30GB Utama + 15GB Lokal" },
+                { name: "Unlimited", price: "25.900", desc: "1 Hari - AIGO Unlimited 24 Jam" }
+            ],
+            tri: [
+                { name: "6GB", price: "10.950", desc: "2 Hari - Happy Kuota 24 Jam" },
+                { name: "12GB", price: "19.990", desc: "3 Hari - 9GB Utama + 3GB 5G" },
+                { name: "Ramadan 20GB", price: "19.990", desc: "3 Hari - Kuota Berkah" }
+            ],
+            indosat: [
+                { name: "Freedom 3GB", price: "15.500", desc: "30 Hari - Full Kuota Utama" }
+            ],
+            xl: [
+                { name: "Xtra Mini 5GB", price: "14.500", desc: "7 Hari - Nasional" }
+            ]
+        };
+
+        const prefixMap = {
+            '811': 'telkomsel', '812': 'telkomsel', '813': 'telkomsel', '821': 'telkomsel',
+            '831': 'axis', '838': 'axis',
+            '895': 'tri', '896': 'tri', '897': 'tri', '898': 'tri',
+            '856': 'indosat', '857': 'indosat', '858': 'indosat',
+            '817': 'xl', '818': 'xl', '819': 'xl', '877': 'xl'
+        };
+
+        function handleDetection() {
+            let input = document.getElementById('phoneInput').value;
+            if (input.startsWith('0')) { input = input.substring(1); }
+
+            const section = document.getElementById('packageSection');
+            const container = document.getElementById('packageContainer');
+            
+            document.querySelectorAll('.provider-img').forEach(img => img.classList.remove('active'));
+
+            if (input.length >= 3) {
+                const prefix = input.substring(0, 3);
+                const provider = prefixMap[prefix];
+
+                if (provider) {
+                    activeProvider = provider;
+                    document.getElementById(`logo-${provider}`).classList.add('active');
+                    document.getElementById('targetProvider').innerText = provider.toUpperCase();
+                    section.style.display = 'block';
+
+                    let cards = "";
+                    (databasePaket[provider] || []).forEach(pkt => {
+                        cards += `
+                            <div onclick="selectPkg('${pkt.name}', '${pkt.price}', this)" class="pkg-card p-5 flex justify-between items-center bg-white shadow-sm border-2">
+                                <div>
+                                    <p class="font-black text-[#1e1b7e] text-lg">${pkt.name}</p>
+                                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tight">${pkt.desc}</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-black text-[#f37021] text-lg">Rp ${pkt.price}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = cards;
+                } else {
+                    section.style.display = 'none';
+                }
+            } else {
+                section.style.display = 'none';
+            }
+        }
+
+        function selectPkg(name, price, el) {
+            selectedData = { name, price };
+            document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected-pkg'));
+            el.classList.add('selected-pkg');
+        }
+
+        function checkout() {
+            const phone = document.getElementById('phoneInput').value;
+            if (!selectedData.name) return alert("Silahkan pilih paket data terlebih dahulu!");
+            let cleanPhone = phone.startsWith('0') ? phone : '0' + phone;
+            window.location.href = `order.html?phone=${cleanPhone}&nominal=${selectedData.price}&wallet=${activeProvider.toUpperCase()} - ${selectedData.name}`;
+        }
+    </script>
+</body>
+</html>

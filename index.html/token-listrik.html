@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Listrik - NEXTGEN</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F3F4F6;
+            color: #1e1b7e;
+        }
+        .card {
+            background: white;
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .input {
+            width: 100%;
+            border: 2px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+        .input:focus {
+            border-color: #1e1b7e;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-6">
+
+<div class="w-full max-w-md">
+
+    <!-- LOGO (DIPERBESAR) -->
+    <div class="text-center mb-6">
+        <img src="NEXTGENLOGO.png" class="h-20 mx-auto">
+    </div>
+
+    <!-- CARD -->
+    <div class="card p-6 space-y-5">
+
+        <h2 class="text-xl font-black text-center">Token Listrik PLN</h2>
+
+        <form action="order.html" method="GET" class="space-y-4">
+
+            <!-- NOMOR -->
+            <div>
+                <label class="text-sm font-bold text-gray-500">Nomor Meter / ID Pelanggan</label>
+                <input 
+                    type="number" 
+                    name="phone" 
+                    required 
+                    class="input"
+                    placeholder="Contoh: 1234567890">
+            </div>
+
+            <!-- NOMINAL -->
+            <div>
+                <label class="text-sm font-bold text-gray-500">Pilih Nominal</label>
+                <select name="nominal" required class="input">
+                    <option value="">-- Pilih Nominal --</option>
+                    <option value="20.000">20.000</option>
+                    <option value="50.000">50.000</option>
+                    <option value="100.000">100.000</option>
+                    <option value="200.000">200.000</option>
+                </select>
+            </div>
+
+            <!-- HIDDEN -->
+            <input type="hidden" name="wallet" value="TOKEN LISTRIK">
+
+            <!-- BUTTON LANJUT -->
+            <button type="submit"
+                class="w-full bg-[#1e1b7e] text-white py-4 rounded-2xl font-black uppercase shadow-lg active:scale-95 transition-all">
+                Lanjut ke Pembayaran
+            </button>
+
+        </form>
+
+        <!-- TOMBOL KEMBALI KE LAYANAN -->
+        <a href="top up.html"
+            class="block text-center w-full border-2 border-[#1e1b7e] text-[#1e1b7e] py-3 rounded-2xl font-bold uppercase text-sm hover:bg-[#1e1b7e] hover:text-white transition-all">
+            Kembali ke Layanan
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

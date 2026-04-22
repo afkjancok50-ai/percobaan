@@ -127,10 +127,13 @@
     const wallet = params.get('wallet');
 
     let globalTotal = "";
+    let orderIdGlobal = "";
 
     if(phone && nominal && wallet){
 
-        document.getElementById('orderId').innerText = "NG-" + Math.floor(Math.random() * 1000000);
+        orderIdGlobal = "NG-" + Math.floor(Math.random() * 1000000);
+
+        document.getElementById('orderId').innerText = orderIdGlobal;
         document.getElementById('resWallet').innerText = wallet + " TOP UP";
         document.getElementById('resPhone').innerText = phone;
         document.getElementById('resNominal').innerText = "Rp " + nominal;
@@ -143,6 +146,7 @@
         document.getElementById('resTotal').innerText = "Rp " + globalTotal;
         document.getElementById('resTotalModal').innerText = "Rp " + globalTotal;
 
+        // 🔥 QR ke nomor kamu
         document.getElementById('qrImage').src =
             `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=083148583173`;
 
@@ -150,23 +154,29 @@
         window.location.href = "topup.html";
     }
 
+    // 🔥 FIX: tombol langsung munculin QR
     function showQRCode(){
-        document.getElementById('qrModal').classList.remove('hidden');
+        const modal = document.getElementById('qrModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('active');
     }
 
     function closeModal(){
-        document.getElementById('qrModal').classList.add('hidden');
+        const modal = document.getElementById('qrModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('active');
     }
 
     function sendWhatsApp(){
-        const orderId = document.getElementById('orderId').innerText;
 
         const message =
             `Halo Admin NextGen,%0A%0A` +
-            `ID: ${orderId}%0A` +
-            `Layanan: ${wallet}%0A` +
-            `Nomor: ${phone}%0A` +
-            `Total: Rp ${globalTotal}`;
+            `Saya sudah melakukan pembayaran:%0A%0A` +
+            `🧾 ID Order: ${orderIdGlobal}%0A` +
+            `📦 Layanan: ${wallet}%0A` +
+            `📱 Nomor Tujuan: ${phone}%0A` +
+            `💰 Total Transfer: Rp ${globalTotal}%0A%0A` +
+            `Saya akan kirim bukti transfer dengan nominal yang *SAMA PERSIS* seperti di atas (tidak kurang / tidak lebih).`;
 
         window.open(`https://wa.me/6283148583173?text=${message}`, '_blank');
     }

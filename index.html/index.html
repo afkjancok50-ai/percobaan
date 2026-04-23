@@ -13,12 +13,11 @@
             scroll-behavior: smooth; 
         }
 
-        /* Container Motif Diperbesar */
         .hero-image-container {
             position: absolute;
             top: 0;
-            right: -5%; /* Sedikit keluar layar agar bisa lebih besar */
-            width: 60%;  /* Diperbesar dari 50% ke 60% */
+            right: -5%;
+            width: 60%;
             height: 100%;
             display: flex;
             align-items: center;
@@ -27,13 +26,13 @@
         }
 
         .motif-img {
-            height: 110%; /* Diperbesar melewati batas container */
+            height: 110%;
             width: auto;
             object-fit: contain;
             object-position: right center;
-            opacity: 1; /* Full opacity agar lebih jelas */
-            filter: drop-shadow(-20px 20px 50px rgba(0,0,0,0.1)); /* Tambah bayangan halus */
-            transform: rotate(-2deg); /* Sedikit kemiringan artistik */
+            opacity: 1;
+            filter: drop-shadow(-20px 20px 50px rgba(0,0,0,0.1));
+            transform: rotate(-2deg);
         }
 
         .z-content { position: relative; z-index: 10; }
@@ -61,7 +60,11 @@
         <div class="hidden md:flex space-x-10 items-center font-bold text-xs text-[#1e1b7e]">
             <a href="#" class="nav-link hover:text-[#f37021] uppercase transition tracking-wider">Beranda</a>
             <a href="cara kerja.html" class="nav-link hover:text-[#f37021] uppercase transition tracking-wider">Cara Kerja</a>
-            <a href="#" class="bg-[#1e1b7e] text-white px-8 py-3 rounded-lg uppercase hover:bg-blue-900 transition shadow-lg transform hover:scale-105 active:scale-95">
+
+            <!-- 🔥 HUBUNGI KAMI WA -->
+            <a href="https://wa.me/6283148583173?text=Halo%20Admin%20NextGen%2C%0ASaya%20ingin%20bertanya%20tentang%20layanan%20Top%20Up.%0ATerima%20kasih."
+               target="_blank"
+               class="bg-[#1e1b7e] text-white px-8 py-3 rounded-lg uppercase hover:bg-blue-900 transition shadow-lg transform hover:scale-105 active:scale-95">
                 Hubungi Kami
             </a>
         </div>

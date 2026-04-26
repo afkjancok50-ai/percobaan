@@ -1,49 +1,192 @@
-// --- GANTI FUNGSI LAMA DENGAN INI ---
-async function prosesTransaksiKeDigiFlazz() {
-    // Tampilkan loading sederhana
-    const btn = document.querySelector('button[onclick="showQRCode()"]');
-    btn.innerText = "SEDANG MEMPROSES...";
-    btn.disabled = true;
-
-    const orderData = {
-        orderId: orderIdGlobal,
-        phone: phone,
-        sku: params.get('sku') // Pastikan halaman sebelumnya mengirim parameter SKU
-    };
-
-    try {
-        const response = await fetch('proses_order.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(orderData)
-        });
-
-        const result = await response.json();
-
-        if (result.data && result.data.status === 'Pending' || result.data.status === 'Success') {
-            alert("Pesanan Berhasil Dikirim ke Sistem!");
-            sendWhatsApp(); // Tetap kirim WA sebagai arsip admin
-        } else {
-            alert("Gagal: " + (result.data.message || "Terjadi kesalahan sistem"));
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pesanan - NEXTGEN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #F3F4F6; }
+        .receipt-shape { position: relative; background: white; border-radius: 2.5rem; }
+        .receipt-shape::after {
+            content: ""; position: absolute; bottom: -10px; left: 0; width: 100%; height: 20px;
+            background-image: radial-gradient(circle, white 70%, transparent 75%);
+            background-size: 20px 20px; background-position: 0 -10px;
         }
-    } catch (error) {
-        console.error("Error:", error);
-        alert("Gagal terhubung ke server transaksi.");
-    } finally {
-        btn.innerText = "BAYAR SEKARANG";
-        btn.disabled = false;
+        .animate-pop { animation: pop 0.4s cubic-bezier(0.26, 0.53, 0.74, 1.48); }
+        @keyframes pop {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        #qrModal { display: none; }
+        #qrModal.active { display: flex; }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-6 text-[#1e1b7e]">
+
+<div id="mainContent" class="w-full max-w-md animate-pop">
+    <div class="text-center mb-8">
+        <img src="NEXTGENLOGO.png" alt="Logo" class="h-14 mx-auto">
+    </div>
+
+    <div class="receipt-shape shadow-2xl overflow-hidden">
+        <div class="bg-[#1e1b7e] p-6 text-white text-center">
+            <h2 class="text-xl font-black uppercase">Ringkasan Order</h2>
+            <p id="orderId" class="text-[10px] opacity-60 tracking-[0.3em] mt-1 font-bold"></p>
+        </div>
+
+        <div class="p-8 space-y-6">
+            <div>
+                <p class="text-gray-400 text-[10px] font-bold uppercase">Layanan</p>
+                <p id="resWallet" class="font-black text-xl">---</p>
+            </div>
+
+            <div>
+                <p class="text-gray-400 text-[10px] font-bold uppercase">Nomor Tujuan</p>
+                <p id="resPhone" class="font-black text-xl">---</p>
+            </div>
+
+            <hr class="border-dashed">
+
+            <div class="space-y-3 text-sm font-semibold">
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Nominal</span>
+                    <span id="resNominal">Rp 0</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Biaya Admin</span>
+                    <span>Rp 2.000</span>
+                </div>
+            </div>
+
+            <div class="bg-orange-50 p-5 rounded-[2rem] flex justify-between">
+                <span class="font-bold text-gray-900">Total Bayar</span>
+                <span id="resTotal" class="text-[#f37021] text-2xl font-black">Rp 0</span>
+            </div>
+
+            <button id="btnBayar" onclick="prosesTransaksiKeDigiFlazz()"
+                class="w-full bg-[#1e1b7e] text-white py-5 rounded-2xl font-black shadow-lg uppercase">
+                Bayar & Proses Sekarang
+            </button>
+
+            <button onclick="window.history.back()"
+                class="w-full text-gray-400 font-bold text-xs uppercase">
+                Kembali & Ubah
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="qrModal" class="fixed inset-0 bg-black/80 flex items-center justify-center p-6 hidden">
+    <div class="bg-white w-full max-w-sm rounded-[3rem] overflow-hidden shadow-2xl">
+        <div class="bg-[#008CFF] p-6 text-white text-center">
+            <h3 class="font-black text-sm uppercase">Pembayaran via QRIS</h3>
+        </div>
+        <div class="p-8 text-center">
+            <img id="qrImage" src="qris.jpg" class="w-56 h-56 mx-auto mb-4 object-contain rounded-xl shadow">
+            <p id="resTotalModal" class="font-black text-2xl mb-4">Rp 0</p>
+            <button onclick="sendWhatsApp()" class="w-full bg-[#25D366] text-white py-4 rounded-2xl font-black mb-2">
+                KONFIRMASI WA
+            </button>
+            <button onclick="closeModal()" class="text-gray-400 text-xs">Tutup</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const phone = params.get('phone');
+    const nominal = params.get('nominal');
+    const wallet = params.get('wallet');
+    const sku = params.get('sku'); // Penting untuk DigiFlazz
+
+    let globalTotal = "";
+    let orderIdGlobal = "";
+
+    if(phone && nominal && wallet){
+        orderIdGlobal = "NG-" + Math.floor(Math.random() * 1000000);
+        document.getElementById('orderId').innerText = orderIdGlobal;
+        document.getElementById('resWallet').innerText = wallet + " TOP UP";
+        document.getElementById('resPhone').innerText = phone;
+        document.getElementById('resNominal').innerText = "Rp " + nominal;
+
+        const adminFee = 2000;
+        const total = parseInt(nominal.replace(/\./g,'')) + adminFee;
+        globalTotal = total.toLocaleString('id-ID');
+
+        document.getElementById('resTotal').innerText = "Rp " + globalTotal;
+        document.getElementById('resTotalModal').innerText = "Rp " + globalTotal;
+    } else {
+        window.location.href = "topup.html";
     }
-}
 
-function sendWhatsApp() {
-    const message =
-        `Halo Admin NextGen,%0A%0A` +
-        `Saya sudah membayar & transaksi diproses:%0A%0A` +
-        `🧾 ID Order: ${orderIdGlobal}%0A` +
-        `📦 Layanan: ${wallet}%0A` +
-        `📱 Nomor Tujuan: ${phone}%0A` +
-        `💰 Total: Rp ${globalTotal}%0A%0A` +
-        `Mohon dicek kembali.`;
+    async function prosesTransaksiKeDigiFlazz() {
+        const btn = document.getElementById('btnBayar');
+        btn.innerText = "SEDANG MEMPROSES...";
+        btn.disabled = true;
 
-    window.open(`https://wa.me/+6281324038810?text=${message}`, '_blank');
-}
+        const orderData = {
+            orderId: orderIdGlobal,
+            phone: phone,
+            sku: sku
+        };
+
+        try {
+            // Catatan: Ini hanya akan jalan jika file PHP ada di server yang sama
+            const response = await fetch('proses_order.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            });
+
+            const result = await response.json();
+
+            // Cek jika transaksi berhasil atau pending di sistem DigiFlazz
+            if (result.data && (result.data.status === 'Pending' || result.data.status === 'Success')) {
+                alert("Pesanan Anda sedang diproses oleh sistem!");
+                showQRCode(); // Munculkan QRIS untuk pembayaran
+            } else {
+                alert("Gagal memproses: " + (result.data.message || "Gagal menghubungi provider"));
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            // Jika di localhost/GitHub Pages pasti error karena PHP tidak ada
+            alert("Sistem API butuh hosting PHP untuk berjalan. Menampilkan QRIS manual...");
+            showQRCode(); 
+        } finally {
+            btn.innerText = "BAYAR & PROSES SEKARANG";
+            btn.disabled = false;
+        }
+    }
+
+    function showQRCode(){
+        const modal = document.getElementById('qrModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('active');
+    }
+
+    function closeModal(){
+        const modal = document.getElementById('qrModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('active');
+    }
+
+    function sendWhatsApp(){
+        const message =
+            `Halo Admin NextGen,%0A%0A` +
+            `Saya sudah melakukan pembayaran:%0A%0A` +
+            `🧾 ID Order: ${orderIdGlobal}%0A` +
+            `📦 Layanan: ${wallet}%0A` +
+            `📱 Nomor Tujuan: ${phone}%0A` +
+            `💰 Total Transfer: Rp ${globalTotal}%0A%0A` +
+            `Mohon segera diproses.`;
+
+        window.open(`https://wa.me/+6281324038810?text=${message}`, '_blank');
+    }
+</script>
+
+</body>
+</html>

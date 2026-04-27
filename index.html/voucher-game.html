@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #0f172a; /* Dark theme untuk vibes gaming */
+            background: #0f172a; 
             color: white;
         }
         .step-card {
@@ -54,9 +54,18 @@
             font-size: 14px;
         }
         input::placeholder { color: #64748b; }
+        
+        /* Memastikan gambar game proporsional */
+        .game-icon {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin: 0 auto 0.5rem;
+        }
     </style>
 </head>
-<body class="pb-20">
+<body class="pb-24">
 
 <div class="max-w-md mx-auto px-4 pt-10">
     
@@ -64,7 +73,7 @@
         <a href="top up.html" class="text-gray-400 hover:text-white transition-colors">
             <i class="fas fa-arrow-left text-xl"></i>
         </a>
-        <img src="NEXTGENLOGO.png" class="h-10">
+        <img src="NEXTGENLOGO.png" class="h-10" alt="Nextgen Logo">
         <div class="w-6"></div>
     </div>
 
@@ -73,20 +82,20 @@
         <div class="step-card p-5 mb-6">
             <div class="flex items-center gap-3 mb-4">
                 <div class="step-number">1</div>
-                <h3 class="font-bold">Pilih Game</h3>
+                <h3 class="font-bold text-slate-200">Pilih Game</h3>
             </div>
             <div class="grid grid-cols-3 gap-3">
                 <div class="game-card p-2 rounded-2xl text-center cursor-pointer" onclick="selectGame(this, 'MOBILE LEGENDS')">
-                    <img src="https://img.utdstc.com/icon/411/506/4115064c58579f1503616e4566c72802d2874f67c3b0185936495674c3e803c5:200" class="w-16 h-16 mx-auto rounded-xl mb-2 object-cover">
-                    <p class="text-[10px] font-bold uppercase">MLBB</p>
+                    <img src="ml.png" class="game-icon" alt="MLBB">
+                    <p class="text-[10px] font-bold uppercase tracking-wider">MLBB</p>
                 </div>
                 <div class="game-card p-2 rounded-2xl text-center cursor-pointer" onclick="selectGame(this, 'FREE FIRE')">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0Y6P2R74Cid8W6h0-Y4yP5_a6pIqO6y_V_A&s" class="w-16 h-16 mx-auto rounded-xl mb-2 object-cover">
-                    <p class="text-[10px] font-bold uppercase">Free Fire</p>
+                    <img src="ff.png" class="game-icon" alt="Free Fire">
+                    <p class="text-[10px] font-bold uppercase tracking-wider">Free Fire</p>
                 </div>
                 <div class="game-card p-2 rounded-2xl text-center cursor-pointer" onclick="selectGame(this, 'PUBG MOBILE')">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7_eR1iH5Vl96k_tKz6H8GzC6e_1E-iA_W-Q&s" class="w-16 h-16 mx-auto rounded-xl mb-2 object-cover">
-                    <p class="text-[10px] font-bold uppercase">PUBG</p>
+                    <img src="pubg.png" class="game-icon" alt="PUBG">
+                    <p class="text-[10px] font-bold uppercase tracking-wider">PUBG</p>
                 </div>
             </div>
             <input type="hidden" name="wallet" id="gameInput" required>
@@ -95,48 +104,50 @@
         <div class="step-card p-5 mb-6">
             <div class="flex items-center gap-3 mb-4">
                 <div class="step-number">2</div>
-                <h3 class="font-bold">Lengkapi Data</h3>
+                <h3 class="font-bold text-slate-200">Lengkapi Data</h3>
             </div>
             <div class="space-y-3">
                 <input type="text" name="phone" required 
-                    class="w-full bg-[#0f172a] border border-slate-700 p-4 rounded-xl outline-none focus:border-indigo-500 transition-all font-bold text-sm" 
+                    class="w-full bg-[#1e293b] border border-slate-700 p-4 rounded-xl outline-none focus:border-indigo-500 transition-all font-bold text-sm text-white" 
                     placeholder="Masukkan User ID (Server)">
-                <p class="text-[10px] text-gray-500 italic px-1">*Contoh: 12345678 (1234)</p>
+                <p class="text-[10px] text-slate-500 italic px-1 leading-relaxed">
+                    *Contoh: 12345678 (1234). Pastikan ID benar untuk menghindari kegagalan transaksi.
+                </p>
             </div>
         </div>
 
         <div class="step-card p-5 mb-8">
             <div class="flex items-center gap-3 mb-4">
                 <div class="step-number">3</div>
-                <h3 class="font-bold">Pilih Nominal</h3>
+                <h3 class="font-bold text-slate-200">Pilih Nominal</h3>
             </div>
-            <div class="grid grid-cols-2 gap-3">
+            <div id="nominalContainer" class="grid grid-cols-2 gap-3">
                 <div class="nominal-item p-4 rounded-xl" onclick="setNominal(this, '15.000', '50 Diamonds')">
                     <div class="text-indigo-400 mb-1"><i class="fas fa-gem text-xs"></i></div>
                     <p class="font-bold text-sm">50 Diamonds</p>
-                    <p class="text-[11px] text-gray-400 mt-1">Rp 15.000</p>
+                    <p class="text-[11px] text-slate-400 mt-1">Rp 15.000</p>
                 </div>
                 <div class="nominal-item p-4 rounded-xl" onclick="setNominal(this, '30.000', '100 Diamonds')">
                     <div class="text-indigo-400 mb-1"><i class="fas fa-gem text-xs"></i></div>
                     <p class="font-bold text-sm">100 Diamonds</p>
-                    <p class="text-[11px] text-gray-400 mt-1">Rp 30.000</p>
+                    <p class="text-[11px] text-slate-400 mt-1">Rp 30.000</p>
                 </div>
                 <div class="nominal-item p-4 rounded-xl" onclick="setNominal(this, '75.000', '250 Diamonds')">
                     <div class="text-indigo-400 mb-1"><i class="fas fa-gem text-xs"></i></div>
                     <p class="font-bold text-sm">250 Diamonds</p>
-                    <p class="text-[11px] text-gray-400 mt-1">Rp 75.000</p>
+                    <p class="text-[11px] text-slate-400 mt-1">Rp 75.000</p>
                 </div>
                 <div class="nominal-item p-4 rounded-xl" onclick="setNominal(this, '150.000', '500 Diamonds')">
                     <div class="text-indigo-400 mb-1"><i class="fas fa-gem text-xs"></i></div>
                     <p class="font-bold text-sm">500 Diamonds</p>
-                    <p class="text-[11px] text-gray-400 mt-1">Rp 150.000</p>
+                    <p class="text-[11px] text-slate-400 mt-1">Rp 150.000</p>
                 </div>
             </div>
             <input type="hidden" name="nominal" id="nominalInput">
         </div>
 
-        <div class="fixed bottom-0 left-0 right-0 p-4 bg-slate-900 border-t border-slate-800 flex justify-center">
-            <button type="submit" class="w-full max-w-md bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-xl font-bold uppercase shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
+        <div class="fixed bottom-0 left-0 right-0 p-4 bg-slate-900/90 backdrop-blur-md border-t border-slate-800 flex justify-center z-50">
+            <button type="submit" class="w-full max-w-md bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-xl font-bold uppercase tracking-widest shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
                 Beli Sekarang
             </button>
         </div>
@@ -149,12 +160,14 @@
         document.querySelectorAll('.game-card').forEach(c => c.classList.remove('active'));
         el.classList.add('active');
         document.getElementById('gameInput').value = gameName;
+        
+        // Opsional: Kamu bisa menambahkan logika di sini untuk mengubah daftar nominal 
+        // berdasarkan game yang dipilih agar lebih akurat (Diamond vs UC).
     }
 
     function setNominal(el, price, label) {
         document.querySelectorAll('.nominal-item').forEach(i => i.classList.remove('active'));
         el.classList.add('active');
-        // Kita kirim format harga ke order.html
         document.getElementById('nominalInput').value = price;
     }
 

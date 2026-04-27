@@ -6,93 +6,184 @@
     <title>Token Listrik - NEXTGEN</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #F3F4F6;
-            color: #1e1b7e;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
         }
-        .card {
+        .header-gradient {
+            background: linear-gradient(135deg, #1e1b7e 0%, #3b82f6 100%);
+        }
+        .card-main {
             background: white;
-            border-radius: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 2rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
         }
-        .input {
-            width: 100%;
-            border: 2px solid #e5e7eb;
-            border-radius: 1rem;
-            padding: 14px;
-            outline: none;
-            transition: 0.2s;
+        .nominal-card {
+            border: 2px solid #f1f5f9;
+            transition: all 0.2s ease;
+            cursor: pointer;
         }
-        .input:focus {
+        .nominal-card:hover {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+        .nominal-card.active {
             border-color: #1e1b7e;
+            background-color: #eff6ff;
+            position: relative;
+        }
+        .nominal-card.active::after {
+            content: "\f058";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            color: #1e1b7e;
+            font-size: 0.8rem;
+        }
+        input:focus {
+            ring: 2px;
+            ring-color: #1e1b7e;
         }
     </style>
 </head>
 
-<body class="min-h-screen flex items-center justify-center p-6">
+<body class="bg-gray-50 pb-10">
 
-<div class="w-full max-w-md">
-
-    <!-- LOGO (DIPERBESAR) -->
-    <div class="text-center mb-6">
-        <img src="NEXTGENLOGO.png" class="h-20 mx-auto">
+    <div class="header-gradient pt-10 pb-24 px-6">
+        <div class="max-w-md mx-auto flex items-center justify-between">
+            <a href="top up.html" class="text-white opacity-80 hover:opacity-100">
+                <i class="fas fa-chevron-left text-xl"></i>
+            </a>
+            <img src="NEXTGENLOGO.png" class="h-8 brightness-0 invert">
+            <div class="w-6"></div> </div>
+        <div class="max-w-md mx-auto mt-6">
+            <h1 class="text-white text-2xl font-extrabold">PLN Prabayar</h1>
+            <p class="text-blue-100 text-sm opacity-80">Isi token listrik jadi lebih mudah</p>
+        </div>
     </div>
 
-    <!-- CARD -->
-    <div class="card p-6 space-y-5">
+    <div class="max-w-md mx-auto px-4 -mt-16">
+        <form action="order.html" method="GET" onsubmit="return validateForm()">
+            
+            <div class="card-main p-6 space-y-6">
+                
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">ID Pelanggan / No. Meter</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400">
+                            <i class="fas fa-bolt"></i>
+                        </span>
+                        <input 
+                            type="number" 
+                            name="phone" 
+                            id="customerID"
+                            required 
+                            class="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl py-4 pl-12 pr-4 focus:border-[#1e1b7e] focus:bg-white outline-none transition-all font-bold text-lg"
+                            placeholder="Contoh: 140328xxxx">
+                    </div>
+                    <div class="flex items-center gap-2 px-2">
+                        <i class="fas fa-info-circle text-[10px] text-blue-500"></i>
+                        <p class="text-[10px] text-gray-400">Pastikan ID Pelanggan terdiri dari 11-12 digit.</p>
+                    </div>
+                </div>
 
-        <h2 class="text-xl font-black text-center">Token Listrik PLN</h2>
+                <hr class="border-gray-50">
 
-        <form action="order.html" method="GET" class="space-y-4">
+                <div class="space-y-4">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Pilih Nominal Token</label>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="nominal-card p-4 rounded-2xl text-center" onclick="selectNominal(this, '20.000')">
+                            <p class="text-xs text-gray-400 font-semibold mb-1">PLN</p>
+                            <p class="text-lg font-black text-[#1e1b7e]">20.000</p>
+                        </div>
 
-            <!-- NOMOR -->
-            <div>
-                <label class="text-sm font-bold text-gray-500">Nomor Meter / ID Pelanggan</label>
-                <input 
-                    type="number" 
-                    name="phone" 
-                    required 
-                    class="input"
-                    placeholder="Contoh: 1234567890">
+                        <div class="nominal-card p-4 rounded-2xl text-center" onclick="selectNominal(this, '50.000')">
+                            <p class="text-xs text-gray-400 font-semibold mb-1">PLN</p>
+                            <p class="text-lg font-black text-[#1e1b7e]">50.000</p>
+                        </div>
+
+                        <div class="nominal-card p-4 rounded-2xl text-center" onclick="selectNominal(this, '100.000')">
+                            <p class="text-xs text-gray-400 font-semibold mb-1">PLN</p>
+                            <p class="text-lg font-black text-[#1e1b7e]">100.000</p>
+                        </div>
+
+                        <div class="nominal-card p-4 rounded-2xl text-center" onclick="selectNominal(this, '200.000')">
+                            <p class="text-xs text-gray-400 font-semibold mb-1">PLN</p>
+                            <p class="text-lg font-black text-[#1e1b7e]">200.000</p>
+                        </div>
+
+                        <div class="nominal-card p-4 rounded-2xl text-center" onclick="selectNominal(this, '500.000')">
+                            <p class="text-xs text-gray-400 font-semibold mb-1">PLN</p>
+                            <p class="text-lg font-black text-[#1e1b7e]">500.000</p>
+                        </div>
+
+                        <div class="nominal-card p-4 rounded-2xl text-center" onclick="selectNominal(this, '1.000.000')">
+                            <p class="text-xs text-gray-400 font-semibold mb-1">PLN</p>
+                            <p class="text-lg font-black text-[#1e1b7e]">1 Juta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="nominal" id="selectedNominal">
+                <input type="hidden" name="wallet" value="TOKEN LISTRIK">
+
+                <button type="submit"
+                    class="w-full bg-[#1e1b7e] text-white py-4 rounded-2xl font-black uppercase shadow-xl shadow-blue-200 active:scale-95 transition-all mt-4 hover:bg-blue-800">
+                    Beli Sekarang
+                </button>
+
             </div>
-
-            <!-- NOMINAL -->
-            <div>
-                <label class="text-sm font-bold text-gray-500">Pilih Nominal</label>
-                <select name="nominal" required class="input">
-                    <option value="">-- Pilih Nominal --</option>
-                    <option value="20.000">20.000</option>
-                    <option value="50.000">50.000</option>
-                    <option value="100.000">100.000</option>
-                    <option value="200.000">200.000</option>
-                </select>
-            </div>
-
-            <!-- HIDDEN -->
-            <input type="hidden" name="wallet" value="TOKEN LISTRIK">
-
-            <!-- BUTTON LANJUT -->
-            <button type="submit"
-                class="w-full bg-[#1e1b7e] text-white py-4 rounded-2xl font-black uppercase shadow-lg active:scale-95 transition-all">
-                Lanjut ke Pembayaran
-            </button>
-
         </form>
 
-        <!-- TOMBOL KEMBALI KE LAYANAN -->
-        <a href="top up.html"
-            class="block text-center w-full border-2 border-[#1e1b7e] text-[#1e1b7e] py-3 rounded-2xl font-bold uppercase text-sm hover:bg-[#1e1b7e] hover:text-white transition-all">
-            Kembali ke Layanan
-        </a>
-
+        <div class="mt-8 p-4 bg-white rounded-2xl flex items-center justify-between border border-gray-100">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-bold">Butuh Bantuan?</p>
+                    <p class="text-xs text-gray-400">Cara cek ID Pelanggan PLN</p>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right text-gray-300"></i>
+        </div>
     </div>
 
-</div>
+    <script>
+        function selectNominal(element, value) {
+            // Remove active class from all
+            const cards = document.querySelectorAll('.nominal-card');
+            cards.forEach(card => card.classList.remove('active'));
+            
+            // Add active class to clicked
+            element.classList.add('active');
+            
+            // Set hidden input value
+            document.getElementById('selectedNominal').value = value;
+        }
 
+        function validateForm() {
+            const id = document.getElementById('customerID').value;
+            const nominal = document.getElementById('selectedNominal').value;
+
+            if (id.length < 8) {
+                alert("Nomor Meter / ID Pelanggan tidak valid!");
+                return false;
+            }
+            if (!nominal) {
+                alert("Silakan pilih nominal token terlebih dahulu!");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
